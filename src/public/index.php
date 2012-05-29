@@ -1,5 +1,5 @@
 <?php
 
-	include '../application/bootstrap.php';
+    include '../application/bootstrap.php';
 
 ?>
