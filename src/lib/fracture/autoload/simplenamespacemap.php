@@ -6,7 +6,7 @@
     {
 
         protected $tree = [[ 'nodes' => [],
-                              'path'  => [] ]];
+                              'paths'  => [] ]];
 
         protected $fallbackPath = '/';
 
@@ -15,7 +15,7 @@
         {
             $segments = explode( '\\', $namespace );
             $id = $this->growBranch( $segments );
-            $this->tree[ $id ][ 'path' ][] = $path;
+            $this->tree[ $id ][ 'paths' ][] = $path;
         }
 
 
@@ -27,23 +27,10 @@
             for ( $i = 0; $i < $total; $i++ )
             {
                 $name = $segments[ $i ];
-                $current = $this->growNode( $current, $name );
+                $current = $this->growNode( $name, $current );
             }
 
             return $current;
-        }
-
-
-        protected function growNode( $current, $name )
-        {
-            if ( !array_key_exists( $name,  $this->tree[ $current ][ 'nodes' ] ) )
-            {
-                $this->tree[] = [ 'nodes' => [],
-                                 'path' => [] ];
-                $this->tree[ $current ][ 'nodes' ][ $name ] = count( $this->tree ) - 1;
-            }
-
-            return $this->tree[ $current ][ 'nodes' ][ $name ];           
         }
 
     }

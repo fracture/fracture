@@ -6,7 +6,7 @@
     {
 
         protected $tree = [[ 'nodes' => [],
-                              'path'  => [] ]];
+                              'paths'  => [] ]];
 
         protected $fallbackPath = '/';
 
@@ -21,7 +21,7 @@
             $path =  implode( '/', $segments );
             $filepath = strtolower( $path ) . '/' . $filename . '.php';
 
-            $locations = $this->combinePaths( $this->tree[ $current ][ 'path' ],
+            $locations = $this->combinePaths( $this->tree[ $current ][ 'paths' ],
                                               $filepath );
 
             return $locations;
@@ -58,6 +58,17 @@
         }
 
 
+        protected function growNode( $name, $current )
+        {
+            if ( !array_key_exists( $name,  $this->tree[ $current ][ 'nodes' ] ) )
+            {
+                $this->tree[] = [ 'nodes' => [],
+                                 'paths' => [] ];
+                $this->tree[ $current ][ 'nodes' ][ $name ] = count( $this->tree ) - 1;
+            }
+
+            return $this->tree[ $current ][ 'nodes' ][ $name ];           
+        }
 
     }
 
