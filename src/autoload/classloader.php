@@ -25,9 +25,9 @@
         protected function load( $className )
         {
 
-            $filepaths = $this->map->getLocations( $className );
+            $locations = $this->map->getLocations( $className );
 
-            foreach ( $filepaths as $filepath )
+            foreach ( $locations as $filepath )
             {
                 if ( file_exists( $filepath ) )
                 {
