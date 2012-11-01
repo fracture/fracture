@@ -1,0 +1,12 @@
+{
+    "Foo": [
+        "../something",
+        {
+            "Bar": ["../foo/bar"]
+        }
+    ],
+    "Test":  [ 
+        "../lolz", 
+        "../xxxxxxx" 
+    ]
+}
