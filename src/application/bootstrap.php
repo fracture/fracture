@@ -1,27 +1,25 @@
 <?php
 
-    use Fracture\Autoload\SimpleNamespaceMap;
+    use Fracture\Autoload\JsonNamespaceMap;
     use Fracture\Autoload\ClassLoader;
 
 
-    require '../lib/fracture/src/autoload/classnotfoundexception.php';
-    require '../lib/fracture/src/autoload/searchable.php';
-    require '../lib/fracture/src/autoload/namespacemap.php';
-    require '../lib/fracture/src/autoload/simplenamespacemap.php';
-    require '../lib/fracture/src/autoload/classloader.php';
+    require '../lib/fracture/autoload/classnotfoundexception.php';
+    require '../lib/fracture/autoload/searchable.php';
+    require '../lib/fracture/autoload/namespacemap.php';
+    require '../lib/fracture/autoload/jsonnamespacemap.php';
+    require '../lib/fracture/autoload/classloader.php';
 
 
     /*
      * Sets up initialized the development stage autoloader
      */
-    $map = new SimpleNamespaceMap( __DIR__ );
+    $map = new JsonNamespaceMap( __DIR__ );
     $loader = new ClassLoader( $map );
     $loader->register();
 
-    $map->addNamespacePath( 'Foo\\Bar' , '../foo/bar' );
-    $map->addNamespacePath( 'Test' , '../lolz' );
-    $map->addNamespacePath( 'Test' , '../xxxxxxx' );
-    $map->addNamespacePath( 'Foo' , '../something' );
+    $map->setBasePath( dirname( __DIR__ ) );
+    $map->import( __DIR__ . '/config/namespaces.json' );
 
 
 ?>

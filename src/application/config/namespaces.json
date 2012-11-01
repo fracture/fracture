@@ -1,12 +1,5 @@
 {
-    "Foo": [
-        "../something",
-        {
-            "Bar": ["../foo/bar"]
-        }
+    "Fracture": [
+        "lib/fracture",
     ],
-    "Test":  [ 
-        "../lolz", 
-        "../xxxxxxx" 
-    ]
 }

@@ -5,6 +5,15 @@
     class JsonNamespaceMap extends NamespaceMap
     {
 
+        protected $basePath = '/';
+
+
+        public function setBasePath( $basePath )
+        {
+            $this->basePath = $basePath;
+        }
+
+
         public function import( $filepath )
         {
             $config = $this->retrieveData( $filepath );
@@ -53,7 +62,7 @@
 
             if ( is_string( $parameter ) )
             {
-                $this->tree[ $id ][ 'paths' ][] = $parameter;
+                $this->tree[ $id ][ 'paths' ][] = $this->basePath . '/' . $parameter;
             }
         }
 
