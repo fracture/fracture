@@ -8,7 +8,7 @@
         protected $tree = [[ 'nodes' => [],
                               'paths'  => [] ]];
 
-        protected $fallbackPath = '/';
+        protected $fallbackPath = DIRECTORY_SEPARATOR;
 
 
         public function getLocations( $className )
@@ -18,8 +18,8 @@
 
             list( $segments, $current ) = $this->yieldNode( $segments );
 
-            $path =  implode( '/', $segments );
-            $filepath = strtolower( $path ) . '/' . $filename . '.php';
+            $path =  implode( DIRECTORY_SEPARATOR, $segments );
+            $filepath = strtolower( $path ) . DIRECTORY_SEPARATOR . strtolower( $filename ) . '.php';
 
             $locations = $this->combinePaths( $this->tree[ $current ][ 'paths' ],
                                               $filepath );
@@ -46,12 +46,12 @@
         {
             foreach ( $locations as $id => $path )
             {
-                $locations[ $id ] = $path . '/' . $filepath;
+                $locations[ $id ] = $path . DIRECTORY_SEPARATOR . $filepath;
             }
 
             if ( empty( $locations ) )
             {
-                $locations = [ $this->fallbackPath . '/' . $filepath ];
+                $locations = [ $this->fallbackPath . DIRECTORY_SEPARATOR . $filepath ];
             }
 
             return $locations;
