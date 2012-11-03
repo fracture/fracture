@@ -1,0 +1,32 @@
+{
+    "user": {
+        "notation": "/:uid[[/:username]/:action]",
+        "defaults": {
+            "resource"  :   "Profile",
+            "action"    :   "Main"
+        },
+        "conditions": {
+            ":uid"       :   "[0-9]+"
+        }
+    },
+
+    "main": {
+        "notation": ":resource[/:id][/:action]",
+        "defaults": {
+            "resource"  :   "site",
+            "action"    :   "default"
+        },
+        "conditions": {
+            ":id"        :   "[0-9]+"
+        }
+    },
+
+    "fallback": {
+        "notation": "",
+        "defaults": {
+            "resource"  :   "site",
+            "action"    :   "default"
+        }
+    }
+
+}

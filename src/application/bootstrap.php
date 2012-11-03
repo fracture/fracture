@@ -23,6 +23,7 @@
 
     $map = new JsonNamespaceMap( __DIR__ );
     $loader = new ClassLoader( $map );
+
     $loader->setBasePath( dirname( __DIR__ ) );
     $loader->register();
 
@@ -43,6 +44,7 @@
     $router->route( $request );
 
 
+    var_dump( $request );
 
 
 
