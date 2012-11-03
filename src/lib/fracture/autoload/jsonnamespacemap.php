@@ -5,23 +5,13 @@
     class JsonNamespaceMap extends NamespaceMap
     {
 
+        use \Fracture\Transcription\JsonToArray;
+
 
         public function import( $filepath )
         {
-            $config = $this->retrieveData( $filepath );
+            $config = $this->fetchConfig( $filepath );
             $this->applyValues( $config );
-        }
-
-
-        protected function retrieveData( $filepath )
-        {
-            if ( !file_exists( $filepath ) )
-            {
-                throw new \Exception( "File '{$filepath}' was not found!" );
-            }
-
-            $json = file_get_contents( $filepath );
-            return json_decode( $json, true );
         }
 
 
