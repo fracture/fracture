@@ -7,15 +7,18 @@
     {
 
         const REGKEY = '/(\:([a-zA-Z]+))/';
+
         const REGVAL = '[^/\.,;?\n]+';
 
 
         protected $notation;
+
         protected $conditions;
+        
         protected $expression;
 
 
-        public function __construct( $notation , array $conditions = array() )
+        public function __construct( $notation , array $conditions = [] )
         {
             $this->notation = $notation;
             $this->conditions = $conditions;    
@@ -24,14 +27,11 @@
 
         public function prepare()
         {
-            $notation = $this->notation;
-            $conditions = $this->conditions;
-
-            $expression = $this->parseNotation( $notation );
+            $expression = $this->parseNotation( $this->notation );
             
-            if ( count( $conditions ) )
+            if ( count( $this->conditions ) )
             {
-                $expression = $this->applyConditions( $expression , $conditions );
+                $expression = $this->applyConditions( $expression , $this->conditions );
             }
 
             $this->expression = "#$expression#";
@@ -45,8 +45,8 @@
 
             $out = str_replace
             (
-                array( '['   , ']' ),
-                array( '(:?' , ')?' ),
+                [ '['   , ']'  ],
+                [ '(:?' , ')?' ],
                 $out    
             );
 
@@ -64,11 +64,10 @@
 
         protected function applyConditions( $expression , $conditions )
         {
-            $search = $replace = array();
+            $search = $replace = [];
 
             foreach ( $conditions as $key => $value)
             {
-                $key = substr( $key , 1);
                 $search[]  = "<$key>".Pattern::REGVAL;
                 $replace[] = "<$key>$value";
             }

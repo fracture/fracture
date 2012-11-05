@@ -2,11 +2,11 @@
     "user": {
         "notation": "/:uid[[/:username]/:action]",
         "defaults": {
-            "resource"  :   "Profile",
-            "action"    :   "Main"
+            "resource"  :   "profile",
+            "action"    :   "overview"
         },
         "conditions": {
-            ":uid"       :   "[0-9]+"
+            "uid"       :   "[0-9]+"
         }
     },
 
@@ -17,7 +17,7 @@
             "action"    :   "default"
         },
         "conditions": {
-            ":id"        :   "[0-9]+"
+            "id"        :   "[0-9]+"
         }
     },
 

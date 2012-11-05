@@ -8,9 +8,7 @@
 
         protected $uri;
 
-        protected $resource;
-
-        protected $action;
+        protected $method;
 
         protected $parameters = [];
 
@@ -22,74 +20,76 @@
         }
 
 
-        public function getUri()
+        public function collectData()
         {
-            return $this->uri;
+            $this->parameters = $_POST;
+            $this->method = $this->getResolvedMethod();
         }
 
-
-        public function setParameters( $parameters )
+        protected function getResolvedMethod()
         {
-            $this->resource = $parameters['resource'];
-            $this->action = $parameters['action'];
+            $method = NULL;
 
-            unset( $parameters['action'], $parameters['resource'] );
-            $this->parameters = $parameters;
-        }
-
-
-
-
-        public function getResourceName()
-        {
-            return $this->resource;
-        }
-
-
-
-        public function getCommand()
-        {
-            $method = $this->getMethod();
-            return $method . $this->action;
-        }
-
-
-        public function getMethod()
-        {
-            $method = strtolower( $_SERVER['REQUEST_METHOD'] );
-
-            if ( $method === 'post' && array_key_exists( '_method', $_POST ) )
+            if ( isset( $_SERVER[ 'REQUEST_METHOD' ] ) ) 
             {
-                $replacement = strtolower( $_POST['_method'] );
-                if ( in_array( $replacement, ['put', 'delete'] ) )
+                $method = strtolower( $_SERVER[ 'REQUEST_METHOD' ] );
+            }
+
+            if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
+            {
+                $replacement = strtolower( $this->parameters[ '_method' ] );
+
+                if ( in_array( $replacement, [ 'put', 'delete' ] ) )
                 {
                     $method = $alternative;
                 }
+
+                unset( $this->parameters[ '_method' ] );
             }
 
             return $method;
         }
 
 
-        public function getQuery( $key )
+
+        public function setParameters( $parameters )
         {
-            if ( array_key_exists( $key , $_GET ) )
+            $duplicates = array_intersect_key( $parameters,
+                                               $this->parameters );
+
+            if ( count( $duplicates ) > 0 )
             {
-                return $_GET[ $key ];
+                $message = 'duplication between POST variable and routed parameters: "'.
+                            implode( '", "', array_keys( $duplicates ) ) . '"';
+
+                trigger_error( $message , \E_USER_WARNING );
             }
 
-            return null;
+            $this->parameters += $parameters;
         }
 
 
-        public function getPost( $key )
+
+        public function getParameter( $name )
         {
-            if ( array_key_exists( $key , $_POST ) )
+            if ( array_key_exists( $name, $this->parameters ) )
             {
-                return $_POST[ $key ];
+                return $this->parameters[ $name ];
             }
 
-            return null;
+            return NULL;
+        }
+
+
+        public function getUri()
+        {
+            return $this->uri;
+        }
+
+
+        public function getMethod()
+        {
+            return $this->method;
         }
 
 

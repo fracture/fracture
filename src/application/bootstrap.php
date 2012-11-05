@@ -37,7 +37,9 @@
      */
 
     $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
+
     $request = new UserRequest( $uri );
+    $request->collectData();
 
     $router = new Router( new RouteBuilder );
     $router->import( __DIR__ . '/config/routes.json' );
@@ -45,8 +47,6 @@
     $router->route( $request );
 
 
-    var_dump( $request );
-
-
+    // $request ready to be used
 
 ?>
