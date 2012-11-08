@@ -1,0 +1,23 @@
+<phpunit bootstrap="bootstrap.php"
+         colors="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+         mapTestClassNameToCoveredClassName="false"
+         printerClass="PHPUnit_TextUI_ResultPrinter"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         strict="false"
+         verbose="false">
+
+<testsuites>
+    <testsuite name="Core Framework">
+      <directory>lib/fracture</directory>
+    </testsuite>
+  </testsuites>
+
+
+</phpunit>
