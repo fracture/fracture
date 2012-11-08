@@ -27,7 +27,8 @@
 
         public function prepare()
         {
-            $expression = $this->parseNotation( $this->notation );
+            $notation = $this->cleanNotation( $this->notation );
+            $expression = $this->parseNotation( $notation );
             
             if ( count( $this->conditions ) )
             {
@@ -38,16 +39,43 @@
         }
 
 
+        protected function cleanNotation( $notation )
+        {
+            if ( strlen( $notation ) === 0 )
+            {
+                return $notation;
+            }
+
+            return $this->addSlash( $notation );
+        }
+
+
+        protected function addSlash( $notation )
+        {
+            $notation = trim( $notation, '/' );
+            $offset = strspn( $notation, '[' );
+
+            if ( $offset === 0 )
+            {
+                return '/' . $notation;
+            }
+
+            if ( substr( $notation, $offset, 1 ) !== '/' )
+            {
+                $notation = substr( $notation , 0, $offset) . '/' . substr( $notation , $offset );
+            }
+
+            return $notation;
+        }
+
 
         protected function parseNotation( $notation )
         {
-            $out = trim( $notation , '/');
-
             $out = str_replace
             (
                 [ '['   , ']'  ],
                 [ '(:?' , ')?' ],
-                $out    
+                $notation    
             );
 
             $out = preg_replace
