@@ -38,14 +38,11 @@
                'pattern'  => '#(:?/(?P<controller>[^/\.,;?\n]+)(:?/(?P<action>[^/\.,;?\n]+))?(:?/(?P<key>[^/\.,;?\n]+))?)?#' ],
 
              [ 'notation' => '[[/:minor]/:major]',
-               'pattern'  => '#(:?(:?/(?P<minor>[^/\.,;?\n]+))?/(?P<major>[^/\.,;?\n]+))?#' ],
+               'pattern'  => '#(:?(:?/(?P<minor>[^/\.,;?\n]+))?/(?P<major>[^/\.,;?\n]+))?#' ] ];
 
 /*
              [ 'notation' => '',
                'pattern'  => '##' ],
 */
-    ];
-
-
 
 ?>
