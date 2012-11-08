@@ -2,7 +2,7 @@
 
     namespace Fracture\Routing;
 
-    class Route
+    class Route implements Matchable
     {
 
         protected $name;
@@ -27,7 +27,7 @@
 
             if ( ! preg_match( $expression , $uri , $matches ) )
             {
-                return false;
+                return FALSE;
             }
 
             $matches = $this->cleanMatches( $matches );

@@ -7,7 +7,7 @@
 
         public function create( $name, $parameters )
         {
-            $parameters += [ 'conditions' => [] ];
+            $parameters += [ 'conditions' => [], 'defaults' => [] ];
             extract( $parameters );
 
             $pattern = new Pattern( $notation, $conditions );
