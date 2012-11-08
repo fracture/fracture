@@ -8,12 +8,15 @@
 
         protected $map;
 
+        protected $silent;
+
         protected $basePath = DIRECTORY_SEPARATOR;
 
         
-        public function __construct( Searchable $map )
+        public function __construct( Searchable $map, $silent = false )
         {
             $this->map = $map;
+            $this->silent = $silent;
         }
         
 
@@ -45,7 +48,10 @@
                 }
             }
 
-            throw new ClassNotFoundException( "Class '$className' not found!" );
+            if ( $this->silent === FALSE )
+            {
+                throw new ClassNotFoundException( "Class '$className' not found!" );
+            }
         }
 
 
