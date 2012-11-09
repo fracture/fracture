@@ -42,7 +42,7 @@
 
             foreach ( $matches as $key => $value )
             {
-                if ( !is_numeric( $key ) && !empty( $value ) )
+                if ( !is_numeric( $key ) && ( !empty( $value ) || $value === '0' ) )
                 {
                     $list[ $key ] = $value;
                 }
