@@ -3,10 +3,8 @@
 
     return [ [ 'name'       => 'first',
                'parameters' => [ 'notation' => '' ],
-               'urls'       => [ '/', 
-                                 '/lorem/ipsum/sit/dolor/amet' ],
-               'expected'   => [ [], 
-                                 [] ] ],
+               'urls'       => [ '' ],
+               'expected'   => [ [] ] ],
 
 
 
@@ -58,11 +56,9 @@
                'parameters' => [ 'notation'   => '[:digits]',
                                  'conditions' =>  [ 'digits' => '[0-9]+' ] ],
                'urls'       => [ '/0',
-                                 '/1234',
-                                 '/some/test' ],
+                                 '/1234' ],
                'expected'   => [ [ 'digits' => '0' ],
-                                 [ 'digits' => '1234' ],
-                                 [] ] ],
+                                 [ 'digits' => '1234' ] ] ],
 
 
 
@@ -80,19 +76,19 @@
 
 
              [ 'name'       => 'has defaults',
-               'parameters' => [ 'notation' => '[:panel][-:segment]',
+               'parameters' => [ 'notation' => '[:panel][/:segment]',
                                  'defaults' => [ 'segment' => 'overview' ] ],
                'urls'       => [ '/test', 
-                                 '/not/expected',
+                                 '/is/expected',
                                  '/user-list' ],
                'expected'   => [ [ 'panel' => 'test', 'segment' => 'overview' ],
-                                 [ 'panel' => 'not',  'segment' => 'overview' ],
+                                 [ 'panel' => 'is',  'segment' => 'expected' ],
                                  [ 'panel' => 'user-list', 'segment' => 'overview' ] ] ],
 
 
 
              [ 'name'       => 'big one',
-               'parameters' => [ 'notation'  => '/i[[/:module]/:param][-:id]',
+               'parameters' => [ 'notation'  => 'i[[/:module]/:param][-:id]',
                                  'conditions' => [ 'param' => '[a-zA-Z]+',
                                                   'id'    => '[0-9]{1,2}' ],
                                  'defaults'  => [ 'module' => 'main',
@@ -101,11 +97,15 @@
                                  '/i-19',
                                  '/i/test',
                                  '/i/different/test',
+                                 '/i/simple-99',
+                                 '/i/1/number-0',
                                  '/i/users/page-01' ], 
                'expected'   => [ [ 'module' => 'main', 'id' => '0' ],
                                  [ 'module' => 'main', 'id' => '19' ],
                                  [ 'module' => 'main', 'param' => 'test', 'id' => '0' ],
                                  [ 'module' => 'different', 'param' => 'test', 'id' => '0' ],
+                                 [ 'module' => 'main', 'param' => 'simple', 'id' => '99' ],
+                                 [ 'module' => '1', 'param' => 'number', 'id' => '0' ],
                                  [ 'module' => 'users', 'param' => 'page', 'id' => '01' ] ] ],
 
 
