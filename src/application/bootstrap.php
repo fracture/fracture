@@ -36,7 +36,7 @@
      * Routing mechanism 
      */
 
-    $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
+    $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '';
 
     $request = new UserRequest( $uri );
     $request->collectData();

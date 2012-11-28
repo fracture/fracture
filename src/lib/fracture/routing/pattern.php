@@ -35,7 +35,7 @@
                 $expression = $this->applyConditions( $expression , $this->conditions );
             }
 
-            $this->expression = "#$expression#";
+            $this->expression = "#^$expression$#";
         }
 
 
