@@ -1,4 +1,4 @@
-<phpunit bootstrap="bootstrap.php"
+<phpunit 
          colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -13,11 +13,19 @@
          strict="false"
          verbose="false">
 
-<testsuites>
-    <testsuite name="Core Framework">
-      <directory>lib/fracture</directory>
-    </testsuite>
-  </testsuites>
+    <testsuites>
+        <testsuite name="Core Framework">
+            <directory>lib/fracture</directory>
+        </testsuite>
+    </testsuites>
 
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src/</directory>
+            <exclude>
+                <directory>../src/lib/fracture/autoload/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 
 </phpunit>

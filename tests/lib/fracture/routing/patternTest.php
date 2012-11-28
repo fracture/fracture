@@ -1,6 +1,11 @@
 <?php
 
 
+    namespace Fracture\Routing;
+
+    use Exception;
+    use ReflectionClass;
+    use PHPUnit_Framework_TestCase;
 
 
     class PatternTest extends PHPUnit_Framework_TestCase
@@ -12,7 +17,7 @@
          */
         public function testSimplePatterns( $notation, $result )
         {
-            $pattern = new Fracture\Routing\Pattern( $notation );
+            $pattern = new Pattern( $notation );
             $pattern->prepare();
 
             $this->assertEquals( $result, $pattern->getExpression() );
@@ -30,7 +35,7 @@
          */
         public function testConditionalPatterns( $notation, $conditions, $result )
         {
-            $pattern = new Fracture\Routing\Pattern( $notation, $conditions );
+            $pattern = new Pattern( $notation, $conditions );
             $pattern->prepare();
 
             $this->assertEquals( $result, $pattern->getExpression() );

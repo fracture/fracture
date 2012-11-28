@@ -1,6 +1,13 @@
 <?php
 
 
+    namespace Fracture\Routing;
+
+    use Exception;
+    use ReflectionClass;
+    use PHPUnit_Framework_TestCase;
+
+
     class RouteTest  extends PHPUnit_Framework_TestCase
     {
 
@@ -9,7 +16,7 @@
 
         public function setUp()
         {
-            $this->builder = new Fracture\Routing\RouteBuilder;
+            $this->builder = new RouteBuilder;
         }
 
         /**
