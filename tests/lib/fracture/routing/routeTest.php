@@ -36,9 +36,31 @@
         public function successfulMatchProvider()
         {
             $foo = '0';
-            var_dump( empty($foo)  );
             return include __DIR__ . '/../../../fixtures/routing-matches-successful.php';
         }
+
+
+
+        /**
+         * @dataProvider failingMatchProvider
+         */
+        public function test_Failing_Matches( $name, $parameters, $urls )
+        {
+            $route = $this->builder->create( $name, $parameters );
+
+            foreach ( $urls as $key => $url )
+            {
+                $data = $route->getMatch( $url );
+                $this->assertFalse( $data );
+            }
+        }
+
+        public function failingMatchProvider()
+        {
+            $foo = '0';
+            return include __DIR__ . '/../../../fixtures/routing-matches-failing.php';
+        }
+
 
 
     }
