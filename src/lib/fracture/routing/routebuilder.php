@@ -7,16 +7,16 @@
 
         public function create( $name, $parameters )
         {
-            $parameters += [ 'conditions' => [], 'defaults' => [] ];
-            extract( $parameters );
+            $parameters += [ 'conditions' => [], 'defaults' => [], 'notation' => '' ];
 
-            $pattern = new Pattern( $notation, $conditions );
-            $instance = new Route( $pattern, $name, $defaults );
+            $pattern = new Pattern( $parameters['notation'], $parameters['conditions'] );
+            $instance = new Route( $pattern, $name, $parameters['defaults'] );
 
             $pattern->prepare();
 
             return $instance;
         }
+
 
     }
 
