@@ -12,7 +12,7 @@
         protected $defaults;
 
 
-        public function __construct( $pattern, $name, $defaults )
+        public function __construct( $pattern, $name, $defaults = [] )
         {
             $this->name = $name;
             $this->pattern = $pattern;

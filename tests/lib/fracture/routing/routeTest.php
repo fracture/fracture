@@ -11,56 +11,53 @@
     class RouteTest  extends PHPUnit_Framework_TestCase
     {
 
-        protected $builder;
-
-
-        public function setUp()
+        /**
+         * @covers Route::getMatch
+         */
+        public function test_Pattern_Exxpression_Retrieved()
         {
-            $this->builder = new RouteBuilder;
+            $pattern = $this->getMock( 'Pattern', ['getExpression'] );
+            $pattern->expects($this->once())
+                    ->method('getExpression')
+                    ->will($this->returnValue('##'));
+
+
+            $unit = new Route( $pattern, 'foo' );
+            $unit->getMatch('/uri');
         }
 
         /**
-         * @dataProvider successfulMatchProvider
+         * @dataProvider simple_Match_Provider
+         * @covers Route::getMatch
          */
-        public function test_Successful_Matches( $name, $parameters, $urls, $expected )
+        public function test_Simple_Matches( $expression, $url, $expected )
         {
-            $route = $this->builder->create( $name, $parameters );
-
-            foreach ( $urls as $key => $url )
-            {
-                $data = $route->getMatch( $url );
-                $this->assertEquals( $expected[ $key ], $data );
-            }
+            $pattern = new \Mock\Pattern( $expression );
+            $route = new Route( $pattern, 'not-important' );
+            $this->assertEquals( $expected, $route->getMatch( $url ) );
         }
 
-        public function successfulMatchProvider()
+        public function  simple_Match_Provider()
         {
-            $foo = '0';
-            return include __DIR__ . '/../../../fixtures/routing-matches-successful.php';
+            return include __DIR__ . '/../../../fixtures/routing/routes-simple.php';
         }
-
 
 
         /**
-         * @dataProvider failingMatchProvider
+         * @dataProvider with_Defaults_Match_Provider
+         * @covers Route::getMatch
          */
-        public function test_Failing_Matches( $name, $parameters, $urls )
+        public function test_With_Default_Matches( $expression, $url, $defaults, $expected )
         {
-            $route = $this->builder->create( $name, $parameters );
-
-            foreach ( $urls as $key => $url )
-            {
-                $data = $route->getMatch( $url );
-                $this->assertFalse( $data );
-            }
+            $pattern = new \Mock\Pattern( $expression );
+            $route = new Route( $pattern, 'not-important', $defaults );
+            $this->assertEquals( $expected, $route->getMatch( $url ) );
         }
 
-        public function failingMatchProvider()
+        public function  with_Defaults_Match_Provider()
         {
-            $foo = '0';
-            return include __DIR__ . '/../../../fixtures/routing-matches-failing.php';
+            return include __DIR__ . '/../../../fixtures/routing/routes-with-defaults.php';
         }
-
 
 
     }
