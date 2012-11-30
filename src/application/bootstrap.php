@@ -22,21 +22,20 @@
      * Sets up initialized the development stage autoloader
      */
 
-    $map = new JsonNamespaceMap( __DIR__ );
-    $loader = new ClassLoader( $map );
-
-    $loader->setBasePath( dirname( __DIR__ ) );
+    $loader = new ClassLoader;
     $loader->register();
 
+    $map = new JsonNamespaceMap( __DIR__ );
     $map->import( __DIR__ . '/config/namespaces.json' );
 
+    $loader->addMap( $map,  dirname( __DIR__ ) );
 
 
     /*
      * Routing mechanism 
      */
 
-    $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '';
+    $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
 
     $request = new UserRequest( $uri );
     $request->collectData();

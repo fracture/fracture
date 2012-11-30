@@ -18,19 +18,17 @@
     require SOURCE_PATH . '/lib/fracture/autoload/classloader.php';
 
 
-    $map1 = new JsonNamespaceMap;
-    $src_loader = new ClassLoader( $map1, TRUE );
+    $loader = new ClassLoader( TRUE );
+    $loader->register();
 
-    $src_loader->setBasePath( SOURCE_PATH );
-    $src_loader->register();
+    $soureMap = new JsonNamespaceMap;
+    $soureMap->import( SOURCE_PATH . '/application/config/namespaces.json' );
 
-    $map1->import( SOURCE_PATH . '/application/config/namespaces.json' );
+    $loader->addMap( $soureMap, SOURCE_PATH );
 
+    $mockMap = new SimpleNamespaceMap;
+    $mockMap->addNamespacePath( 'Mock' , '/mocks' );
 
-    $map2 = new SimpleNamespaceMap;
-    $mock_loader = new ClassLoader( $map2, TRUE );
-    $mock_loader->setBasePath( TEST_PATH );
-    $mock_loader->register();
-    
-    $map2->addNamespacePath( 'Mock' , '/mocks' );
+    $loader->addMap( $mockMap, TEST_PATH );
+
 ?>

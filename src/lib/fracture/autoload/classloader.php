@@ -6,23 +6,25 @@
     class ClassLoader
     {
 
-        protected $map;
+        protected $maps = [];
 
         protected $silent;
 
         protected $basePath = DIRECTORY_SEPARATOR;
 
         
-        public function __construct( Searchable $map, $silent = false )
+        public function __construct( $silent = FALSE )
         {
-            $this->map = $map;
             $this->silent = $silent;
         }
         
 
-        public function setBasePath( $basePath )
+        public function addMap( Searchable $map, $basePath )
         {
-            $this->basePath = $basePath;
+            $item = [ 'map'  => $map, 
+                      'path' => $basePath ];
+
+            $this->maps[] = $item;
         }
 
 
@@ -36,16 +38,22 @@
         protected function load( $className )
         {
 
-            $locations = $this->map->getLocations( $className );
-
-            foreach ( $locations as $filepath )
+            foreach ( $this->maps as $item )
             {
-                $filepath = $this->basePath . $filepath;
-                if ( file_exists( $filepath ) )
+
+
+                $locations = $item['map']->getLocations( $className );
+
+                foreach ( $locations as $filepath )
                 {
-                    require $filepath;
-                    return;
+                    $filepath = $item['path'] . $filepath;
+                    if ( file_exists( $filepath ) )
+                    {
+                        require $filepath;
+                        return;
+                    }
                 }
+
             }
 
             if ( $this->silent === FALSE )
