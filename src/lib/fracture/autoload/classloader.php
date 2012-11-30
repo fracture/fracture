@@ -38,28 +38,36 @@
         protected function load( $className )
         {
 
-            foreach ( $this->maps as $item )
+            foreach ( $this->maps as $option )
             {
-
-
-                $locations = $item['map']->getLocations( $className );
-
-                foreach ( $locations as $filepath )
+                if ( $this->hasLoadedClass( $option['map'], $option['path'], $className ) )
                 {
-                    $filepath = $item['path'] . $filepath;
-                    if ( file_exists( $filepath ) )
-                    {
-                        require $filepath;
-                        return;
-                    }
+                    return;
                 }
-
             }
 
             if ( $this->silent === FALSE )
             {
                 throw new ClassNotFoundException( "Class '$className' not found!" );
             }
+        }
+
+
+        protected function hasLoadedClass( $map, $path, $className )
+        {
+            $locations = $map->getLocations( $className );
+
+            foreach ( $locations as $filepath )
+            {
+                $filepath = $path . $filepath;
+                if ( file_exists( $filepath ) )
+                {
+                    require $filepath;
+                    return TRUE;
+                }
+            }
+
+            return FALSE;
         }
 
 
