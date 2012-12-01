@@ -41,7 +41,7 @@
 
                 if ( in_array( $replacement, [ 'put', 'delete' ] ) )
                 {
-                    $method = $alternative;
+                    $method = $replacement;
                 }
 
                 unset( $this->parameters[ '_method' ] );

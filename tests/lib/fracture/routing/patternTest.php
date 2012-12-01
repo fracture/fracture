@@ -13,9 +13,9 @@
 
 
         /**
-         * @dataProvider simplePatternProvider
+         * @dataProvider simple_Pattern_Provider
          */
-        public function testSimplePatterns( $notation, $result )
+        public function test_Simple_Patterns( $notation, $result )
         {
             $pattern = new Pattern( $notation );
             $pattern->prepare();
@@ -24,16 +24,16 @@
 
         }
 
-        public function simplePatternProvider()
+        public function simple_Pattern_Provider()
         {   
-            return include __DIR__ . '/../../../fixtures/routing-notations-simple.php';
+            return include __DIR__ . '/../../../fixtures/routing/patterns-simple.php';
         }
 
 
         /**
-         * @dataProvider conditionalPatternProvider
+         * @dataProvider conditional_Pattern_Provider
          */
-        public function testConditionalPatterns( $notation, $conditions, $result )
+        public function test_Conditional_Patterns( $notation, $conditions, $result )
         {
             $pattern = new Pattern( $notation, $conditions );
             $pattern->prepare();
@@ -42,10 +42,11 @@
 
         }
 
-        public function conditionalPatternProvider()
+        public function conditional_Pattern_Provider()
         {   
-            return include __DIR__ . '/../../../fixtures/routing-notations-conditional.php';
+            return include __DIR__ . '/../../../fixtures/routing/patterns-conditional.php';
         }
+
 
 
     }
