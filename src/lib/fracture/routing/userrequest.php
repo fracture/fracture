@@ -8,32 +8,62 @@
 
         protected $uri;
 
-        protected $method;
+        protected $ip;
+
+        protected $method = NULL;
 
         protected $parameters = [];
 
 
 
-        public function __construct( $uri )
+        public function setMethod( $method )
         {
-            $this->uri = $uri;
+            $this->method = $method;
+            return $this;
         }
 
 
-        public function collectData()
+        public function getMethod()
         {
-            $this->parameters = $_POST;
+            return $this->method;
+        }
+
+
+        public function setUri( $uri )
+        {
+            $this->uri = $uri;
+            return $this;
+        }
+
+
+        public function getUri()
+        {
+            return $this->uri;
+        }
+
+
+        public function setIp( $ip )
+        {
+            $this->ip = $ip;
+            return $this;
+        }
+
+
+        public function getIp()
+        {
+            return $this->ip;
+        }
+
+
+        public function prepare()
+        {
             $this->method = $this->getResolvedMethod();
         }
 
+
         protected function getResolvedMethod()
         {
-            $method = NULL;
-
-            if ( isset( $_SERVER[ 'REQUEST_METHOD' ] ) ) 
-            {
-                $method = strtolower( $_SERVER[ 'REQUEST_METHOD' ] );
-            }
+            $method = $this->method;
 
             if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
             {
@@ -51,7 +81,6 @@
         }
 
 
-
         public function setParameters( $parameters )
         {
             $duplicates = array_intersect_key( $parameters,
@@ -66,6 +95,8 @@
             }
 
             $this->parameters += $parameters;
+
+            return $this;
         }
 
 
@@ -81,19 +112,4 @@
         }
 
 
-        public function getUri()
-        {
-            return $this->uri;
-        }
-
-
-        public function getMethod()
-        {
-            return $this->method;
-        }
-
-
     }
-
-
-?>

@@ -4,8 +4,8 @@
     use Fracture\Autoload\ClassLoader;
 
     use Fracture\Routing\RouteBuilder;
+    use Fracture\Routing\RequestBuilder;
     use Fracture\Routing\Router;
-    use Fracture\Routing\UserRequest;
 
 
 
@@ -37,8 +37,9 @@
 
     $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
 
-    $request = new UserRequest( $uri );
-    $request->collectData();
+    $builder = new RequestBuilder;
+    $request = $builder->create();
+    $request->setUri( $uri );
 
     $router = new Router( new RouteBuilder );
     $router->import( __DIR__ . '/config/routes.json' );
