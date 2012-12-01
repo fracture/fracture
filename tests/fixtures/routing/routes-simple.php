@@ -1,74 +1,100 @@
 <?php
 
+    /*
+     * :alpha - first named parameter in pattern
+     * :beta  - second parameter
+     * :gamma - third parameter
+     *
+     * static - specified part of the pattern
+     *
+     * foo    - first unspecified segment in URL
+     * bar    - second segment
+     * buz    - third segment
+     *
+     * qux    - default value 
+     */
 
     return 
-    [ [ 'expression' => '#^/test$#',
-        'url'        => '/test',
+    [ #notation:    '/static'
+      [ 'expression' => '#^/static$#',
+        'url'        => '/static',
         'expected'   => [] ],
 
-      [ 'expression' => '#^/foo/bar$#',
+      #notation:    '/static/static'
+      [ 'expression' => '#^/static/static$#',
+        'url'        => '/static/static',
+        'expected'   => [] ],
+
+      #notation:    '/:alpha'
+      [ 'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+        'url'        => '/foo',
+        'expected'   => [ 'alpha' => 'foo'] ],
+
+      #notation:    '/:alpha/static'
+      [ 'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static$#',
+        'url'        => '/foo/static',
+        'expected'   => [ 'alpha' => 'foo' ] ],
+
+      #notation:    '/static/:alpha'
+      [ 'expression' => '#^/static/(?P<alpha>[^/\.,;?\n]+)$#',
+        'url'        => '/static/foo',
+        'expected'   => [ 'alpha' => 'foo' ] ],
+
+      #notation:    '/:alpha/:beta'     
+      [ 'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/(?P<beta>[^/\.,;?\n]+)$#',
         'url'        => '/foo/bar',
+        'expected'   => [ 'alpha' => 'foo',
+                          'beta'  => 'bar' ] ],
+
+      #notation:    '/:alpha/static/:beta'
+      [ 'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static/(?P<beta>[^/\.,;?\n]+)$#',
+        'url'        => '/foo/static/bar',
+        'expected'   => [ 'alpha' => 'foo',
+                          'beta'  => 'bar' ] ],
+
+      #notation:    '[/static/static]'
+      [ 'expression' => '#^(:?/static/static)?$#',
+        'url'        => '/static/static',
         'expected'   => [] ],
 
-      [ 'expression' => '#^/(?P<item>[^/\.,;?\n]+)$#',
-        'url'        => '/some-value',
-        'expected'   => [ 'item' => 'some-value'] ],
+      #notation:    '[/:alpha]'
+      [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo',
+        'expected'   => [ 'alpha' => 'foo' ] ],
 
-      [ 'expression' => '#^/(?P<parameter>[^/\.,;?\n]+)/fixed$#',
-        'url'        => '/value/fixed',
-        'expected'   => [ 'parameter' => 'value' ] ],
-
-      [ 'expression' => '#^/admin/(?P<section>[^/\.,;?\n]+)$#',
-        'url'        => '/admin/login',
-        'expected'   => [ 'section' => 'login' ] ],
-
-      [ 'expression' => '#^/(?P<one>[^/\.,;?\n]+)/(?P<two>[^/\.,;?\n]+)$#',
-        'url'        => '/alpha/beta',
-        'expected'   => [ 'one' => 'alpha',
-                          'two' => 'beta' ] ],
-
-      [ 'expression' => '#^/(?P<main>[^/\.,;?\n]+)/category/(?P<sub>[^/\.,;?\n]+)$#',
-        'url'        => '/document/category/overview',
-        'expected'   => [ 'main' => 'document',
-                          'sub'  => 'overview' ] ],
-
-      [ 'expression' => '#^(:?/lorem/ipsum)?$#',
-        'url'        => '/lorem/ipsum',
+      #notation:    '/static[/:alpha]'
+      [ 'expression' => '#^/static(:?/(?P<alpha>[^/\.,;?\n]+))?$#',
+        'url'        => '/static',
         'expected'   => [] ],
 
-      [ 'expression' => '#^(:?/(?P<optional>[^/\.,;?\n]+))?$#',
-        'url'        => '/value',
-        'expected'   => [ 'optional' => 'value' ] ],
+      [ 'expression' => '#^/static(:?/(?P<alpha>[^/\.,;?\n]+))?$#',
+        'url'        => '/static/foo',
+        'expected'   => [ 'alpha' => 'foo' ] ],
 
-      [ 'expression' => '#^/test(:?/(?P<id>[^/\.,;?\n]+))?$#',
-        'url'        => '/test',
-        'expected'   => [] ],
-
-      [ 'expression' => '#^/test(:?/(?P<id>[^/\.,;?\n]+))?$#',
-        'url'        => '/test/1234',
-        'expected'   => [ 'id' => '1234' ] ],
-
-      [ 'expression' => '#^(:?/(?P<either>[^/\.,;?\n]+))?(:?/(?P<or>[^/\.,;?\n]+))?$#',
+      #notation:    '[/:alpha][/:beta]'
+      [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?(:?/(?P<beta>[^/\.,;?\n]+))?$#',
         'url'        => '',
         'expected'   => [] ],
 
-      [ 'expression' => '#^(:?/(?P<either>[^/\.,;?\n]+))?(:?/(?P<or>[^/\.,;?\n]+))?$#',
-        'url'        => '/first-one',
-        'expected'   => [ 'either' => 'first-one' ] ],
+      [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?(:?/(?P<beta>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo',
+        'expected'   => [ 'alpha' => 'foo' ] ],
 
-      [ 'expression' => '#^(:?/(?P<either>[^/\.,;?\n]+))?(:?/(?P<or>[^/\.,;?\n]+))?$#',
-        'url'        => '/first/second',
-        'expected'   => [ 'either' => 'first',
-                          'or'     => 'second' ] ],
+      [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?(:?/(?P<beta>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo/bar',
+        'expected'   => [ 'alpha' => 'foo',
+                          'beta'     => 'bar' ] ],
 
-      [ 'expression' => '#^(:?/test/(?P<parameter>[^/\.,;?\n]+))?/mandatory$#',
-        'url'        => '/mandatory',
+      #notation:    '[/static/:alpha]/static'
+      [ 'expression' => '#^(:?/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+        'url'        => '/static',
         'expected'   => [] ],
 
-      [ 'expression' => '#^(:?/test/(?P<parameter>[^/\.,;?\n]+))?/mandatory$#',
-        'url'        => '/test/value/mandatory',
-        'expected'   => [ 'parameter' => 'value' ] ],
+      [ 'expression' => '#^(:?/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+        'url'        => '/static/value/static',
+        'expected'   => [ 'alpha' => 'value' ] ],
 
+      #notation:    '/'
       [ 'expression' => '#^/$#',
         'url'        => '/',
         'expected'   => [] ] ];
@@ -79,6 +105,3 @@
         'url'        => '',
         'expected'   => [] ],
 */
-
-
-?>

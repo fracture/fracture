@@ -1,41 +1,61 @@
 <?php
 
+    /*
+     * :alpha - first named parameter in pattern
+     * :beta  - second parameter
+     * :gamma - third parameter
+     *
+     * static - specified part of the pattern
+     *
+     * foo    - first unspecified segment in URL
+     * bar    - second segment
+     * buz    - third segment
+     *
+     * qux    - default value 
+     */
+
     return
-    [ [ 'expression' => '#^/foo$#',
-        'url'        => '/foo',
+    [ #notation:    '/static'
+      [ 'expression' => '#^/static$#',
+        'url'        => '/static',
         'defaults'   => [],
         'expected'   => [] ],
 
+      #notation:    '/'
       [ 'expression' => '#^/$#',
         'url'        => '/',
-        'defaults'   => [ 'test' => 'data' ],
-        'expected'   => [ 'test' => 'data' ] ],
+        'defaults'   => [ 'alpha' => 'qux' ],
+        'expected'   => [ 'alpha' => 'qux' ] ],
 
-      [ 'expression' => '#^/(?P<param>[^/\.,;?\n]+)$#',
-        'url'        => '/data',
-        'defaults'   => [ 'lorem' => 'ipsum' ],
-        'expected'   => [ 'param'  => 'data',
-                          'lorem' => 'ipsum' ] ],
+      #notation:    '/:alpha'
+      [ 'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+        'url'        => '/foo',
+        'defaults'   => [ 'beta'  => 'qux' ],
+        'expected'   => [ 'alpha' => 'foo',
+                          'beta'  => 'qux' ] ],
 
-      [ 'expression' => '#^(:?/(?P<optional>[^/\.,;?\n]+))?$#',
-        'url'        => '/foobar',
-        'defaults'   => [ 'optional' => 'default' ],
-        'expected'   => [ 'optional' => 'foobar' ] ],
+      #notation:    [/:alpha]
+      [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo',
+        'defaults'   => [ 'alpha' => 'qux' ],
+        'expected'   => [ 'alpha' => 'foo' ] ],
 
-      [ 'expression' => '#^(:?(:?/(?P<minor>[^/\.,;?\n]+))?/(?P<major>[^/\.,;?\n]+))?$#',
-        'url'        => '/test',
-        'defaults'   => [ 'minor' => 'list',
-                          'major' => 'public' ],
-        'expected'   => [ 'minor' => 'list',
-                          'major' => 'test' ] ],
+      #notation:    [[/:alpha]/:beta]
+      [ 'expression' => '#^(:?(:?/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo',
+        'defaults'   => [ 'alpha' => 'qux',
+                          'beta'  => 'qux' ],
+        'expected'   => [ 'alpha' => 'qux',
+                          'beta'  => 'foo' ] ],
 
-      [ 'expression' => '#^(:?(:?/(?P<minor>[^/\.,;?\n]+))?/(?P<major>[^/\.,;?\n]+))?$#',
-        'url'        => '/another/test',
-        'defaults'   => [ 'minor' => 'list',
-                          'major' => 'public' ],
-        'expected'   => [ 'minor' => 'another',
-                          'major' => 'test' ] ],
+      [ 'expression' => '#^(:?(:?/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[^/\.,;?\n]+))?$#',
+        'url'        => '/foo/bar',
+        'defaults'   => [ 'alpha' => 'qux',
+                          'beta'  => 'qux' ],
+        'expected'   => [ 'alpha' => 'foo',
+                          'beta'  => 'bar' ] ],
 
+      #notation:    '/'                        
       [ 'expression' => '#^/$#',
         'url'        => '/',
         'defaults'   => [],

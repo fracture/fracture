@@ -14,7 +14,7 @@
         /**
          * @covers Route::getMatch
          */
-        public function test_Pattern_Exxpression_Retrieved()
+        public function test_Pattern_Expression_Retrieved()
         {
             $pattern = $this->getMock( 'Pattern', ['getExpression'] );
             $pattern->expects($this->once())
@@ -29,6 +29,7 @@
         /**
          * @dataProvider simple_Match_Provider
          * @covers Route::getMatch
+         * @depends test_Pattern_Expression_Retrieved
          */
         public function test_Simple_Matches( $expression, $url, $expected )
         {
@@ -46,6 +47,7 @@
         /**
          * @dataProvider with_Defaults_Match_Provider
          * @covers Route::getMatch
+         * @depends test_Pattern_Expression_Retrieved
          */
         public function test_With_Default_Matches( $expression, $url, $defaults, $expected )
         {
@@ -57,6 +59,24 @@
         public function  with_Defaults_Match_Provider()
         {
             return include __DIR__ . '/../../../fixtures/routing/routes-with-defaults.php';
+        }
+
+
+        /**
+         * @dataProvider failing_Match_Provider
+         * @covers Route::getMatch
+         * @depends test_Pattern_Expression_Retrieved
+         */
+        public function test_Failing_Matches( $expression, $url )
+        {
+            $pattern = new \Mock\Pattern( $expression );
+            $route = new Route( $pattern, 'not-important' );
+            $this->assertFalse( $route->getMatch( $url ) );
+        }
+
+        public function  failing_Match_Provider()
+        {
+            return include __DIR__ . '/../../../fixtures/routing/routes-unmatched.php';
         }
 
 
