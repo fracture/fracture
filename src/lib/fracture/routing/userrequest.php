@@ -18,7 +18,7 @@
 
         public function setMethod( $method )
         {
-            $this->method = $method;
+            $this->method = strtolower( $method );
             return $this;
         }
 
