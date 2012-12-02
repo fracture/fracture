@@ -88,7 +88,7 @@
 
             if ( count( $duplicates ) > 0 )
             {
-                $message = 'duplication between POST variable and routed parameters: "'.
+                $message = 'You are trying to override following parameter(s): "'.
                             implode( '", "', array_keys( $duplicates ) ) . '"';
 
                 trigger_error( $message , \E_USER_WARNING );
