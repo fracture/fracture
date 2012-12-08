@@ -1,0 +1,11 @@
+{
+    "one": {
+        "notation": "/:one/:foo"
+    },
+    "two": {
+        "notation": "/:two"
+    },
+    "three": {
+        "notation": "/:three"
+    }
+}
