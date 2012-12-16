@@ -10,7 +10,6 @@
 
 
     require '../lib/fracture/transcription/jsontoarray.php';
-    require '../lib/fracture/autoload/classnotfoundexception.php';
     require '../lib/fracture/autoload/searchable.php';
     require '../lib/fracture/autoload/namespacemap.php';
     require '../lib/fracture/autoload/jsonnamespacemap.php';
@@ -49,4 +48,3 @@
 
     // $request ready to be used
 
-?>

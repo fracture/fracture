@@ -30,7 +30,6 @@
 
         protected function load( $className )
         {
-
             foreach ( $this->maps as $option )
             {
                 if ( $this->hasLoadedClass( $option['map'], $option['path'], $className ) )
@@ -50,6 +49,7 @@
             foreach ( $locations as $filepath )
             {
                 $filepath = $path . $filepath;
+
                 if ( file_exists( $filepath ) )
                 {
                     require $filepath;
