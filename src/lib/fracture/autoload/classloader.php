@@ -8,17 +8,9 @@
 
         protected $maps = [];
 
-        protected $silent;
-
         protected $basePath = DIRECTORY_SEPARATOR;
 
         
-        public function __construct( $silent = FALSE )
-        {
-            $this->silent = $silent;
-        }
-        
-
         public function addMap( Searchable $map, $basePath )
         {
             $item = [ 'map'  => $map, 
@@ -26,6 +18,7 @@
 
             $this->maps[] = $item;
         }
+
 
 
         public function register()
@@ -42,14 +35,11 @@
             {
                 if ( $this->hasLoadedClass( $option['map'], $option['path'], $className ) )
                 {
-                    return;
+                    return TRUE;
                 }
             }
 
-            if ( $this->silent === FALSE )
-            {
-                throw new ClassNotFoundException( "Class '$className' not found!" );
-            }
+            return FALSE;
         }
 
 
@@ -72,5 +62,3 @@
 
 
     }
-
-?>

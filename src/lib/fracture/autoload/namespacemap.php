@@ -63,7 +63,7 @@
             if ( !array_key_exists( $name,  $this->tree[ $current ][ 'nodes' ] ) )
             {
                 $this->tree[] = [ 'nodes' => [],
-                                 'paths' => [] ];
+                                  'paths' => [] ];
                 $this->tree[ $current ][ 'nodes' ][ $name ] = count( $this->tree ) - 1;
             }
 
@@ -71,5 +71,3 @@
         }
 
     }
-
-?>
