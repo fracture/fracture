@@ -4,7 +4,5 @@
 
     interface Searchable
     {
-        
+        public function getLocations( $className );
     }
-
-?>

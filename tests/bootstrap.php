@@ -10,7 +10,6 @@
 
 
     require SOURCE_PATH . '/lib/fracture/transcription/jsontoarray.php';
-    require SOURCE_PATH . '/lib/fracture/autoload/classnotfoundexception.php';
     require SOURCE_PATH . '/lib/fracture/autoload/searchable.php';
     require SOURCE_PATH . '/lib/fracture/autoload/namespacemap.php';
     require SOURCE_PATH . '/lib/fracture/autoload/jsonnamespacemap.php';

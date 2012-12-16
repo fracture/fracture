@@ -5,11 +5,6 @@
     class SimpleNamespaceMap extends NamespaceMap
     {
 
-        protected $tree = [[ 'nodes' => [],
-                              'paths'  => [] ]];
-
-        protected $fallbackPath = '/';
-
 
         public function addNamespacePath( $namespace, $path )
         {
@@ -34,6 +29,3 @@
         }
 
     }
-
-
-?>
