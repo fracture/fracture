@@ -10,7 +10,7 @@
         public function create()
         {
             $instance = new UserRequest;
-            $instance->setParameters( $_POST )
+            $instance->setParameters( $this->getPostValues() )
                      ->setIP( $this->getServerValue( 'REMOTE_ADDR' ) )
                      ->setMethod( $this->getServerValue( 'REQUEST_METHOD' ) );
 
@@ -26,10 +26,24 @@
         {
             if ( array_key_exists( $key, $_SERVER ) )
             {
-                return $$_SERVER[ $key ];
+                return $_SERVER[ $key ];
             }
 
             return NULL;
+        }
+
+
+        /**
+         * @codeCoverageIgnore
+         */
+        protected function getPostValues()
+        {
+            if ( isset( $_POST ) && is_array( $_POST )
+            {
+                return $_POST;
+            }
+
+            return [];
         }
 
     }
