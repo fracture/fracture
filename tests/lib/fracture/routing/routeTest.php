@@ -12,7 +12,8 @@
     {
 
         /**
-         * @covers Route::getMatch
+         * @covers Fracture\Routing\Route::__construct
+         * @covers Fracture\Routing\Route::getMatch
          */
         public function test_Pattern_Expression_Retrieved()
         {
@@ -28,7 +29,8 @@
 
         /**
          * @dataProvider simple_Match_Provider
-         * @covers Route::getMatch
+         * @covers Fracture\Routing\Route::__construct
+         * @covers Fracture\Routing\Route::getMatch
          * @depends test_Pattern_Expression_Retrieved
          */
         public function test_Simple_Matches( $expression, $url, $expected )
@@ -46,7 +48,8 @@
 
         /**
          * @dataProvider with_Defaults_Match_Provider
-         * @covers Route::getMatch
+         * @covers Fracture\Routing\Route::__construct
+         * @covers Fracture\Routing\Route::getMatch
          * @depends test_Pattern_Expression_Retrieved
          */
         public function test_With_Default_Matches( $expression, $url, $defaults, $expected )
@@ -64,7 +67,8 @@
 
         /**
          * @dataProvider failing_Match_Provider
-         * @covers Route::getMatch
+         * @covers Fracture\Routing\Route::__construct
+         * @covers Fracture\Routing\Route::getMatch
          * @depends test_Pattern_Expression_Retrieved
          */
         public function test_Failing_Matches( $expression, $url )

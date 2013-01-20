@@ -12,7 +12,8 @@
     {
 
         /**
-         * @covers Router::import
+         * @covers Fracture\Routing\Router::__construct
+         * @covers Fracture\Routing\Router::import
          */
         public function test_Calling_Create_in_Import_for_Single_Route()
         {
@@ -32,7 +33,8 @@
 
 
         /**
-         * @covers Router::import
+         * @covers Fracture\Routing\Router::__construct
+         * @covers Fracture\Routing\Router::import
          */
         public function test_Calling_Create_in_Import_for_Several_Routes()
         {
@@ -47,7 +49,8 @@
 
 
         /**
-         * @covers Router::import
+         * @covers Fracture\Routing\Router::__construct
+         * @covers Fracture\Routing\Router::import
          */
         public function test_Invalid_JSON_Import_Exception()
         {
@@ -62,7 +65,7 @@
 
 
         /**
-         * @covers Router::import
+         * @covers Fracture\Routing\Router::import
          */
         public function test_Missing_JSON_Exception()
         {

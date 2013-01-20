@@ -14,6 +14,9 @@
 
         /**
          * @dataProvider simple_Pattern_Provider
+         * @covers Fracture\Routing\Pattern::__construct
+         * @covers Fracture\Routing\Pattern::prepare
+         * @covers Fracture\Routing\Pattern::getExpression
          */
         public function test_Simple_Patterns( $notation, $result )
         {
@@ -32,6 +35,9 @@
 
         /**
          * @dataProvider conditional_Pattern_Provider
+         * @covers Fracture\Routing\Pattern::__construct
+         * @covers Fracture\Routing\Pattern::prepare
+         * @covers Fracture\Routing\Pattern::getExpression
          */
         public function test_Conditional_Patterns( $notation, $conditions, $result )
         {

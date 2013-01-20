@@ -19,7 +19,9 @@
             return $instance;
         }
 
-
+        /**
+         * @codeCoverageIgnore
+         */
         protected function getServerValue( $key )
         {
             if ( array_key_exists( $key, $_SERVER ) )

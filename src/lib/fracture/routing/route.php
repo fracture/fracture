@@ -36,6 +36,9 @@
 
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function cleanMatches( $matches )
         {
             $list = [];

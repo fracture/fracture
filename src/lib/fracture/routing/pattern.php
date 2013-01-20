@@ -39,6 +39,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function cleanNotation( $notation )
         {
             if ( strlen( $notation ) === 0 )
@@ -50,6 +53,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function addSlash( $notation )
         {
             $notation = trim( $notation, '/' );
@@ -69,6 +75,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function parseNotation( $notation )
         {
             $out = str_replace
@@ -90,6 +99,9 @@
 
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function applyConditions( $expression , $conditions )
         {
             $search = $replace = [];

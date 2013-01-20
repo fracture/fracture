@@ -11,7 +11,9 @@
     class RouteBuilderTest extends PHPUnit_Framework_TestCase
     {
 
-
+        /**
+         * @covers Fracture\Routing\RouteBuilder::create
+         */
         public function test_Created_Interface()
         {
             $builder = new RouteBuilder;

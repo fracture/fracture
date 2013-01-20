@@ -30,6 +30,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function createRoutes( $config )
         {
             $routes = [];

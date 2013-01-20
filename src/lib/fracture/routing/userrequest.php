@@ -61,6 +61,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         protected function getResolvedMethod()
         {
             $method = $this->method;

@@ -12,8 +12,8 @@
     {
 
         /**
-         * @covers UserRequest::setMethod
-         * @covers UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::setMethod
+         * @covers Fracture\Routing\UserRequest::getMethod
          */
         public function test_getMethod_for_Unprepared_Request()
         {
@@ -25,9 +25,9 @@
 
 
         /**
-         * @covers UserRequest::setMethod
-         * @covers UserRequest::getMethod
-         * @covers UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::setMethod
+         * @covers Fracture\Routing\UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::prepare
          * 
          * @depends test_getMethod_for_Unprepared_Request
          */
@@ -42,8 +42,8 @@
 
 
         /**
-         * @covers UserRequest::setParameters
-         * @covers UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::getMethod
          */
         public function test_getMethod_for_Unprepared_Request_with_Custom_Method()
         {
@@ -55,9 +55,9 @@
 
 
         /**
-         * @covers UserRequest::setParameters
-         * @covers UserRequest::getMethod
-         * @covers UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::prepare
          * 
          * @depends test_getMethod_for_Unprepared_Request_with_Custom_Method
          */
@@ -71,10 +71,10 @@
         }
 
         /**
-         * @covers UserRequest::setParameters
-         * @covers UserRequest::setMethod
-         * @covers UserRequest::getMethod
-         * @covers UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::setMethod
+         * @covers Fracture\Routing\UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::prepare
          * 
          * @depends test_getMethod_for_Prepared_Request
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override
@@ -90,10 +90,10 @@
         }
 
         /**
-         * @covers UserRequest::setParameters
-         * @covers UserRequest::setMethod
-         * @covers UserRequest::getMethod
-         * @covers UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::setMethod
+         * @covers Fracture\Routing\UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::prepare
          * 
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
@@ -109,10 +109,10 @@
 
 
         /**
-         * @covers UserRequest::setParameters
-         * @covers UserRequest::setMethod
-         * @covers UserRequest::getMethod
-         * @covers UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::setMethod
+         * @covers Fracture\Routing\UserRequest::getMethod
+         * @covers Fracture\Routing\UserRequest::prepare
          * 
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
@@ -128,7 +128,7 @@
 
 
         /**
-         * @covers UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::setParameters
          */
         public function test_Duplicate_Keys_Assigned_to_Parameters()
         {
