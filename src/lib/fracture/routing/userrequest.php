@@ -29,18 +29,46 @@
         }
 
 
-        protected function sanitizeUri( $uri )
+        private function sanitizeUri( $uri )
         {
             $uri = '/' . $uri;
             $uri = preg_replace( ['#(/)+#' , '#/(\./)+#'] , '/', $uri);
             $uri = trim( $uri, '/');
-            return '/' . $uri;
+            return $uri;
+        }
+
+
+        private function adjustUriSegments( $list, $item )
+        {
+            if ( $item === '..' )
+            {
+                array_pop( $list );
+            }
+            else
+            {
+                array_push( $list, $item );
+            }
+
+            return $list;
+        }
+
+        private function resolveUri( $uri )
+        {
+            $parts = explode( '/', $uri );
+            $segments = [];
+            foreach ( $parts as $element )
+            {
+                $segments = $this->adjustUriSegments( $segments, $element );
+            }
+            return implode( '/', $segments );
         }
 
 
         public function setUri( $uri )
         {
-            $this->uri = $this->sanitizeUri( $uri );
+            $uri = $this->sanitizeUri( $uri );
+            $uri = $this->resolveUri( $uri );
+            $this->uri = '/' . $uri;
             return $this;
         }
 

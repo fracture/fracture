@@ -42,6 +42,19 @@
         [ 'uri'      => '/././foo/././bar/./',
           'expected' => '/foo/bar' ],
 
+        [ 'uri'      => '../../../',
+          'expected' => '/' ],
+
+        [ 'uri'      => '/foo/../bar/',
+          'expected' => '/bar' ],
+
+        [ 'uri'      => '/foo/../../bar/',
+          'expected' => '/bar' ],
+
+        [ 'uri'      => '/foo/bar/../../baz/',
+          'expected' => '/baz' ],
+
+
     ];
 
 /*
