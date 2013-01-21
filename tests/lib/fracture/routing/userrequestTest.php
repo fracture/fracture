@@ -146,4 +146,25 @@
              $this->assertEquals( E_USER_WARNING, $errno );
         }
 
+
+
+        /**
+         * @dataProvider clean_URI_Provider
+         * @covers Fracture\Routing\UserRequest::setUri
+         * @covers Fracture\Routing\UserRequest::getUri
+         */
+        public function test_Valid_Clean_Uri( $uri, $expected )
+        {
+            $request = new UserRequest;
+            $request->setUri( $uri );
+
+            $this->assertEquals( $expected, $request->getUri() );
+        }
+
+
+        public function  clean_URI_Provider()
+        {
+            return include __DIR__ . '/../../../fixtures/routing/uri-variations.php';
+        }
+
     }
