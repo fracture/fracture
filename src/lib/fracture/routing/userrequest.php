@@ -29,9 +29,18 @@
         }
 
 
+        protected function sanitizeUri( $uri )
+        {
+            $uri = '/' . $uri;
+            $uri = preg_replace( ['#(/)+#' , '#/(\./)+#'] , '/', $uri);
+            $uri = trim( $uri, '/');
+            return '/' . $uri;
+        }
+
+
         public function setUri( $uri )
         {
-            $this->uri = $uri;
+            $this->uri = $this->sanitizeUri( $uri );
             return $this;
         }
 
