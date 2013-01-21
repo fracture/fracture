@@ -38,7 +38,7 @@
          */
         protected function getPostValues()
         {
-            if ( isset( $_POST ) && is_array( $_POST )
+            if ( isset( $_POST ) && is_array( $_POST ) )
             {
                 return $_POST;
             }

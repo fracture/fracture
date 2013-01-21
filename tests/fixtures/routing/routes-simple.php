@@ -83,7 +83,7 @@
       [ 'expression' => '#^(:?/(?P<alpha>[^/\.,;?\n]+))?(:?/(?P<beta>[^/\.,;?\n]+))?$#',
         'url'        => '/foo/bar',
         'expected'   => [ 'alpha' => 'foo',
-                          'beta'     => 'bar' ] ],
+                          'beta'  => 'bar' ] ],
 
       #notation:    '[/static/:alpha]/static'
       [ 'expression' => '#^(:?/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
