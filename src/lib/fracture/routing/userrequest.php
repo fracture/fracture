@@ -10,7 +10,7 @@
 
         protected $ip;
 
-        protected $method = NULL;
+        protected $method = null;
 
         protected $parameters = [];
 
@@ -29,6 +29,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         private function sanitizeUri( $uri )
         {
             $uri = '/' . $uri;
@@ -38,6 +41,9 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
         private function adjustUriSegments( $list, $item )
         {
             if ( $item === '..' )
@@ -52,7 +58,10 @@
             return $list;
         }
 
-        private function resolveUri( $uri )
+        /**
+         * @codeCoverageIgnore
+         */
+        protected function resolveUri( $uri )
         {
             $parts = explode( '/', $uri );
             $segments = [];
@@ -81,6 +90,11 @@
 
         public function setIp( $ip )
         {
+            if ( filter_var( $ip, FILTER_VALIDATE_IP ) === false )
+            {
+                $ip = null;
+            }
+
             $this->ip = $ip;
             return $this;
         }

@@ -167,4 +167,31 @@
             return include __DIR__ . '/../../../fixtures/routing/uri-variations.php';
         }
 
+
+        /**
+         * @covers Fracture\Routing\UserRequest::setIp
+         * @covers Fracture\Routing\UserRequest::getIp
+         */
+        public function test_Valid_IP()
+        {
+            $request = new UserRequest;
+            $request->setIp( '127.0.0.1' );
+
+            $this->assertEquals( '127.0.0.1', $request->getIp() );
+        }
+
+        /**
+         * @covers Fracture\Routing\UserRequest::setIp
+         * @covers Fracture\Routing\UserRequest::getIp
+         */
+        public function test_Invalid_IP()
+        {
+            $request = new UserRequest;
+            $request->setIp( 'a.b.c.d.e' );
+
+            $this->assertNull( $request->getIp() );            
+        }
+
+
+
     }

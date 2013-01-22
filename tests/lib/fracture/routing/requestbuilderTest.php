@@ -12,7 +12,7 @@
     {
 
         /**
-         * @covers \Fracture\Routing\RequestBuilder::build()
+         * @covers \Fracture\Routing\RequestBuilder::create
          */
         public function testCreate()
         {
