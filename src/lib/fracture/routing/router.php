@@ -47,20 +47,31 @@
         }
 
 
+        /**
+         * @codeCoverageIgnore
+         */
+        protected function gatherRouteValues( $uri )
+        {
+            foreach ( $this->pool as $name => $route )
+            {
+                $parameters = $route->getMatch( $uri );
+
+                if ( empty($parameters) === false )
+                {
+                    $this->currentRoute = $name;
+                    return $parameters;
+                }
+            }
+
+            return [];
+        }
+
 
         public function route( $request )
         {
             $uri = $request->getUri();
-
-            foreach ( $this->pool as $name => $route )
-            {
-                if ( $parameters = $route->getMatch( $uri ) )
-                {
-                    $this->currentRoute = $route;
-                    $request->setParameters( $parameters );
-                    return;
-                }
-            }
+            $parameters = $this->gatherRouteValues( $uri );
+            $request->setParameters( $parameters );
         }
 
     }
