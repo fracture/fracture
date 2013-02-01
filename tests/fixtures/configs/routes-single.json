@@ -1,6 +1,6 @@
 {
     "test": {
-        "notation": "[/:alpha][:/beta]",
+        "notation": "[/:alpha][/:beta]",
         "defaults": {
             "alpha":    "qux",
             "beta":     "qux"

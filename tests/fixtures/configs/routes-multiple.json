@@ -1,11 +1,11 @@
 {
     "one": {
-        "notation": "/:one/:foo"
+        "notation": "/:foo/:bar"
     },
     "two": {
-        "notation": "/:two"
+        "notation": "/static/:foo"
     },
     "three": {
-        "notation": "/:three"
+        "notation": "/:foo"
     }
 }
