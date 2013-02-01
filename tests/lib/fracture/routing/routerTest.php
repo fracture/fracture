@@ -21,7 +21,7 @@
             $builder->expects($this->once())
                     ->method('create')
                     ->with($this->equalTo('test'),
-                           $this->equalTo( [ 'notation' => '[/:alpha][:/beta]',
+                           $this->equalTo( [ 'notation' => '[/:alpha][/:beta]',
                                              'defaults' => [
                                                 "alpha" => 'qux',
                                                 "beta"  => 'qux' ]]));
@@ -78,6 +78,29 @@
 
         }
 
+
+        /**
+         * @dataProvider simple_route_Provider
+         * @covers Fracture\Routing\Router::route
+         */
+        public function test_Routing_With_Single_Route( $filepath, $uri, $expected )
+        {
+            $request = new \Mock\UserRequest( $uri );
+
+            $builder = new RouteBuilder;
+            $router = new Router( $builder );
+
+            $router->import( __DIR__ . '/../../..' . $filepath );
+            $router->route( $request );
+
+            $this->assertEquals( $expected, $request->getParameters() );
+        }
+
+
+        public function simple_route_Provider()
+        {
+            return include __DIR__ . '/../../../fixtures/routing/single-route-list.php';
+        }
 
     }
 
