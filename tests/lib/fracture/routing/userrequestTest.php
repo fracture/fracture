@@ -109,10 +109,45 @@
 
 
         /**
+         * @covers Fracture\Routing\UserRequest::getParameter
+         */
+        public function test_getParameter_when_no_Value()
+        {
+            $request = new UserRequest;
+            $this->assertNull( $request->getParameter('foobar') );
+        }
+
+
+        /**
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::getParameter
+         */
+        public function test_getParameter_when_set_Value()
+        {
+            $request = new UserRequest;
+            $request->setParameters( ['param' => 'value'] );
+            $this->assertEquals( 'value', $request->getParameter('param') );
+        }
+
+
+        /**
+         * @covers Fracture\Routing\UserRequest::setParameters
+         * @covers Fracture\Routing\UserRequest::getParameter
+         */
+        public function test_getParameter_when_set_Different()
+        {
+            $request = new UserRequest;
+            $request->setParameters( ['param' => 'value'] );
+            $this->assertNull( $request->getParameter('different') );
+        }
+
+
+        /**
          * @covers Fracture\Routing\UserRequest::setParameters
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
+         * @covers Fracture\Routing\UserRequest::getParameter
          *
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
