@@ -1,63 +1,96 @@
 <?php
 
-
     return [
 
-        [ 'uri'      => '',
-          'expected' => '/' ],
+        [
+            'uri'      => '',
+            'expected' => '/',
+        ],
 
-        [ 'uri'      => 'foo/bar',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => 'foo/bar',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => 'foo/',
-          'expected' => '/foo' ],
+        [
+            'uri'      => 'foo/',
+            'expected' => '/foo',
+        ],
 
-        [ 'uri'      => './',
-          'expected' => '/' ],
+        [
+            'uri'      => './',
+            'expected' => '/',
+        ],
 
-        [ 'uri'      => './foo/',
-          'expected' => '/foo' ],
+        [
+            'uri'      => './foo/',
+            'expected' => '/foo',
+        ],
 
-        [ 'uri'      => 'foo/./bar/./',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => 'foo/./bar/./',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => 'foo.bar',
-          'expected' => '/foo.bar' ],
+        [
+            'uri'      => 'foo.bar',
+            'expected' => '/foo.bar',
+        ],
 
-        [ 'uri'      => 'foo./bar',
-          'expected' => '/foo./bar' ],
+        [
+            'uri'      => 'foo./bar',
+            'expected' => '/foo./bar',
+        ],
 
-        [ 'uri'      => 'foo./bar./',
-          'expected' => '/foo./bar.' ],
+        [
+            'uri'      => 'foo./bar./',
+            'expected' => '/foo./bar.',
+        ],
 
-        [ 'uri'      => 'foo/////bar',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => 'foo/////bar',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => '///foo/bar/',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => '///foo/bar/',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => '///foo///bar//',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => '///foo///bar//',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => '/././foo/././bar/./',
-          'expected' => '/foo/bar' ],
+        [
+            'uri'      => '/././foo/././bar/./',
+            'expected' => '/foo/bar',
+        ],
 
-        [ 'uri'      => '../../../',
-          'expected' => '/' ],
+        [
+            'uri'      => '../../../',
+            'expected' => '/',
+        ],
 
-        [ 'uri'      => '/foo/../bar/',
-          'expected' => '/bar' ],
+        [
+            'uri'      => '/foo/../bar/',
+            'expected' => '/bar',
+        ],
 
-        [ 'uri'      => '/foo/../../bar/',
-          'expected' => '/bar' ],
+        [
+            'uri'      => '/foo/../../bar/',
+            'expected' => '/bar',
+        ],
 
-        [ 'uri'      => '/foo/bar/../../baz/',
-          'expected' => '/baz' ],
-
-
+        [
+            'uri'      => '/foo/bar/../../baz/',
+            'expected' => '/baz',
+        ],
     ];
 
 /*
-        [ 'uri' => '',
-          'expected' => '/' ],
-*/
+        [
+            'uri' => '',
+            'expected' => '/',
+        ],
+//*/
