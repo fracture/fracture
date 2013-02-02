@@ -28,7 +28,7 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
-         * 
+         *
          * @depends test_getMethod_for_Unprepared_Request
          */
         public function test_getMethod_for_Prepared_Request()
@@ -58,7 +58,7 @@
          * @covers Fracture\Routing\UserRequest::setParameters
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
-         * 
+         *
          * @depends test_getMethod_for_Unprepared_Request_with_Custom_Method
          */
         public function test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override()
@@ -75,7 +75,7 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
-         * 
+         *
          * @depends test_getMethod_for_Prepared_Request
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override
          */
@@ -94,7 +94,7 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
-         * 
+         *
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
         public function test_getMethod_for_Prepared_Request_with_Custom_Method_with_Wrong_Override()
@@ -113,7 +113,7 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
-         * 
+         *
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
         public function test_getMethod_for_Prepared_Request_Unsets_Custom_Method()
@@ -123,7 +123,7 @@
             $request->setParameters( ['_method' => 'PUT'] );
             $request->prepare();
 
-            $this->assertNull( $request->getParameter('_method') );            
+            $this->assertNull( $request->getParameter('_method') );
         }
 
 
@@ -164,7 +164,7 @@
 
         public function  clean_URI_Provider()
         {
-            return include __DIR__ . '/../../../fixtures/routing/uri-variations.php';
+            return include TEST_PATH . '/fixtures/routing/uri-variations.php';
         }
 
 
@@ -189,7 +189,7 @@
             $request = new UserRequest;
             $request->setIp( 'a.b.c.d.e' );
 
-            $this->assertNull( $request->getIp() );            
+            $this->assertNull( $request->getIp() );
         }
 
 

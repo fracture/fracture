@@ -28,8 +28,8 @@
         }
 
         public function simple_Pattern_Provider()
-        {   
-            return include __DIR__ . '/../../../fixtures/routing/patterns-simple.php';
+        {
+            return include TEST_PATH . '/fixtures/routing/patterns-simple.php';
         }
 
 
@@ -49,8 +49,8 @@
         }
 
         public function conditional_Pattern_Provider()
-        {   
-            return include __DIR__ . '/../../../fixtures/routing/patterns-conditional.php';
+        {
+            return include TEST_PATH . '/fixtures/routing/patterns-conditional.php';
         }
 
 

@@ -27,8 +27,8 @@
                                                 "beta"  => 'qux' ]]));
 
             $router = new Router( $builder );
-            $router->import( __DIR__ . '/../../../fixtures/configs/routes-single.json' );
-            
+            $router->import( TEST_PATH . '/fixtures/configs/routes-single.json' );
+
         }
 
 
@@ -43,8 +43,8 @@
                      ->method('create');
 
             $router = new Router( $builder );
-            $router->import( __DIR__ . '/../../../fixtures/configs/routes-multiple.json' );
-            
+            $router->import( TEST_PATH . '/fixtures/configs/routes-multiple.json' );
+
         }
 
 
@@ -59,7 +59,7 @@
             $builder = $this->getMock( 'RouteBuilder', ['create'] );
 
             $router = new Router( $builder );
-            $router->import( __DIR__ . '/../../../fixtures/configs/routes-invalid.json' );
+            $router->import( TEST_PATH . '/fixtures/configs/routes-invalid.json' );
 
         }
 
@@ -75,7 +75,7 @@
             $builder = $this->getMock( 'RouteBuilder', ['create'] );
 
             $router = new Router( $builder );
-            $router->import( __DIR__ . '/../../../fixtures/configs/routes-fake.json' );
+            $router->import( TEST_PATH . '/fixtures/configs/routes-fake.json' );
 
         }
 
@@ -93,7 +93,7 @@
             $builder = new RouteBuilder;
             $router = new Router( $builder );
 
-            $router->import( __DIR__ . '/../../..' . $filepath );
+            $router->import( TEST_PATH . $filepath );
             $router->route( $request );
 
             $this->assertEquals( $expected, $request->getParameters() );
@@ -102,7 +102,7 @@
 
         public function simple_Route_Provider()
         {
-            return include __DIR__ . '/../../../fixtures/routing/single-route-list.php';
+            return include TEST_PATH . '/fixtures/routing/single-route-list.php';
         }
 
     }
