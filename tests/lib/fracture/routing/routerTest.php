@@ -39,7 +39,7 @@
         public function test_Calling_Create_in_Import_for_Several_Routes()
         {
             $builder = $this->getMock( 'RouteBuilder', ['create'] );
-            $builder->expects($this->exactly(3))
+            $builder->expects($this->exactly(4))
                      ->method('create');
 
             $router = new Router( $builder );
@@ -65,6 +65,7 @@
 
 
         /**
+         * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
          */
         public function test_Missing_JSON_Exception()
@@ -80,7 +81,9 @@
 
 
         /**
-         * @dataProvider simple_route_Provider
+         * @dataProvider simple_Route_Provider
+         * @covers Fracture\Routing\Router::__construct
+         * @covers Fracture\Routing\Router::import
          * @covers Fracture\Routing\Router::route
          */
         public function test_Routing_With_Single_Route( $filepath, $uri, $expected )
@@ -97,7 +100,7 @@
         }
 
 
-        public function simple_route_Provider()
+        public function simple_Route_Provider()
         {
             return include __DIR__ . '/../../../fixtures/routing/single-route-list.php';
         }
