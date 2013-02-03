@@ -13,12 +13,16 @@
 
         /**
          * @covers Fracture\Routing\RouteBuilder::create
+         *
+         * @covers Fracture\Routing\Pattern::__construct
+         * @covers Fracture\Routing\Pattern::prepare
+         * @covers Fracture\Routing\Route::__construct
          */
         public function test_Created_Interface()
         {
             $builder = new RouteBuilder;
             $instance = $builder->create( 'test', [ 'notation' => '' ] );
-            
+
             $this->assertInstanceOf( 'Fracture\Routing\Matchable', $instance );
         }
 

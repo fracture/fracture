@@ -13,6 +13,9 @@
 
         /**
          * @covers \Fracture\Routing\RequestBuilder::create
+         *
+         * @covers \Fracture\Routing\RequestBuilder::getPostValues
+         * @covers \Fracture\Routing\RequestBuilder::getServerValue
          */
         public function testCreate()
         {

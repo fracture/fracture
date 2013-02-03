@@ -14,6 +14,8 @@
         /**
          * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
+         *
+         * @covers Fracture\Routing\Router::createRoutes
          */
         public function test_Calling_Create_in_Import_for_Single_Route()
         {
@@ -38,6 +40,8 @@
         /**
          * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
+         *
+         * @covers Fracture\Routing\Router::createRoutes
          */
         public function test_Calling_Create_in_Import_for_Several_Routes()
         {
@@ -59,6 +63,9 @@
          * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
          * @covers Fracture\Routing\Router::route
+         *
+         * @covers Fracture\Routing\Router::createRoutes
+         * @covers Fracture\Routing\Router::gatherRouteValues
          */
         public function test_Routing_With_Single_Route( $filepath, $uri, $expected )
         {

@@ -29,6 +29,8 @@
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
          *
+         * @covers Fracture\Routing\UserRequest::getResolvedMethod
+         *
          * @depends test_getMethod_for_Unprepared_Request
          */
         public function test_getMethod_for_Prepared_Request()
@@ -59,6 +61,8 @@
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
          *
+         * @covers Fracture\Routing\UserRequest::getResolvedMethod
+         *
          * @depends test_getMethod_for_Unprepared_Request_with_Custom_Method
          */
         public function test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override()
@@ -75,6 +79,8 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
+         *
+         * @covers Fracture\Routing\UserRequest::getResolvedMethod
          *
          * @depends test_getMethod_for_Prepared_Request
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override
@@ -94,6 +100,8 @@
          * @covers Fracture\Routing\UserRequest::setMethod
          * @covers Fracture\Routing\UserRequest::getMethod
          * @covers Fracture\Routing\UserRequest::prepare
+         *
+         * @covers Fracture\Routing\UserRequest::getResolvedMethod
          *
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
@@ -149,6 +157,8 @@
          * @covers Fracture\Routing\UserRequest::prepare
          * @covers Fracture\Routing\UserRequest::getParameter
          *
+         * @covers Fracture\Routing\UserRequest::getResolvedMethod
+         *
          * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
         public function test_getMethod_for_Prepared_Request_Unsets_Custom_Method()
@@ -187,6 +197,10 @@
          * @dataProvider clean_URI_Provider
          * @covers Fracture\Routing\UserRequest::setUri
          * @covers Fracture\Routing\UserRequest::getUri
+         *
+         * @covers Fracture\Routing\UserRequest::sanitizeUri
+         * @covers Fracture\Routing\UserRequest::resolveUri
+         * @covers Fracture\Routing\UserRequest::adjustUriSegments
          */
         public function test_Valid_Clean_Uri( $uri, $expected )
         {

@@ -17,6 +17,11 @@
          * @covers Fracture\Routing\Pattern::__construct
          * @covers Fracture\Routing\Pattern::prepare
          * @covers Fracture\Routing\Pattern::getExpression
+         *
+         * @covers Fracture\Routing\Pattern::cleanNotation
+         * @covers Fracture\Routing\Pattern::addSlash
+         * @covers Fracture\Routing\Pattern::parseNotation
+         * @covers Fracture\Routing\Pattern::applyConditions
          */
         public function test_Simple_Patterns( $notation, $result )
         {
@@ -38,6 +43,11 @@
          * @covers Fracture\Routing\Pattern::__construct
          * @covers Fracture\Routing\Pattern::prepare
          * @covers Fracture\Routing\Pattern::getExpression
+         *
+         * @covers Fracture\Routing\Pattern::cleanNotation
+         * @covers Fracture\Routing\Pattern::addSlash
+         * @covers Fracture\Routing\Pattern::parseNotation
+         * @covers Fracture\Routing\Pattern::applyConditions
          */
         public function test_Conditional_Patterns( $notation, $conditions, $result )
         {
