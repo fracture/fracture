@@ -26,8 +26,11 @@
                                                 "alpha" => 'qux',
                                                 "beta"  => 'qux' ]]));
 
+            $json = file_get_contents( TEST_PATH . '/fixtures/configs/routes-single.json' );
+            $config = json_decode( $json, true );
+
             $router = new Router( $builder );
-            $router->import( TEST_PATH . '/fixtures/configs/routes-single.json' );
+            $router->import( $config );
 
         }
 
@@ -42,40 +45,11 @@
             $builder->expects($this->exactly(4))
                      ->method('create');
 
-            $router = new Router( $builder );
-            $router->import( TEST_PATH . '/fixtures/configs/routes-multiple.json' );
-
-        }
-
-
-        /**
-         * @covers Fracture\Routing\Router::__construct
-         * @covers Fracture\Routing\Router::import
-         */
-        public function test_Invalid_JSON_Import_Exception()
-        {
-
-            $this->setExpectedException('Exception');
-            $builder = $this->getMock( 'RouteBuilder', ['create'] );
+            $json = file_get_contents( TEST_PATH . '/fixtures/configs/routes-multiple.json' );
+            $config = json_decode( $json, true );
 
             $router = new Router( $builder );
-            $router->import( TEST_PATH . '/fixtures/configs/routes-invalid.json' );
-
-        }
-
-
-        /**
-         * @covers Fracture\Routing\Router::__construct
-         * @covers Fracture\Routing\Router::import
-         */
-        public function test_Missing_JSON_Exception()
-        {
-
-            $this->setExpectedException('Exception');
-            $builder = $this->getMock( 'RouteBuilder', ['create'] );
-
-            $router = new Router( $builder );
-            $router->import( TEST_PATH . '/fixtures/configs/routes-fake.json' );
+            $router->import( $config );
 
         }
 
@@ -93,7 +67,10 @@
             $builder = new RouteBuilder;
             $router = new Router( $builder );
 
-            $router->import( TEST_PATH . $filepath );
+            $json = file_get_contents( TEST_PATH . $filepath );
+            $config = json_decode( $json, true );
+
+            $router->import( $config );
             $router->route( $request );
 
             $this->assertEquals( $expected, $request->getParameters() );
@@ -106,6 +83,3 @@
         }
 
     }
-
-
-
