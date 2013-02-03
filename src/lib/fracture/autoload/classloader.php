@@ -8,13 +8,13 @@
 
         protected $maps = [];
 
-        protected $basePath = DIRECTORY_SEPARATOR;
 
-        
         public function addMap( Searchable $map, $basePath )
         {
-            $item = [ 'map'  => $map, 
-                      'path' => $basePath ];
+            $item = [
+                'map'  => $map,
+                'path' => $basePath,
+            ];
 
             $this->maps[] = $item;
         }
@@ -23,29 +23,29 @@
 
         public function register()
         {
-            spl_autoload_register( array( $this, 'load' ) );
+            spl_autoload_register( [ $this, 'load' ] );
         }
-
 
 
         protected function load( $className )
         {
             foreach ( $this->maps as $option )
             {
-                if ( $this->hasLoadedClass( $option['map'], $option['path'], $className ) )
+                // gets a list of possible filepaths for the class definition
+                $locations = $option['map']->getLocations( $className );
+
+                if ( $this->hasLoadedClass( $option['path'], $locations ) )
                 {
-                    return TRUE;
+                    return true;
                 }
             }
 
-            return FALSE;
+            return false;
         }
 
 
-        protected function hasLoadedClass( $map, $path, $className )
+        protected function hasLoadedClass( $path, $locations )
         {
-            $locations = $map->getLocations( $className );
-
             foreach ( $locations as $filepath )
             {
                 $filepath = $path . $filepath;
@@ -53,11 +53,11 @@
                 if ( file_exists( $filepath ) )
                 {
                     require $filepath;
-                    return TRUE;
+                    return true;
                 }
             }
 
-            return FALSE;
+            return false;
         }
 
 
