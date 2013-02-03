@@ -14,14 +14,14 @@
         protected $notation;
 
         protected $conditions;
-        
+
         protected $expression;
 
 
         public function __construct( $notation , array $conditions = [] )
         {
             $this->notation = $notation;
-            $this->conditions = $conditions;    
+            $this->conditions = $conditions;
         }
 
 
@@ -29,7 +29,7 @@
         {
             $notation = $this->cleanNotation( $this->notation );
             $expression = $this->parseNotation( $notation );
-            
+
             if ( count( $this->conditions ) )
             {
                 $expression = $this->applyConditions( $expression , $this->conditions );
@@ -39,9 +39,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function cleanNotation( $notation )
         {
             if ( strlen( $notation ) === 0 )
@@ -53,9 +50,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function addSlash( $notation )
         {
             $notation = trim( $notation, '/' );
@@ -75,16 +69,13 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function parseNotation( $notation )
         {
             $out = str_replace
             (
                 [ '['   , ']'  ],
                 [ '(:?' , ')?' ],
-                $notation    
+                $notation
             );
 
             $out = preg_replace
@@ -99,9 +90,6 @@
 
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function applyConditions( $expression , $conditions )
         {
             $search = $replace = [];
@@ -120,8 +108,6 @@
         {
             return $this->expression;
         }
-        
+
 
     }
-
-?>

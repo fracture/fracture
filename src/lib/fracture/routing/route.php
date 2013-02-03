@@ -25,9 +25,9 @@
             $expression = $this->pattern->getExpression();
             $matches = [];
 
-            if ( ! preg_match( $expression , $uri , $matches ) )
+            if ( preg_match( $expression , $uri , $matches ) === 0 )
             {
-                return FALSE;
+                return false;
             }
 
             $matches = $this->cleanMatches( $matches );
@@ -35,17 +35,13 @@
         }
 
 
-
-        /**
-         * @codeCoverageIgnore
-         */
         protected function cleanMatches( $matches )
         {
             $list = [];
 
             foreach ( $matches as $key => $value )
             {
-                if ( !is_numeric( $key ) && ( !empty( $value ) || $value === '0' ) )
+                if ( is_numeric( $key ) === false && ( empty( $value ) === false || $value === '0' ) )
                 {
                     $list[ $key ] = $value;
                 }
@@ -53,10 +49,5 @@
 
             return $list;
         }
-        
-
-
 
     }
-
-?>

@@ -4,7 +4,7 @@
 
     class UserRequest
     {
-        
+
 
         protected $uri;
 
@@ -29,9 +29,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         private function sanitizeUri( $uri )
         {
             $uri = '/' . $uri;
@@ -41,9 +38,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         private function adjustUriSegments( $list, $item )
         {
             if ( $item === '..' )
@@ -58,9 +52,7 @@
             return $list;
         }
 
-        /**
-         * @codeCoverageIgnore
-         */
+
         protected function resolveUri( $uri )
         {
             $parts = explode( '/', $uri );
@@ -112,9 +104,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function getResolvedMethod()
         {
             $method = $this->method;
@@ -162,7 +151,7 @@
                 return $this->parameters[ $name ];
             }
 
-            return NULL;
+            return null;
         }
 
 

@@ -19,9 +19,7 @@
             return $instance;
         }
 
-        /**
-         * @codeCoverageIgnore
-         */
+
         protected function getServerValue( $key )
         {
             if ( array_key_exists( $key, $_SERVER ) )
@@ -29,13 +27,10 @@
                 return $_SERVER[ $key ];
             }
 
-            return NULL;
+            return null;
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function getPostValues()
         {
             if ( isset( $_POST ) && is_array( $_POST ) )

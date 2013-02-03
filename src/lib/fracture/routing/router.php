@@ -26,9 +26,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function createRoutes( $config )
         {
             $routes = [];
@@ -43,9 +40,6 @@
         }
 
 
-        /**
-         * @codeCoverageIgnore
-         */
         protected function gatherRouteValues( $uri )
         {
             foreach ( $this->pool as $name => $route )

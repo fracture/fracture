@@ -6,5 +6,3 @@
     {
         public function getMatch( $uri );
     }
-
-?>
