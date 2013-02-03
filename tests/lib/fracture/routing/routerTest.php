@@ -11,7 +11,8 @@
     class RouterTest extends PHPUnit_Framework_TestCase
     {
 
-        /**
+
+       /**
          * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
          *
@@ -59,13 +60,36 @@
 
 
         /**
-         * @dataProvider simple_Route_Provider
          * @covers Fracture\Routing\Router::__construct
          * @covers Fracture\Routing\Router::import
          * @covers Fracture\Routing\Router::route
          *
          * @covers Fracture\Routing\Router::createRoutes
          * @covers Fracture\Routing\Router::gatherRouteValues
+         */
+        public function test_Routing_With_No_Routes()
+        {
+            $request = new \Mock\UserRequest( '/not/important' );
+
+            $builder = new RouteBuilder;
+            $router = new Router( $builder );
+
+            $router->import( [] );
+            $router->route( $request );
+
+            $this->assertEquals( [], $request->getParameters() );
+        }
+
+
+        /**
+         * @covers Fracture\Routing\Router::__construct
+         * @covers Fracture\Routing\Router::import
+         * @covers Fracture\Routing\Router::route
+         *
+         * @covers Fracture\Routing\Router::createRoutes
+         * @covers Fracture\Routing\Router::gatherRouteValues
+         *
+         * @dataProvider simple_Route_Provider
          */
         public function test_Routing_With_Single_Route( $filepath, $uri, $expected )
         {

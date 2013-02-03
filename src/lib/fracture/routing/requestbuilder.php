@@ -33,7 +33,7 @@
 
         protected function getPostValues()
         {
-            if ( isset( $_POST ) && is_array( $_POST ) )
+            if ( empty( $_POST ) === false )
             {
                 return $_POST;
             }
