@@ -5,11 +5,8 @@
     class Router
     {
 
-        use \Fracture\Transcription\JsonToArray;
-
-
         protected $builder;
-        
+
         protected $uri;
 
         protected $pool = [];
@@ -23,9 +20,8 @@
         }
 
 
-        public function import( $filepath )
+        public function import( $config )
         {
-            $config = $this->fetchConfig( $filepath );
             $this->pool = $this->createRoutes( $config );
         }
 
@@ -75,6 +71,3 @@
         }
 
     }
-
-
-?>

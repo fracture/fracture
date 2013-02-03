@@ -1,5 +1,7 @@
 <?php
 
+    use Fracture\Transcription\JsonReader;
+
     use Fracture\Autoload\JsonNamespaceMap;
     use Fracture\Autoload\ClassLoader;
 
@@ -9,7 +11,7 @@
 
 
 
-    require '../lib/fracture/transcription/jsontoarray.php';
+    require '../lib/fracture/transcription/jsonreader.php';
     require '../lib/fracture/autoload/searchable.php';
     require '../lib/fracture/autoload/namespacemap.php';
     require '../lib/fracture/autoload/jsonnamespacemap.php';
@@ -25,13 +27,16 @@
     $loader->register();
 
     $map = new JsonNamespaceMap( __DIR__ );
-    $map->import( __DIR__ . '/config/namespaces.json' );
+    $reader = new JsonReader;
+    $map->import(
+        $reader->getAsArray( __DIR__ . '/config/namespaces.json' )
+    );
 
     $loader->addMap( $map,  dirname( __DIR__ ) );
 
 
     /*
-     * Routing mechanism 
+     * Routing mechanism
      */
 
     $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
@@ -41,10 +46,11 @@
     $request->setUri( $uri );
 
     $router = new Router( new RouteBuilder );
-    $router->import( __DIR__ . '/config/routes.json' );
+    $router->import(
+        $reader->getAsArray( __DIR__ . '/config/routes.json')
+    );
 
     $router->route( $request );
 
 
     // $request ready to be used
-

@@ -5,12 +5,8 @@
     class JsonNamespaceMap extends NamespaceMap
     {
 
-        use \Fracture\Transcription\JsonToArray;
-
-
-        public function import( $filepath )
+        public function import( $config )
         {
-            $config = $this->fetchConfig( $filepath );
             $this->applyValues( $config );
         }
 
@@ -47,6 +43,5 @@
                 $this->tree[ $id ][ 'paths' ][] = $parameter;
             }
         }
-
 
     }
