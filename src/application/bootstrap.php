@@ -7,6 +7,7 @@
 
     use Fracture\Routing\RouteBuilder;
     use Fracture\Routing\RequestBuilder;
+    use Fracture\Routing\Aliaser;
     use Fracture\Routing\Router;
 
 
@@ -51,6 +52,27 @@
     );
 
     $router->route( $request );
+
+    $aliaser = new Aliaser();
+    $aliaser->import(
+        $reader->getAsArray( __DIR__ . '/config/aliases.json')
+    );
+    $aliaser->adjust( $request );
+
+    /*
+    Gateway
+    Mask
+    Transformer
+    Prism
+    Filter
+    Spindle
+    Nexus
+    Crossroad
+    Confluence
+    Translator
+    Intersection
+
+    */
 
 
     // $request ready to be used
