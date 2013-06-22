@@ -7,7 +7,11 @@
 
         public function create( $name, $parameters )
         {
-            $parameters += [ 'conditions' => [], 'defaults' => [], 'notation' => '' ];
+            $parameters += [
+                'conditions' => [],
+                'defaults'   => [],
+                'notation'   => '',
+            ];
 
             $pattern = new Pattern( $parameters['notation'], $parameters['conditions'] );
             $instance = new Route( $pattern, $name, $parameters['defaults'] );

@@ -71,19 +71,10 @@
 
         protected function parseNotation( $notation )
         {
-            $out = str_replace
-            (
-                [ '['   , ']'  ],
-                [ '(:?' , ')?' ],
-                $notation
-            );
+            $out = str_replace( ['[', ']'], ['(:?', ')?'], $notation );
 
-            $out = preg_replace
-            (
-                Pattern::REGKEY ,
-                '(?P<\2>' . Pattern::REGVAL . ')' ,
-                $out
-            );
+            $enhancement = '(?P<\2>' . Pattern::REGVAL . ')';
+            $out = preg_replace( Pattern::REGKEY ,$enhancement , $out);
 
             return $out;
         }
