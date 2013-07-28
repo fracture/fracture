@@ -71,7 +71,7 @@
 
         protected function parseNotation( $notation )
         {
-            $out = str_replace( ['[', ']'], ['(:?', ')?'], $notation );
+            $out = str_replace( ['[', ']'], ['(?:', ')?'], $notation );
 
             $enhancement = '(?P<\2>' . Pattern::REGVAL . ')';
             $out = preg_replace( Pattern::REGKEY ,$enhancement , $out);
