@@ -53,26 +53,5 @@
 
     $router->route( $request );
 
-    $aliaser = new Aliaser();
-    $aliaser->import(
-        $reader->getAsArray( __DIR__ . '/config/aliases.json')
-    );
-    $aliaser->adjust( $request );
-
-    /*
-    Gateway
-    Mask
-    Transformer
-    Prism
-    Filter
-    Spindle
-    Nexus
-    Crossroad
-    Confluence
-    Translator
-    Intersection
-
-    */
-
 
     // $request ready to be used
