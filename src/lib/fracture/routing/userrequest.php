@@ -32,8 +32,8 @@
         private function sanitizeUri( $uri )
         {
             $uri = '/' . $uri;
-            $uri = preg_replace( ['#(/)+#' , '#/(\./)+#'] , '/', $uri);
-            $uri = trim( $uri, '/');
+            $uri = preg_replace( [ '#(/)+#', '#/(\./)+#' ], '/', $uri );
+            $uri = trim( $uri, '/' );
             return $uri;
         }
 
@@ -131,7 +131,7 @@
 
             if ( count( $duplicates ) > 0 )
             {
-                $message = 'You are trying to override following parameter(s): "'.
+                $message = 'You are trying to override following parameter(s): "' .
                             implode( '", "', array_keys( $duplicates ) ) . '"';
 
                 trigger_error( $message , \E_USER_WARNING );

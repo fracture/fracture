@@ -13,8 +13,8 @@
                 'notation'   => '',
             ];
 
-            $pattern = new Pattern( $parameters['notation'], $parameters['conditions'] );
-            $instance = new Route( $pattern, $name, $parameters['defaults'] );
+            $pattern = new Pattern( $parameters[ 'notation' ], $parameters[ 'conditions' ] );
+            $instance = new Route( $pattern, $name, $parameters[ 'defaults' ] );
 
             $pattern->prepare();
 

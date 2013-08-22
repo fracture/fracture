@@ -32,9 +32,9 @@
             foreach ( $this->maps as $option )
             {
                 // gets a list of possible filepaths for the class definition
-                $locations = $option['map']->getLocations( $className );
+                $locations = $option[ 'map' ]->getLocations( $className );
 
-                if ( $this->hasLoadedClass( $option['path'], $locations ) )
+                if ( $this->hasLoadedClass( $option[ 'path' ], $locations ) )
                 {
                     return true;
                 }

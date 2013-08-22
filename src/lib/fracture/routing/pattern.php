@@ -18,7 +18,7 @@
         protected $expression;
 
 
-        public function __construct( $notation , array $conditions = [] )
+        public function __construct( $notation, array $conditions = [] )
         {
             $this->notation = $notation;
             $this->conditions = $conditions;
@@ -32,7 +32,7 @@
 
             if ( count( $this->conditions ) )
             {
-                $expression = $this->applyConditions( $expression , $this->conditions );
+                $expression = $this->applyConditions( $expression, $this->conditions );
             }
 
             $this->expression = "#^$expression$#";
@@ -62,7 +62,7 @@
 
             if ( substr( $notation, $offset, 1 ) !== '/' )
             {
-                $notation = substr( $notation , 0, $offset) . '/' . substr( $notation , $offset );
+                $notation = substr( $notation, 0, $offset) . '/' . substr( $notation, $offset );
             }
 
             return $notation;
@@ -71,27 +71,27 @@
 
         protected function parseNotation( $notation )
         {
-            $out = str_replace( ['[', ']'], ['(?:', ')?'], $notation );
+            $out = str_replace( [ '[', ']' ], [ '(?:', ')?' ], $notation );
 
             $enhancement = '(?P<\2>' . Pattern::REGVAL . ')';
-            $out = preg_replace( Pattern::REGKEY ,$enhancement , $out);
+            $out = preg_replace( Pattern::REGKEY ,$enhancement, $out );
 
             return $out;
         }
 
 
 
-        protected function applyConditions( $expression , $conditions )
+        protected function applyConditions( $expression, $conditions )
         {
             $search = $replace = [];
 
             foreach ( $conditions as $key => $value)
             {
-                $search[]  = "<$key>".Pattern::REGVAL;
+                $search[]  = "<$key>" . Pattern::REGVAL;
                 $replace[] = "<$key>$value";
             }
 
-            return str_replace($search, $replace, $expression );
+            return str_replace( $search, $replace, $expression );
         }
 
 

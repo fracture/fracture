@@ -40,7 +40,9 @@
      * Routing mechanism
      */
 
-    $uri =  isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : '/';
+    $uri = isset( $_SERVER[ 'PATH_INFO' ] ) 
+                ? $_SERVER[ 'PATH_INFO' ] 
+                : '/';
 
     $builder = new RequestBuilder;
     $request = $builder->create();
@@ -48,7 +50,7 @@
 
     $router = new Router( new RouteBuilder );
     $router->import(
-        $reader->getAsArray( __DIR__ . '/config/routes.json')
+        $reader->getAsArray( __DIR__ . '/config/routes.json' )
     );
 
     $router->route( $request );

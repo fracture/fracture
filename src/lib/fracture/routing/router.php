@@ -46,7 +46,7 @@
             {
                 $parameters = $route->getMatch( $uri );
 
-                if ( empty($parameters) === false )
+                if ( empty( $parameters ) === false )
                 {
                     $this->currentRoute = $name;
                     return $parameters;

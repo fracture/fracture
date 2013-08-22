@@ -25,7 +25,7 @@
             $expression = $this->pattern->getExpression();
             $matches = [];
 
-            if ( preg_match( $expression , $uri , $matches ) === 0 )
+            if ( preg_match( $expression, $uri, $matches ) === 0 )
             {
                 return false;
             }
