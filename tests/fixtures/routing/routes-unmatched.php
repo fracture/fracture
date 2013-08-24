@@ -37,6 +37,12 @@
             'url'        => '/foo/bar',
         ],
 
+
+        [
+            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'url'        => '/namespace\\class',
+        ],
+
         #notation:      '/static/:alpha'
         [
             'expression' => '#^/static/(?P<alpha>[^/\.,;?\n]+)$#',
