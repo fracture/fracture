@@ -28,94 +28,94 @@
 
         #notation:      '/:alpha'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/',
         ],
 
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/bar',
         ],
 
 
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/namespace\\class',
         ],
 
         #notation:      '/static/:alpha'
         [
-            'expression' => '#^/static/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/static/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/static/foo/bar',
         ],
 
         [
-            'expression' => '#^/static/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/static/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/static',
         ],
 
         #notation:      '/:alpha/static/:beta'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static/(?P<beta>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/static/(?P<beta>[^/\\\\.,;?\n]+)$#',
             'url'        => '/',
         ],
 
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static/(?P<beta>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/static/(?P<beta>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/bar/buz',
         ],
 
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static/(?P<beta>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/static/(?P<beta>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/static',
         ],
 
         #notation:      '[/:alpha]'
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/',
         ],
 
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo/bar',
         ],
 
         #notation:      '/static[/:alpha]'
         [
-            'expression' => '#^/static(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^/static(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/',
         ],
 
         [
-            'expression' => '#^/static(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^/static(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/static/foo/bar',
         ],
 
         #notation:      '[/:alpha][/:beta]'
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?(?:/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?(?:/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/',
         ],
 
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?(?:/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?(?:/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo/bar/buz',
         ],
 
         #notation:      '[/static/:alpha]/static'
         [
-            'expression' => '#^(?:/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+            'expression' => '#^(?:/static/(?P<alpha>[^/\\\\.,;?\n]+))?/static$#',
             'url'        => '/foo',
         ],
 
         [
-            'expression' => '#^(?:/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+            'expression' => '#^(?:/static/(?P<alpha>[^/\\\\.,;?\n]+))?/static$#',
             'url'        => '/static/foo',
         ],
 
         [
-            'expression' => '#^(?:/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+            'expression' => '#^(?:/static/(?P<alpha>[^/\\\\.,;?\n]+))?/static$#',
             'url'        => '/foo/static',
         ],
 
@@ -156,22 +156,22 @@
         #notation:      '/static[[/:alpha]/:beta][-:gamma]'
         #conditions     beta => [a-z]+ , gamma => [\d]{1,2}
         [
-            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
+            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
             'url'        => '/foo',
         ],
 
         [
-            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
+            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
             'url'        => '/static/00',
         ],
 
         [
-            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
+            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
             'url'        => '/static-foo',
         ],
 
         [
-            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
+            'expression' => '#^/static(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[a-z]+))?(?:-(?P<gamma>[\d]{1,2}))?$#',
             'url'        => '/static/foo/bar-baz',
         ],
 

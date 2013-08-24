@@ -31,7 +31,7 @@
 
         #notation:      '/:alpha'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -40,7 +40,7 @@
 
         #notation:      '/:alpha/static'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/static$#',
             'url'        => '/foo/static',
             'expected'   => [
                                 'alpha' => 'foo'
@@ -49,7 +49,7 @@
 
         #notation:      '/static/:alpha'
         [
-            'expression' => '#^/static/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/static/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/static/foo',
             'expected'   => [
                                 'alpha' => 'foo'
@@ -58,7 +58,7 @@
 
         #notation:      '/:alpha/:beta'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/(?P<beta>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/(?P<beta>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/bar',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -68,7 +68,7 @@
 
         #notation:      '/:alpha/static/:beta'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)/static/(?P<beta>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)/static/(?P<beta>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo/static/bar',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -85,7 +85,7 @@
 
         #notation:      '[/:alpha]'
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -94,13 +94,13 @@
 
         #notation:      '/static[/:alpha]'
         [
-            'expression' => '#^/static(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^/static(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/static',
             'expected'   => [],
         ],
 
         [
-            'expression' => '#^/static(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^/static(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/static/foo',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -109,13 +109,13 @@
 
         #notation:      '[/:alpha][/:beta]'
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?(?:/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?(?:/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '',
             'expected'   => [],
         ],
 
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?(?:/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?(?:/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -123,7 +123,7 @@
         ],
 
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?(?:/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?(?:/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo/bar',
             'expected'   => [
                                 'alpha' => 'foo',
@@ -133,13 +133,13 @@
 
         #notation:      '[/static/:alpha]/static'
         [
-            'expression' => '#^(?:/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+            'expression' => '#^(?:/static/(?P<alpha>[^/\\\\.,;?\n]+))?/static$#',
             'url'        => '/static',
             'expected'   => [],
         ],
 
         [
-            'expression' => '#^(?:/static/(?P<alpha>[^/\.,;?\n]+))?/static$#',
+            'expression' => '#^(?:/static/(?P<alpha>[^/\\\\.,;?\n]+))?/static$#',
             'url'        => '/static/value/static',
             'expected'   => [
                                 'alpha' => 'value',

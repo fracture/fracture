@@ -37,7 +37,7 @@
 
         #notation:      '/:alpha'
         [
-            'expression' => '#^/(?P<alpha>[^/\.,;?\n]+)$#',
+            'expression' => '#^/(?P<alpha>[^/\\\\.,;?\n]+)$#',
             'url'        => '/foo',
             'defaults'   => [
                                 'beta'  => 'qux',
@@ -50,7 +50,7 @@
 
         #notation:      '[/:alpha]''
         [
-            'expression' => '#^(?:/(?P<alpha>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:/(?P<alpha>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo',
             'defaults'   => [
                                 'alpha' => 'qux',
@@ -62,7 +62,7 @@
 
         #notation:      '[[/:alpha]/:beta]'
         [
-            'expression' => '#^(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo',
             'defaults'   => [
                                 'alpha' => 'qux',
@@ -75,7 +75,7 @@
         ],
 
         [
-            'expression' => '#^(?:(?:/(?P<alpha>[^/\.,;?\n]+))?/(?P<beta>[^/\.,;?\n]+))?$#',
+            'expression' => '#^(?:(?:/(?P<alpha>[^/\\\\.,;?\n]+))?/(?P<beta>[^/\\\\.,;?\n]+))?$#',
             'url'        => '/foo/bar',
             'defaults'   => [
                                 'alpha' => 'qux',

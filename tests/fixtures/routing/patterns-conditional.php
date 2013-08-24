@@ -10,7 +10,7 @@
         [
             'notation'   => ':standard',
             'conditions' => [],
-            'pattern'    => '#^/(?P<standard>[^/\.,;?\n]+)$#',
+            'pattern'    => '#^/(?P<standard>[^/\\\\.,;?\n]+)$#',
         ],
 
         [
@@ -36,7 +36,7 @@
                                 'param' => '[a-z]+',
                                 'id'    => '[\d]{1,2}',
                             ],
-            'pattern'    => '#^/i(?:(?:/(?P<module>[^/\.,;?\n]+))?/(?P<param>[a-z]+))?(?:-(?P<id>[\d]{1,2}))?$#',
+            'pattern'    => '#^/i(?:(?:/(?P<module>[^/\\\\.,;?\n]+))?/(?P<param>[a-z]+))?(?:-(?P<id>[\d]{1,2}))?$#',
         ],
     ];
 
