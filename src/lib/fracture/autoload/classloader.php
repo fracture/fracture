@@ -20,10 +20,20 @@
         }
 
 
-
-        public function register()
+        protected function hasLoadedClass( $path, $locations )
         {
-            spl_autoload_register( [ $this, 'load' ] );
+            foreach ( $locations as $filepath )
+            {
+                $filepath = $path . $filepath;
+
+                if ( file_exists( $filepath ) )
+                {
+                    require $filepath;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 
@@ -44,20 +54,9 @@
         }
 
 
-        protected function hasLoadedClass( $path, $locations )
+        public function register()
         {
-            foreach ( $locations as $filepath )
-            {
-                $filepath = $path . $filepath;
-
-                if ( file_exists( $filepath ) )
-                {
-                    require $filepath;
-                    return true;
-                }
-            }
-
-            return false;
+            spl_autoload_register( [ $this, 'load' ] );
         }
 
 

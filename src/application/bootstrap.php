@@ -7,7 +7,6 @@
 
     use Fracture\Routing\RouteBuilder;
     use Fracture\Routing\RequestBuilder;
-    use Fracture\Routing\Aliaser;
     use Fracture\Routing\Router;
 
 
@@ -40,8 +39,8 @@
      * Routing mechanism
      */
 
-    $uri = isset( $_SERVER[ 'PATH_INFO' ] ) 
-                ? $_SERVER[ 'PATH_INFO' ] 
+    $uri = isset( $_SERVER[ 'PATH_INFO' ] )
+                ? $_SERVER[ 'PATH_INFO' ]
                 : '/';
 
     $builder = new RequestBuilder;
