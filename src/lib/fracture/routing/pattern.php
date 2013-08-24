@@ -8,7 +8,9 @@
 
         const REGKEY = '/(\:([a-zA-Z]+))/';
 
-        const REGVAL = '[^/\.,;?\n]+';
+        const REGVAL = '[^/\\\\\\\\.,;?\n]+';
+
+        const STRVAL = '[^/\\\\.,;?\n]+';
 
 
         protected $notation;
@@ -87,7 +89,7 @@
 
             foreach ( $conditions as $key => $value)
             {
-                $search[]  = "<$key>" . Pattern::REGVAL;
+                $search[]  = "<$key>" . Pattern::STRVAL;
                 $replace[] = "<$key>$value";
             }
 
