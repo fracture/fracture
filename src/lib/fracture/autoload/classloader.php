@@ -9,23 +9,16 @@
         protected $maps = [];
 
 
-        public function addMap( Searchable $map, $basePath )
+        public function addMap( Searchable $map )
         {
-            $item = [
-                'map'  => $map,
-                'path' => $basePath,
-            ];
-
-            $this->maps[] = $item;
+            $this->maps[] = $map;
         }
 
 
-        protected function hasLoadedClass( $path, $locations )
+        protected function hasLoadedClass( $locations )
         {
             foreach ( $locations as $filepath )
             {
-                $filepath = $path . $filepath;
-
                 if ( file_exists( $filepath ) )
                 {
                     require $filepath;
@@ -39,12 +32,12 @@
 
         protected function load( $className )
         {
-            foreach ( $this->maps as $option )
+            foreach ( $this->maps as $map )
             {
                 // gets a list of possible filepaths for the class definition
-                $locations = $option[ 'map' ]->getLocations( $className );
+                $locations = $map->getLocations( $className );
 
-                if ( $this->hasLoadedClass( $option[ 'path' ], $locations ) )
+                if ( $this->hasLoadedClass( $locations ) )
                 {
                     return true;
                 }

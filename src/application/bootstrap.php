@@ -2,7 +2,7 @@
 
     use Fracture\Transcription\JsonReader;
 
-    use Fracture\Autoload\JsonNamespaceMap;
+    use Fracture\Autoload\NodeMap;
     use Fracture\Autoload\ClassLoader;
 
     use Fracture\Routing\RouteBuilder;
@@ -13,8 +13,8 @@
 
     require '../lib/fracture/transcription/jsonreader.php';
     require '../lib/fracture/autoload/searchable.php';
-    require '../lib/fracture/autoload/namespacemap.php';
-    require '../lib/fracture/autoload/jsonnamespacemap.php';
+    require '../lib/fracture/autoload/node.php';
+    require '../lib/fracture/autoload/nodemap.php';
     require '../lib/fracture/autoload/classloader.php';
 
 
