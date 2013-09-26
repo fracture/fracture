@@ -23,10 +23,12 @@
         public function addChild( $name, Node $node )
         {
             $this->children[ $name ] = $node;
+
             if ( $this->namespace !== '' )
             {
                 $name = $this->namespace . '\\' . $name;
             }
+
             $node->setNamespace( $name );
         }
 

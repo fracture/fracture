@@ -17,8 +17,8 @@
             {
                 $this->root = new Node;
             }
-            $this->path = $path;
 
+            $this->path = $path;
             $this->growElements( $config, $this->root );
         }
 
@@ -43,7 +43,8 @@
                 {
                     $this->growElements( $value, $node );
                 }
-                if ( is_string($value) )
+
+                if ( is_string($value) === true )
                 {
                     $value = $this->cleanedPath( $value );
                     $node->addPath( $value );
@@ -55,6 +56,7 @@
         {
             $value = trim( $value, '\\/');
             $value = str_replace( ['\\', '/'], DIRECTORY_SEPARATOR, $value );
+
             return trim( $this->path, '\\/') . DIRECTORY_SEPARATOR . $value;
         }
 
@@ -67,8 +69,8 @@
             $segments = explode('\\', $className, -1);
 
             $node = $this->findNode( $segments );
-
             $paths = $this->extractPaths( $node, $className );
+
             return $paths;
         }
 
@@ -93,12 +95,12 @@
 
         private function extractPaths( $node, $className )
         {
-            $leftover = str_replace( '###' . $node->getNamespace() , '', '###' . $className );
+            $leftover = str_replace( '###' . $node->getNamespace(), '', '###' . $className );
             $leftover = trim( $leftover, '\\/' );
 
             $paths = $node->getPaths();
 
-            $paths = array_map( function( $element ) use ( $leftover ){
+            $paths = array_map( function( $element ) use ( $leftover ) {
                 return $element . DIRECTORY_SEPARATOR . $leftover . '.php';
             }, $paths );
 
