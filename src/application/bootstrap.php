@@ -26,10 +26,11 @@
     $loader = new ClassLoader;
     $loader->register();
 
-    $map = new JsonNamespaceMap( __DIR__ );
+    $map = new NodeMap( __DIR__ );
     $reader = new JsonReader;
     $map->import(
-        $reader->getAsArray( __DIR__ . '/config/namespaces.json' )
+        $reader->getAsArray( __DIR__ . '/config/namespaces.json' ),
+        __DIR__
     );
 
     $loader->addMap( $map,  dirname( __DIR__ ) );
