@@ -27,11 +27,28 @@
         {
             foreach ( $parameters as $name => $details )
             {
-                $node = new Node;
-                $parent->addChild( strtolower( $name ), $node );
+                $node = $this->expandBranch( $name, $parent );
+                if ( is_array( $details ) === false )
+                {
+                    $details = [ $details ];
+                }
                 $this->setupElement( $details, $node );
             }
+        }
 
+
+        private function expandBranch( $name, Node $parent )
+        {
+            $list = explode( '\\', $name );
+
+            foreach ( $list as $item )
+            {
+                $node = new Node;
+                $parent->addChild( strtolower( $item ), $node );
+                $parent = $node;
+            }
+
+            return $node;
         }
 
 
@@ -77,19 +94,24 @@
 
         protected function findNode( $list )
         {
-            $node = $this->root;
+            $node = $marker = $this->root;
 
             foreach ( $list as $key )
             {
                 if ( $node->hasChild( $key ) === false )
                 {
-                    return $node;
+                    return $marker;
                 }
 
                 $node = $node->getChild( $key );
+
+                if ( count($node->getPaths()) > 0 )
+                {
+                    $marker = $node;
+                }
             }
 
-            return $node;
+            return $marker;
         }
 
 
