@@ -27,7 +27,7 @@
         SOURCE_PATH
     );
     $map->import(
-        [ 'Mock' => ['/mocks'] ],
+        [ 'Mock' => ['unit/mocks'] ],
         TEST_PATH
     );
 

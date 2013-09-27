@@ -47,7 +47,7 @@
 
         public function  simple_Match_Provider()
         {
-            return include TEST_PATH . '/fixtures/routing/routes-simple.php';
+            return include TEST_PATH . '/unit/fixtures/routing/routes-simple.php';
         }
 
 
@@ -69,7 +69,7 @@
 
         public function  with_Defaults_Match_Provider()
         {
-            return include TEST_PATH . '/fixtures/routing/routes-with-defaults.php';
+            return include TEST_PATH . '/unit/fixtures/routing/routes-with-defaults.php';
         }
 
 
@@ -91,7 +91,7 @@
 
         public function  failing_Match_Provider()
         {
-            return include TEST_PATH . '/fixtures/routing/routes-unmatched.php';
+            return include TEST_PATH . '/unit/fixtures/routing/routes-unmatched.php';
         }
 
 

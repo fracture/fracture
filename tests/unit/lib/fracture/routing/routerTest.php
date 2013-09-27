@@ -29,7 +29,7 @@
                                                 "alpha" => 'qux',
                                                 "beta"  => 'qux' ]]));
 
-            $json = file_get_contents( TEST_PATH . '/fixtures/configs/routes-single.json' );
+            $json = file_get_contents( TEST_PATH . '/unit/fixtures/configs/routes-single.json' );
             $config = json_decode( $json, true );
 
             $router = new Router( $builder );
@@ -50,7 +50,7 @@
             $builder->expects($this->exactly(4))
                      ->method('create');
 
-            $json = file_get_contents( TEST_PATH . '/fixtures/configs/routes-multiple.json' );
+            $json = file_get_contents( TEST_PATH . '/unit/fixtures/configs/routes-multiple.json' );
             $config = json_decode( $json, true );
 
             $router = new Router( $builder );
@@ -98,7 +98,7 @@
             $builder = new RouteBuilder;
             $router = new Router( $builder );
 
-            $json = file_get_contents( TEST_PATH . $filepath );
+            $json = file_get_contents( TEST_PATH . '/unit' . $filepath );
             $config = json_decode( $json, true );
 
             $router->import( $config );
@@ -110,7 +110,7 @@
 
         public function simple_Route_Provider()
         {
-            return include TEST_PATH . '/fixtures/routing/single-route-list.php';
+            return include TEST_PATH . '/unit/fixtures/routing/single-route-list.php';
         }
 
     }
