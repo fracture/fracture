@@ -19,6 +19,8 @@
 
 
 
+    $reader = new JsonReader;
+
     /*
      * Sets up initialized the development stage autoloader
      */
@@ -26,14 +28,12 @@
     $loader = new ClassLoader;
     $loader->register();
 
-    $map = new NodeMap( __DIR__ );
-    $reader = new JsonReader;
-    $map->import(
-        $reader->getAsArray( __DIR__ . '/config/namespaces.json' ),
-        __DIR__
-    );
+    $configuration = $reader->getAsArray( __DIR__ . '/config/namespaces.json' );
 
-    $loader->addMap( $map,  dirname( __DIR__ ) );
+    $map = new NodeMap( __DIR__ );
+    $map->import( $configuration, __DIR__ . '/..' );
+
+    $loader->addMap( $map );
 
 
     /*
@@ -48,10 +48,10 @@
     $request = $builder->create();
     $request->setUri( $uri );
 
+    $configuration = $reader->getAsArray( __DIR__ . '/config/routes.json' );
+
     $router = new Router( new RouteBuilder );
-    $router->import(
-        $reader->getAsArray( __DIR__ . '/config/routes.json' )
-    );
+    $router->import( $configuration );
 
     $router->route( $request );
 
