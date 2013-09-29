@@ -41,7 +41,7 @@
 
             foreach ( $matches as $key => $value )
             {
-                if ( is_numeric( $key ) === false && ( empty( $value ) === false || $value === '0' ) )
+                if ( is_numeric( $key ) === false && $value !== '' )
                 {
                     $list[ $key ] = $value;
                 }

@@ -31,6 +31,7 @@
 
         private function sanitizeUri( $uri )
         {
+            // to remove './' at the start of $uri
             $uri = '/' . $uri;
             $uri = preg_replace( [ '#(/)+#', '#/(\./)+#' ], '/', $uri );
             $uri = trim( $uri, '/' );
@@ -38,6 +39,9 @@
         }
 
 
+        /**
+         * Method for handling `../` in URL query
+         */
         private function adjustUriSegments( $list, $item )
         {
             if ( $item === '..' )
@@ -108,6 +112,8 @@
         {
             $method = $this->method;
 
+            // to mimic RESTlike API this lets you define override
+            // for request method in form element with name '_method'
             if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
             {
                 $replacement = strtolower( $this->parameters[ '_method' ] );
@@ -129,6 +135,7 @@
             $duplicates = array_intersect_key( $parameters,
                                                $this->parameters );
 
+            // checks of parameters with overlapping names
             if ( count( $duplicates ) > 0 )
             {
                 $message = 'You are trying to override following parameter(s): "' .

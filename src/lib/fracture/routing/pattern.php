@@ -6,11 +6,14 @@
     class Pattern
     {
 
+        // default pattern fragment for matching URL query segment
+        const STRVAL = '[^/\\\\.,;?\n]+';
+
+        // pattern of the route notation element
         const REGKEY = '/(\:([a-zA-Z]+))/';
 
+        // pattern fragment to match Pattern::STRVAL in a string
         const REGVAL = '[^/\\\\\\\\.,;?\n]+';
-
-        const STRVAL = '[^/\\\\.,;?\n]+';
 
 
         protected $notation;
@@ -51,7 +54,9 @@
             return $this->addSlash( $notation );
         }
 
-
+        /**
+         * Method ensures that all non-empty route notations expect '/' as first symbol
+         */
         protected function addSlash( $notation )
         {
             $notation = trim( $notation, '/' );
@@ -70,7 +75,9 @@
             return $notation;
         }
 
-
+        /**
+         * Turns route notation in a regular expression
+         */
         protected function parseNotation( $notation )
         {
             $out = str_replace( [ '[', ']' ], [ '(?:', ')?' ], $notation );
@@ -82,7 +89,9 @@
         }
 
 
-
+        /**
+         * Inserts custom patterns in the existing regular expression
+         */
         protected function applyConditions( $expression, $conditions )
         {
             $search = $replace = [];
