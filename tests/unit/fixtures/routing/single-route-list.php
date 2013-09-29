@@ -2,25 +2,25 @@
 
     return [
         [
-            '/fixtures/configs/routes-single.json',
+            '/configs/routes-single.json',
             '/foo',
-            [ 
+            [
                 'alpha' => 'foo',
                 'beta'  => 'qux',
             ],
         ],
 
         [
-            '/fixtures/configs/routes-single.json',
+            '/configs/routes-single.json',
             '/foo/bar',
-            [ 
+            [
                 'alpha' => 'foo',
                 'beta'  => 'bar',
             ],
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/value',
             [
                 'alpha' => 'value',
@@ -30,7 +30,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/user/1234',
             [
                 'alpha' => '1234',
@@ -39,7 +39,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/user/0/value',
             [
                 'alpha' => '0',
@@ -48,7 +48,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/static/123123',
             [
                 'alpha' => 'foo',
@@ -58,7 +58,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/static/long-text',
             [
                 'alpha' => 'foo',
@@ -66,9 +66,9 @@
                 'omega' => 'unrouted',
             ],
         ],
-            
+
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/static/text/foo',
             [
                 'alpha' => 'text',
@@ -78,7 +78,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/lorem/ipsum',
             [
                 'alpha' => 'lorem',
@@ -88,7 +88,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/lorem',
             [
                 'alpha' => 'lorem',
@@ -98,7 +98,7 @@
         ],
 
         [
-            '/fixtures/configs/routes-multiple.json',
+            '/configs/routes-multiple.json',
             '/cogito/ergo/sum',
             [
                 'alpha' => 'cogito',
@@ -107,5 +107,5 @@
             ],
         ],
 
-            
+
     ];

@@ -7,6 +7,7 @@
 
     define('SOURCE_PATH', dirname( __DIR__ ) . '/src' );
     define('TEST_PATH', dirname( __DIR__ ) . '/tests' );
+    define('FIXTURE_PATH', TEST_PATH . '/unit/fixtures' );
 
 
     require SOURCE_PATH . '/lib/fracture/transcription/jsonreader.php';

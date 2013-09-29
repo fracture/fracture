@@ -34,7 +34,7 @@
 
         public function simple_Pattern_Provider()
         {
-            return include TEST_PATH . '/unit/fixtures/routing/patterns-simple.php';
+            return include FIXTURE_PATH . '/routing/patterns-simple.php';
         }
 
 
@@ -60,7 +60,7 @@
 
         public function conditional_Pattern_Provider()
         {
-            return include TEST_PATH . '/unit/fixtures/routing/patterns-conditional.php';
+            return include FIXTURE_PATH . '/routing/patterns-conditional.php';
         }
 
 

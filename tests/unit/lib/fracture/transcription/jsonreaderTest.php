@@ -32,7 +32,7 @@
 
             $this->setExpectedException('Exception');
             $reader = new JsonReader;
-            $reader->getAsArray( TEST_PATH . '/unit/fixtures/configs/routes-invalid.json' );
+            $reader->getAsArray( FIXTURE_PATH . '/configs/routes-invalid.json' );
 
         }
 
@@ -44,7 +44,7 @@
         {
 
             $reader = new JsonReader;
-            $data = $reader->getAsArray( TEST_PATH . '/unit/fixtures/configs/routes-single.json' );
+            $data = $reader->getAsArray( FIXTURE_PATH . '/configs/routes-single.json' );
 
             $expected = [
                 'test' => [

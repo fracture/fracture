@@ -213,7 +213,7 @@
 
         public function  clean_URI_Provider()
         {
-            return include TEST_PATH . '/unit/fixtures/routing/uri-variations.php';
+            return include FIXTURE_PATH . '/routing/uri-variations.php';
         }
 
 
