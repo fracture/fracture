@@ -40,7 +40,7 @@
 
 
         /**
-         * Method for handling `../` in URL query
+         * Method for handling '../' in URL query
          */
         private function adjustUriSegments( $list, $item )
         {
