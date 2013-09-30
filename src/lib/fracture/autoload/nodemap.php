@@ -28,6 +28,7 @@
             foreach ( $parameters as $name => $details )
             {
                 $node = $this->expandBranch( $name, $parent );
+                // to be able shorthand for assigning single string as path
                 if ( is_array( $details ) === false )
                 {
                     $details = [ $details ];
@@ -63,6 +64,7 @@
 
                 if ( is_string($value) === true )
                 {
+                    // for building full path
                     $value = $this->cleanedPath( $value );
                     $node->addPath( $value );
                 }
@@ -105,6 +107,7 @@
 
                 $node = $node->getChild( $key );
 
+                // if a namespace does not have any paths associated to it, use previous one
                 if ( count($node->getPaths()) > 0 )
                 {
                     $marker = $node;
@@ -117,6 +120,7 @@
 
         private function extractPaths( $node, $className )
         {
+            // the marker is added to make sur that only first match in the classname is replaced
             $leftover = str_replace( '###' . $node->getNamespace(), '', '###' . $className );
             $leftover = trim( $leftover, '\\/' );
 
