@@ -1,6 +1,6 @@
 <?php
 
-    namespace Fracture\Routing;
+    namespace Fracture\NoName;
 
     class UserRequest
     {
