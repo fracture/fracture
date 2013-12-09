@@ -1,7 +1,7 @@
 <?php
 
 
-	namespace Fracture\Http;
+    namespace Fracture\Http;
 
     use Exception;
     use ReflectionClass;
@@ -14,9 +14,10 @@
         /**
          * @dataProvider simple_Type_Provider
          */
-    	public function test_Upload_Types( $params, $result )
+        public function test_Upload_Types( $params, $result )
         {
             $instance = new UploadedFile( $params );
+            $instance->prepare();
             $this->assertEquals( $result, $instance->getMimeType() );
         }
 
