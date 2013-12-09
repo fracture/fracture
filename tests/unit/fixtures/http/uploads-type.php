@@ -14,16 +14,6 @@
         ],
         [
             [
-                'name'      => '',
-                'type'      => '',
-                'tmp_name'  => '',
-                'error'     => 4,
-                'size'      => 0,
-            ],
-            null,
-        ],
-        [
-            [
                 'name'      => 'text.png',
                 'type'      => 'image/png',
                 'tmp_name'  => FIXTURE_PATH .  '/files/text.png',
@@ -32,7 +22,6 @@
             ],
             'text/plain',
         ],
-
         [
             [
                 'name'      => 'no-extension',
@@ -43,5 +32,5 @@
             ],
             'image/png',
         ],
-                
+
     ];
