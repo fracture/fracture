@@ -30,13 +30,13 @@
 		{
 			if ( class_exists('\FInfo') ) 
 			{
-				$info = \FInfo( FILEINFO_MIME_TYPE );
+				$info = new \FInfo( FILEINFO_MIME_TYPE );
 				return $info->file( $this->getPath() );
 			}
 
 			return $this->rawParams['type'];
 		}
-		
+
 
 		public function getPath()
 		{
