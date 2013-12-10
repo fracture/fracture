@@ -17,6 +17,8 @@
         public function test_Upload_Types( $params, $result )
         {
             $instance = new UploadedFile( $params );
+            //
+            $_FILES['test'] = $HTTP_POST_FILES['test'] = $params;
             $instance->prepare();
             $this->assertEquals( $result, $instance->getMimeType() );
         }

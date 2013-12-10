@@ -22,7 +22,7 @@
         {
             $filename = $this->getPath();
 
-            if ( $this->rawParams['error'] !== 0 || $this->isRisky( $filename ) === true ) 
+            if ( $this->rawParams['error'] !== 0 || $this->isPresent( $filename ) === true ) 
             {
                 $this->isValid = false;
                 return;
@@ -36,14 +36,17 @@
         }
         
 
-        private function isRisky( $filename )
+        private function isPresent( $filename )
         {
             return 
                 file_exists( $filename ) === false ||
                 is_readable( $filename ) === false ||
-                is_uploaded_file( $filename ) === false ||
                 filesize( $filename ) === 0;
+        }
 
+        public function isUntampered()
+        {
+            return is_uploaded_file( $this->getPath() ) === false;
         }
 
         public function isValid()
