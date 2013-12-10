@@ -26,5 +26,21 @@
             return include FIXTURE_PATH . '/http/uploads-type.php';
         }
 
+        /**
+         * @dataProvider simple_Validity_provider
+         */
+        public function test_Upload_Validity( $params, $result )
+        {
+            $instance = new UploadedFile( $params );
+            $instance->prepare();
+            $this->assertEquals( $result, $instance->isValid() );
+        }
+
+
+        public function simple_Validity_provider()
+        {
+            return include FIXTURE_PATH . '/http/uploads-validity.php';            
+        }
+
 
     }
