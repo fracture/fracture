@@ -2,15 +2,19 @@
 
     namespace Http;
 
-    class FileBag
+    class FileBag implements \Iterator
     {
 
-        private $rawParams = [];
+        private $params = [];
+
+        private $entries = [];
+
+        private $current = 0;
 
 
-        public function __construct( $list )
+        public function __construct( $params )
         {
-            $this->rawParams = $list;
+            $this->params = $params;
         }
 
 
@@ -30,5 +34,39 @@
         {
 
         }
+
+
+        // implementing Iterator interface
+        public function current()
+        {
+            return $this->entries[ $this->current ];
+        }
+
+
+        public function key()
+        {
+            return $this->current;
+        }
+
+
+        public function next()
+        {
+            $this->current += 1;
+        }
+
+
+        public function rewind()
+        {
+            $this->current = 0;
+        }
+
+
+        public function valid()
+        {
+            return isset( $this->entries[ $this->current ] );
+        }
+
+
+
 
     }
