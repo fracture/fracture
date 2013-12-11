@@ -9,6 +9,9 @@
 
         private $parameters = [];
 
+        private $files = [];
+
+
 
         public function setParameters( $list )
         {
@@ -66,6 +69,25 @@
             return $this->method;
         }
 
+
+
+        public function setUploadedFiles( $list )
+        {
+            $files = new FileBag( $list );
+            $files->prepare();
+            $this->files[ $name ] = $files;
+        }
+
+
+        public function getUploadedFile( $name )
+        {
+            if ( $this->files->hasItem( $name ) )
+            {
+                return $this->files->fetchItem( $name );
+            }
+
+            return null;
+        }
 
 
     }
