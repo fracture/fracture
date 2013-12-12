@@ -22,7 +22,7 @@
         {
             $filename = $this->getPath();
 
-            if ( $this->rawParams['error'] !== 0 || $this->isPresent( $filename ) === true ) 
+            if ( $this->rawParams['error'] !== 0 || $this->isDubious( $filename ) === true ) 
             {
                 $this->isValid = false;
                 return;
@@ -36,18 +36,21 @@
         }
         
 
-        private function isPresent( $filename )
+        private function isDubious( $filename )
         {
             return 
                 file_exists( $filename ) === false ||
                 is_readable( $filename ) === false ||
-                filesize( $filename ) === 0;
+                filesize( $filename ) === 0 ||
+                $this->seemsTampered( $filename );
         }
 
-        public function isUntampered()
+
+        protected function seemsTampered( $filename )
         {
-            return is_uploaded_file( $this->getPath() ) === false;
+            return is_uploaded_file( $filename ) === false;
         }
+
 
         public function isValid()
         {

@@ -16,8 +16,8 @@
          */
         public function test_Upload_Types( $params, $result )
         {
-            $instance = new UploadedFile( $params );
-            //
+            $instance = new \Mock\UploadedFile( $params );
+
             $_FILES['test'] = $HTTP_POST_FILES['test'] = $params;
             $instance->prepare();
             $this->assertEquals( $result, $instance->getMimeType() );
@@ -33,7 +33,8 @@
          */
         public function test_Upload_Validity( $params, $result )
         {
-            $instance = new UploadedFile( $params );
+            $instance = new \Mock\UploadedFile( $params );
+            
             $instance->prepare();
             $this->assertEquals( $result, $instance->isValid() );
         }
