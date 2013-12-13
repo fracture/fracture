@@ -7,6 +7,8 @@
     use ReflectionClass;
     use PHPUnit_Framework_TestCase;
 
+    use \Mock\UploadedFile as UploadedFile;
+
 
     class UploadedFileTest extends PHPUnit_Framework_TestCase
     {
@@ -17,7 +19,7 @@
          */
         public function test_Upload_Types( $params, $result )
         {
-            $instance = new \Mock\UploadedFile( $params );
+            $instance = new UploadedFile( $params );
 
             $instance->prepare();
             $this->assertEquals( $result, $instance->getMimeType() );
@@ -34,7 +36,7 @@
          */
         public function test_Upload_Validity( $params, $result )
         {
-            $instance = new \Mock\UploadedFile( $params );
+            $instance = new UploadedFile( $params );
 
             $instance->prepare();
             $this->assertEquals( $result, $instance->isValid() );
