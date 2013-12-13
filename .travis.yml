@@ -3,4 +3,9 @@ php:
   - "5.5"
   - "5.4"
 
-script: phpunit --configuration tests/travis.xml --coverage-text tests
+script: 
+  - mkdir -p build/logs
+  - phpunit --configuration tests/travis.xml --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls
