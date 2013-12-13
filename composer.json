@@ -19,7 +19,6 @@
         }
     }
 ],
-…
 "require-dev": {
     "satooshi/php-coveralls": "dev-master",
     "sebastianbergmann/phpcov": "1.1.0"
