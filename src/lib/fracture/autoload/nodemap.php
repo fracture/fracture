@@ -73,10 +73,10 @@
 
         private function cleanedPath( $value )
         {
-            $value = trim( $value, '\\/');
+            $value = rtrim( $value, '\\/');
             $value = str_replace( ['\\', '/'], DIRECTORY_SEPARATOR, $value );
 
-            return trim( $this->path, '\\/') . DIRECTORY_SEPARATOR . $value;
+            return rtrim( $this->path, '\\/') . DIRECTORY_SEPARATOR . $value;
         }
 
 
@@ -123,6 +123,7 @@
             // the marker is added to make sur that only first match in the classname is replaced
             $leftover = str_replace( '###' . $node->getNamespace(), '', '###' . $className );
             $leftover = trim( $leftover, '\\/' );
+            $leftover = str_replace( ['\\', '/'], DIRECTORY_SEPARATOR, $leftover );
 
             $paths = $node->getPaths();
 
