@@ -13,12 +13,12 @@
 
         /**
          * @dataProvider simple_Type_Provider
+         * @covers Fracture\Http\UploadedFile::getMimeType
          */
         public function test_Upload_Types( $params, $result )
         {
             $instance = new \Mock\UploadedFile( $params );
 
-            $_FILES['test'] = $HTTP_POST_FILES['test'] = $params;
             $instance->prepare();
             $this->assertEquals( $result, $instance->getMimeType() );
         }
@@ -30,11 +30,12 @@
 
         /**
          * @dataProvider simple_Validity_provider
+         * @covers Fracture\Http\UploadedFile::isValid
          */
         public function test_Upload_Validity( $params, $result )
         {
             $instance = new \Mock\UploadedFile( $params );
-            
+
             $instance->prepare();
             $this->assertEquals( $result, $instance->isValid() );
         }
