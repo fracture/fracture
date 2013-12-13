@@ -8,4 +8,5 @@ script:
   - phpunit --configuration tests/travis.xml --coverage-clover build/logs/clover.xml
 
 after_script:
+  - php composer.phar install --dev --no-interaction
   - php vendor/bin/coveralls
