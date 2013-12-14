@@ -1,6 +1,6 @@
 <?php
 
-    namespace Http;
+    namespace Fracture\Http;
 
     class FileBag implements \Iterator
     {

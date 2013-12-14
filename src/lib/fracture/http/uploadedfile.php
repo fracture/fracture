@@ -22,7 +22,8 @@
         {
             $filename = $this->getPath();
 
-            if ( $this->rawParams['error'] !== 0 || $this->isDubious( $filename ) === true ) 
+            if ( $this->rawParams['error'] !== UPLOAD_ERR_OK || 
+                $this->isDubious( $filename ) === true ) 
             {
                 $this->isValid = false;
                 return;
