@@ -80,5 +80,43 @@
         }
 
 
+        /**
+         * @covers Fracture\Autoload\Node::addChild
+         * @covers Fracture\Autoload\Node::getNamespace
+         */
+        public function test_Simple_Child_Addition()
+        {
+            $parent = new Node;
+            $child = new Node;
+
+            $parent->addChild( 'test', $child );
+
+            $this->assertEquals( 'test', $child->getNamespace() );
+        }
+
+
+        /**
+         * @covers Fracture\Autoload\Node::addChild
+         * @covers Fracture\Autoload\Node::setNamespace
+         * @covers Fracture\Autoload\Node::getNamespace
+         *
+         * @dataProvider provide_Child_Addition_with_Parent_Namespace
+         */
+        public function test_Child_Addition_with_Parent_Namespace( $namespace, $name, $result)
+        {
+            $parent = new Node;
+            $child = new Node;
+
+            $parent->setNamespace( $namespace );
+            $parent->addChild( $name, $child );
+
+            $this->assertEquals( $result, $child->getNamespace() );
+        }
+
+
+        public function provide_Child_Addition_with_Parent_Namespace()
+        {
+            return include FIXTURE_PATH . '/autoload/node-namespaces.php';
+        }
 
     }
