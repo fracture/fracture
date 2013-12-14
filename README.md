@@ -6,4 +6,4 @@ The purpose of this project is to create a system which provides a clear separat
 
 ####Current status:
 
-[![Build Status](https://travis-ci.org/fracture/fracture.png?branch=master)](https://travis-ci.org/fracture/fracture)
+[![Build Status](https://travis-ci.org/fracture/fracture.png?branch=master)](https://travis-ci.org/fracture/fracture) [![Coverage Status](https://coveralls.io/repos/fracture/fracture/badge.png?branch=master)](https://coveralls.io/r/fracture/fracture?branch=master)
