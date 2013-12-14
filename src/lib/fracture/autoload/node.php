@@ -10,6 +10,8 @@
 
         private $paths = [];
 
+        private $hasNewPaths = false;
+
         private $namespace = '';
 
 
@@ -17,6 +19,7 @@
         public function addPath( $path )
         {
             $this->paths[] = $path;
+            $this->hasNewPaths = true;
         }
 
 
@@ -55,9 +58,29 @@
             return $this->namespace;
         }
 
+
         public function getPaths()
         {
+            if ( $this->hasNewPaths === true )
+            {
+                $this->paths = $this->findUniquePaths( $this->paths );
+                $this->hasNewPaths = false;
+            }
+
             return $this->paths;
         }
+
+
+        private function findUniquePaths( $list )
+        {
+            $temp = [];
+            foreach ( $list as $item )
+            {
+                $temp[ $item ] = 1;
+            }
+
+            return array_keys( $temp );
+        }
+
 
     }
