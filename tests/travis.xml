@@ -23,7 +23,11 @@
         <whitelist>
             <directory suffix=".php">../src/</directory>
             <exclude>
-                <directory>../src/lib/fracture/autoload/</directory>
+                <file>../src/public/index.php</file>
+                <file>../src/application/bootstrap.php</file>
+                <file>../src/lib/fracture/autoload/classloader.php</file>
+                <file>../src/lib/fracture/autoload/searchable.php</file>
+                <file>../src/lib/fracture/routing/matchable.php</file>
             </exclude>
         </whitelist>
     </filter>
