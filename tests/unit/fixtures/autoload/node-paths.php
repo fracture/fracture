@@ -3,12 +3,22 @@
     return [
         [
             'list' => [
-                '/foo/bar',
+                'foo/bar',
             ],
             'result' => [
-                '/foo/bar',
+                'foo/bar',
             ],
         ],
+
+        [
+            'list' => [
+                'foo\\bar',
+            ],
+            'result' => [
+                'foo/bar',
+            ],
+        ],
+
 
         [
             'list' => [
@@ -16,8 +26,20 @@
                 '/second',
             ],
             'result' => [
-                '/first',
-                '/second',
+                'first',
+                'second',
+            ],
+        ],
+
+
+        [
+            'list' => [
+                '/first/',
+                'second/',
+            ],
+            'result' => [
+                'first',
+                'second',
             ],
         ],
 
@@ -27,19 +49,20 @@
                 '/duplicate',
             ],
             'result' => [
-                '/duplicate',
+                'duplicate',
             ],
         ],
 
         [
             'list' => [
-                '/duplicate',
-                '/duplicate',
+                '/duplicate/path',
+                'duplicate/path/',
+                '\\duplicate\\path\\',
                 '/unique',
             ],
             'result' => [
-                '/duplicate',
-                '/unique',
+                'duplicate/path',
+                'unique',
             ],
         ],
     ];

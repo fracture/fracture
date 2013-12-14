@@ -18,6 +18,8 @@
 
         public function addPath( $path )
         {
+            $path = str_replace( '\\', '/' , $path );
+            $path = trim( $path, '/' );
             $this->paths[] = $path;
             $this->hasNewPaths = true;
         }
