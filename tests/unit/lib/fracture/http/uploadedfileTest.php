@@ -15,14 +15,18 @@
 
         /**
          * @dataProvider simple_Type_Provider
+         * @covers Fracture\Http\UploadedFile::__construct
          * @covers Fracture\Http\UploadedFile::getMimeType
+         * @covers Fracture\Http\UploadedFile::prepare
+         * @covers Fracture\Http\UploadedFile::hasProperExtension
          */
-        public function test_Upload_Types( $params, $result )
+        public function test_Upload_Types( $params, $type, $validity )
         {
             $instance = new UploadedFile( $params );
 
             $instance->prepare();
-            $this->assertEquals( $result, $instance->getMimeType() );
+            $this->assertEquals( $type, $instance->getMimeType() );
+            $this->assertEquals( $validity, $instance->hasProperExtension() );
         }
 
         public function simple_Type_Provider()
@@ -32,7 +36,9 @@
 
         /**
          * @dataProvider simple_Validity_provider
+         * @covers Fracture\Http\UploadedFile::__construct
          * @covers Fracture\Http\UploadedFile::isValid
+         * @covers Fracture\Http\UploadedFile::prepare
          */
         public function test_Upload_Validity( $params, $result )
         {
