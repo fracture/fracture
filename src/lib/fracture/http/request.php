@@ -1,15 +1,44 @@
 <?php
 
-    namespace Http;
+    namespace Fracture\Http;
 
     class Request
     {
 
-        private $method = '';
+        private $method = null;
 
         private $parameters = [];
 
         private $files = [];
+
+
+        private function getResolvedMethod()
+        {
+            $method = $this->method;
+
+            // to mimic RESTlike API this lets you define override
+            // for request method in form element with name '_method'
+            if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
+            {
+                $replacement = strtolower( $this->parameters[ '_method' ] );
+
+                if ( in_array( $replacement, [ 'put', 'delete' ] ) )
+                {
+                    $method = $replacement;
+                }
+
+                unset( $this->parameters[ '_method' ] );
+            }
+
+            return $method;
+        }
+
+
+        public function prepare()
+        {
+            $this->method = $this->getResolvedMethod();
+        }
+
 
 
 
@@ -45,21 +74,6 @@
         public function setMethod( $value )
         {
             $method = strtolower( $value );
-
-            // to mimic RESTlike API this lets you define override
-            // for request method in form element with name '_method'
-            if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
-            {
-                $replacement = strtolower( $this->parameters[ '_method' ] );
-
-                if ( in_array( $replacement, [ 'put', 'delete' ] ) )
-                {
-                    $method = $replacement;
-                }
-
-                unset( $this->parameters[ '_method' ] );
-            }
-
             $this->method = $method;
         }
 
@@ -87,6 +101,80 @@
             }
 
             return null;
+        }
+
+
+        private function sanitizeUri( $uri )
+        {
+            // to remove './' at the start of $uri
+            $uri = '/' . $uri;
+            $uri = preg_replace( [ '#(/)+#', '#/(\./)+#' ], '/', $uri );
+            $uri = trim( $uri, '/' );
+            return $uri;
+        }
+
+
+        /**
+         * Method for handling '../' in URL query
+         */
+        private function adjustUriSegments( $list, $item )
+        {
+            if ( $item === '..' )
+            {
+                array_pop( $list );
+            }
+            else
+            {
+                array_push( $list, $item );
+            }
+
+            return $list;
+        }
+
+
+        protected function resolveUri( $uri )
+        {
+            $parts = explode( '/', $uri );
+            $segments = [];
+            foreach ( $parts as $element )
+            {
+                $segments = $this->adjustUriSegments( $segments, $element );
+            }
+            return implode( '/', $segments );
+        }
+
+
+        public function setUri( $uri )
+        {
+            $uri = $this->sanitizeUri( $uri );
+            $uri = $this->resolveUri( $uri );
+            $this->uri = '/' . $uri;
+            return $this;
+        }
+
+
+        public function getUri()
+        {
+            return $this->uri;
+        }
+
+
+
+        public function setIp( $ip )
+        {
+            if ( filter_var( $ip, FILTER_VALIDATE_IP ) === false )
+            {
+                $ip = null;
+            }
+
+            $this->ip = $ip;
+            return $this;
+        }
+
+
+        public function getIp()
+        {
+            return $this->ip;
         }
 
 
