@@ -17,6 +17,17 @@
 
         [
             'config' => [
+                'Foo' => [ 'foo' ],
+            ],
+            'path' => '/path/to',
+            'class' => 'Foo\\Bar\\Class',
+            'result' => [
+                '/path/to/foo/bar/class.php',
+            ],
+        ],
+
+        [
+            'config' => [
                 'Foo' => [ 'foo\\bar' ],
             ],
             'path' => 'D:\\path\\to',

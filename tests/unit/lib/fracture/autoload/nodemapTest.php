@@ -12,6 +12,16 @@
     {
 
         /**
+         * @covers Fracture\Autoload\NodeMap::import
+         * @covers Fracture\Autoload\NodeMap::getLocations
+         *
+         * @covers Fracture\Autoload\NodeMap::growElements
+         * @covers Fracture\Autoload\NodeMap::setupElement
+         * @covers Fracture\Autoload\NodeMap::expandBranch
+         * @covers Fracture\Autoload\NodeMap::cleanedPath
+         * @covers Fracture\Autoload\NodeMap::findNode
+         * @covers Fracture\Autoload\NodeMap::extractPaths
+         *
          * @dataProvider simple_Import_Provider
          */
         public function test_Simple_Import( $config, $path, $class, $result )
