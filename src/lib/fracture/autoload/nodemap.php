@@ -18,7 +18,7 @@
                 $this->root = new Node;
             }
 
-            $this->path = $path;
+            $this->path = str_replace('\\', '/', $path);
             $this->growElements( $config, $this->root );
         }
 
@@ -73,10 +73,10 @@
 
         private function cleanedPath( $value )
         {
-            $value = rtrim( $value, '\\/');
-            $value = str_replace( ['\\', '/'], DIRECTORY_SEPARATOR, $value );
+            $value = str_replace( '\\', '/', $value );
+            $value = rtrim( $value, '/');
 
-            return rtrim( $this->path, '\\/') . DIRECTORY_SEPARATOR . $value;
+            return rtrim( $this->path, '/') . '/' . $value;
         }
 
 
@@ -123,12 +123,12 @@
             // the marker is added to make sur that only first match in the classname is replaced
             $leftover = str_replace( '###' . $node->getNamespace(), '', '###' . $className );
             $leftover = trim( $leftover, '\\/' );
-            $leftover = str_replace( ['\\', '/'], DIRECTORY_SEPARATOR, $leftover );
+            $leftover = str_replace( '\\', '/', $leftover );
 
             $paths = $node->getPaths();
 
             $paths = array_map( function( $element ) use ( $leftover ) {
-                return $element . DIRECTORY_SEPARATOR . $leftover . '.php';
+                return $element . '/' . $leftover . '.php';
             }, $paths );
 
             return $paths;

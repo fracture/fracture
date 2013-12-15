@@ -1,20 +1,28 @@
 <?php
-    
+
     namespace Mock\Autoload;
 
-    function _( $string ){
-        return str_replace( '/' , DIRECTORY_SEPARATOR , $string );
-    }
 
     return [
         [
-            'config' => [ 
+            'config' => [
                 'Foo' => [ 'foo/bar' ],
             ],
             'path' => '/path/to',
-            'class' => 'Foo\First',
+            'class' => 'Foo\\Class',
             'result' => [
-                _( '/path/to/foo/bar/first.php' ),
-            ], 
+                '/path/to/foo/bar/class.php',
+            ],
+        ],
+
+        [
+            'config' => [
+                'Foo' => [ 'foo\\bar' ],
+            ],
+            'path' => 'D:\\path\\to',
+            'class' => 'Foo\\Class',
+            'result' => [
+                'D:/path/to/foo/bar/class.php',
+            ],
         ],
     ];

@@ -12,7 +12,7 @@
     {
 
         /**
-         * @dataProvider simple_import_Provider
+         * @dataProvider simple_Import_Provider
          */
         public function test_Simple_Import( $config, $path, $class, $result )
         {
@@ -22,7 +22,7 @@
             $this->assertEquals( $result, $instance->getLocations( $class ) );
         }
 
-        public function simple_import_Provider()
+        public function simple_Import_Provider()
         {
             return include FIXTURE_PATH . '/autoload/imports-simple.php';
         }

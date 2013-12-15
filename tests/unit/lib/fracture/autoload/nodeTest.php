@@ -71,11 +71,11 @@
             $instance->addPath('/duplicate');
             $instance->addPath('/unique');
             $temp  = $instance->getPaths();
-            $instance->addPath('duplicate');
+            $instance->addPath('/duplicate');
 
             $this->assertEquals([
-                'duplicate',
-                'unique',
+                '/duplicate',
+                '/unique',
             ], $instance->getPaths());
         }
 
