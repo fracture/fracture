@@ -105,21 +105,17 @@
         {
             $node = $marker = $this->root;
 
-            foreach ( $list as $key )
+            do
             {
-                if ( $node->hasChild( $key ) === false )
-                {
-                    return $marker;
-                }
-
-                $node = $node->getChild( $key );
-
-                // if a namespace does not have any paths associated to it, use previous one
                 if ( count($node->getPaths()) > 0 )
                 {
                     $marker = $node;
                 }
+
+                $key = array_shift( $list );
+
             }
+            while( $node = $node->getChild( $key ) );
 
             return $marker;
         }
