@@ -44,7 +44,12 @@
 
         public function getChild( $name )
         {
-            return $this->children[ $name ];
+            if ( $this->hasChild( $name ) )
+            {
+                return $this->children[ $name ];
+            }
+
+            return null;
         }
 
         public function setNamespace( $namespace )
