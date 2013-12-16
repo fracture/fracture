@@ -12,15 +12,16 @@
         private $current = 0;
 
 
-        public function __construct( $params )
-        {
-            $this->params = $params;
-        }
-
 
         public function prepare()
         {
 
+        }
+
+
+        public function addItem( $name, $item )
+        {
+            $this->entries[ $name ] = $item;
         }
 
 

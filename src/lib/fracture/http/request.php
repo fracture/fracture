@@ -11,6 +11,14 @@
 
         private $files = [];
 
+        private $fileBagBuilder = null;
+
+
+        public function __construct( $fileBagBuilder = null )
+        {
+            $this->fileBagBuilder = $fileBagBuilder;
+        }
+
 
         private function getResolvedMethod()
         {
@@ -87,17 +95,20 @@
 
         public function setUploadedFiles( $list )
         {
-            $files = new FileBag( $list );
-            $files->prepare();
-            $this->files[ $name ] = $files;
+            if ( $this->fileBagBuilder !== null )
+            {
+                $list = $this->fileBagBuilder->create( $list );
+            }
+
+            $this->files = $list;
         }
 
 
-        public function getUploadedFile( $name )
+        public function getUpload( $name )
         {
-            if ( $this->files->hasItem( $name ) )
+            if ( isset ( $this->files[ $name ] ) )
             {
-                return $this->files->fetchItem( $name );
+                return $this->files[ $name ];
             }
 
             return null;

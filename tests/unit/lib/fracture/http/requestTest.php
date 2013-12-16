@@ -242,5 +242,66 @@
         }
 
 
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::getUpload
+         */
+        public function test_Gathering_Uploads_without_Files()
+        {
+            $instance = new Request;
+            $this->assertNull( $instance->getUpload( 'foobar' ) );
+        }
+
+
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::setUploadedFiles
+         * @covers Fracture\Http\Request::getUpload
+         */
+        public function test_Addition_of_Uploads_without_Builder()
+        {
+            $input = [
+                'alpha' => [
+                    'name'      => 'simple.png',
+                    'type'      => 'image/png',
+                    'tmp_name'  => FIXTURE_PATH . '/files/simple.png',
+                    'error'     => 0,
+                    'size'      => 74,
+                ],
+            ];
+
+            $instance = new Request;
+            $instance->setUploadedFiles( $input );
+
+            $this->assertEquals( $input[ 'alpha' ], $instance->getUpload('alpha')
+            );
+        }
+
+
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::setUploadedFiles
+         */
+        public function test_Call_on_FileBagBuilder_when_Setting_Uploads()
+        {
+            $input = [
+                'alpha' => [
+                    'name'      => 'simple.png',
+                    'type'      => 'image/png',
+                    'tmp_name'  => FIXTURE_PATH . '/files/simple.png',
+                    'error'     => 0,
+                    'size'      => 74,
+                ],
+            ];
+
+            $builder = $this->getMock( 'FileBagBuilder', ['create'] );
+            $builder->expects( $this->once() )
+                    ->method( 'create' )
+                    ->with( $this->equalTo( $input ) );
+
+            $instance = new Request( $builder );
+            $instance->setUploadedFiles( $input );
+        }
+
 
     }
