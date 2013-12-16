@@ -17,10 +17,12 @@
          *
          * @covers Fracture\Autoload\NodeMap::growElements
          * @covers Fracture\Autoload\NodeMap::setupElement
+         * @covers Fracture\Autoload\NodeMap::handleParams
          * @covers Fracture\Autoload\NodeMap::expandBranch
          * @covers Fracture\Autoload\NodeMap::cleanedPath
          * @covers Fracture\Autoload\NodeMap::findNode
          * @covers Fracture\Autoload\NodeMap::extractPaths
+         * @covers Fracture\Autoload\NodeMap::cleanUnmappedPart
          *
          * @dataProvider simple_Import_Provider
          */

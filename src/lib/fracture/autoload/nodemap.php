@@ -55,21 +55,28 @@
 
         private function setupElement( $parameters, Node $node )
         {
-            foreach ( $parameters as $name => $value )
+            foreach ( $parameters as $value )
             {
-                if ( is_array( $value ) === true )
-                {
-                    $this->growElements( $value, $node );
-                }
-
-                if ( is_string($value) === true )
-                {
-                    // for building full path
-                    $value = $this->cleanedPath( $value );
-                    $node->addPath( $value );
-                }
+                $this->handleParams( $value, $node );
             }
         }
+
+
+        private function handleParams( $value, Node $node)
+        {
+            if ( is_array( $value ) === true )
+            {
+                $this->growElements( $value, $node );
+            }
+
+            if ( is_string($value) === true )
+            {
+                // for building full path
+                $value = $this->cleanedPath( $value );
+                $node->addPath( $value );
+            }
+        }
+
 
         private function cleanedPath( $value )
         {
@@ -120,11 +127,7 @@
 
         private function extractPaths( $node, $className )
         {
-            // the marker is added to make sur that only first match in the classname is replaced
-            $leftover = str_replace( '###' . $node->getNamespace(), '', '###' . $className );
-            $leftover = trim( $leftover, '\\/' );
-            $leftover = str_replace( '\\', '/', $leftover );
-
+            $leftover = $this->cleanUnmappedPart( $node->getNamespace(), $className );
             $paths = $node->getPaths();
 
             $paths = array_map( function( $element ) use ( $leftover ) {
@@ -134,6 +137,16 @@
             return $paths;
         }
 
+
+        private function cleanUnmappedPart( $namespace, $className )
+        {
+            // the marker is added to make sure that only first match in the classname is replaced
+            $leftover = str_replace( '###' . $namespace, '', '###' . $className );
+            $leftover = str_replace( '\\', '/', $leftover );
+            $leftover = trim( $leftover, '/' );
+
+            return $leftover;
+        }
 
 
     }
