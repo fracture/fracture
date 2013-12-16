@@ -1,5 +1,5 @@
 <?php
-    
+
     namespace Fracture\Http;
 
     class UploadedFile
@@ -22,24 +22,24 @@
         {
             $filename = $this->getPath();
 
-            if ( $this->rawParams['error'] !== UPLOAD_ERR_OK || 
-                $this->isDubious( $filename ) === true ) 
+            if ( $this->rawParams['error'] !== UPLOAD_ERR_OK ||
+                $this->isDubious( $filename ) === true )
             {
                 $this->isValid = false;
                 return;
             }
 
-            if ( class_exists('\FInfo') ) 
+            if ( class_exists('\FInfo') )
             {
                 $info = new \FInfo( FILEINFO_MIME_TYPE );
                 $this->type = $info->file( $filename );
             }
         }
-        
+
 
         private function isDubious( $filename )
         {
-            return 
+            return
                 file_exists( $filename ) === false ||
                 is_readable( $filename ) === false ||
                 filesize( $filename ) === 0 ||
@@ -47,6 +47,13 @@
         }
 
 
+        /**
+         * Verfification for whether file was actually uploaded
+         * using native PHP function
+         *
+         * @codeCoverageIgnore
+         * @return bool
+         */
         protected function seemsTampered( $filename )
         {
             return is_uploaded_file( $filename ) === false;
