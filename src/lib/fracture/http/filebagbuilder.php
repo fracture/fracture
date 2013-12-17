@@ -29,14 +29,6 @@
 
         private function createItem( $params )
         {
-            /*
-            if ( is_array( $params ) === false ||
-                 array_key_exists( 'name', $params ) === false  )
-            {
-                return null;
-            }
-            */
-
             if ( isset( $params[ 'name' ] ) === true &&
                  is_array( $params[ 'name' ] ) === true )
             {
@@ -61,7 +53,7 @@
                     'size'      => $list['size'][$key],
                 ];
                 $file = $this->uploadedFileBuilder->create( $params );
-                $instance[ $key ] = $file;
+                $instance[] = $file;
             }
 
             return $instance;

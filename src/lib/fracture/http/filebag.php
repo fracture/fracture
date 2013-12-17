@@ -44,15 +44,16 @@
 
 
         // implementing ArrayAccess interface
-        public function  offsetExists ( $offset )
+        public function  offsetExists( $offset )
         {
             return isset( $this->entries[ $offset ] );
         }
 
 
-        public function offsetSet ( $offset, $value )
+        public function offsetSet( $offset, $value )
         {
-            if ( $value->isValid() === false )
+            if ( is_a( $value, 'Fracture\Http\UploadedFile') === true &&
+                 $value->isValid() === false )
             {
                 return;
             }
@@ -68,7 +69,7 @@
         }
 
 
-        public function offsetGet ( $offset )
+        public function offsetGet( $offset )
         {
             if ( array_key_exists( $offset, $this->entries ) )
             {
@@ -79,7 +80,7 @@
         }
 
 
-        public function offsetUnset ( $offset )
+        public function offsetUnset( $offset )
         {
             unset( $this->entries[ $offset ] );
         }

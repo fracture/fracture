@@ -22,7 +22,7 @@
             $instance = new FileBag;
 
 
-            $item  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $item  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar'] );
             $item->expects( $this->once() )
                      ->method( 'isValid' )
                      ->will( $this->returnValue( true ) );
@@ -47,7 +47,7 @@
             $instance = new FileBag;
 
 
-            $item  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $item  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
             $item->expects( $this->once() )
                      ->method( 'isValid' )
                      ->will( $this->returnValue( false ) );

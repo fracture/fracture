@@ -7,7 +7,7 @@
 
         public function create( $params )
         {
-            $instance = $this->buildInstance( $params )
+            $instance = $this->buildInstance( $params );
             $instance->prepare();
 
 
