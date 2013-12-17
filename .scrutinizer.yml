@@ -30,4 +30,5 @@ tools:
         filter:
             paths: ["src/*", "tests/*"]
     sensiolabs_security_checker: true
-    external_code_coverage: true
+    external_code_coverage:
+        timeout: 1800 # Timeout in seconds.
