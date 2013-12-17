@@ -31,7 +31,7 @@
         {
             if ( array_key_exists( 'name', $params ) === false  )
             {
-                return null
+                return null;
             }
 
             if ( is_array( $list[ 'name' ] ) === true )
