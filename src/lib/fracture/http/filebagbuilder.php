@@ -29,7 +29,8 @@
 
         private function createItem( $params )
         {
-            if ( array_key_exists( 'name', $params ) === false  )
+            if ( is_array( $params ) === false ||
+                 array_key_exists( 'name', $params ) === false  )
             {
                 return null;
             }
