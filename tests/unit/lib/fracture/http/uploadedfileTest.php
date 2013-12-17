@@ -61,4 +61,26 @@
         }
 
 
+        /**
+         * @covers Fracture\Http\UploadedFile::__construct
+         * @covers Fracture\Http\UploadedFile::getName
+         * @covers Fracture\Http\UploadedFile::getMimeType
+         */
+        public function test_Simple_Getters()
+        {
+            $params = [
+                'name'      => 'simple.png',
+                'type'      => 'image/png',
+                'tmp_name'  => FIXTURE_PATH . '/files/simple.png',
+                'error'     => UPLOAD_ERR_OK,
+                'size'      => 74,
+            ];
+
+            $instance = new UploadedFile( $params );
+
+            $this->assertEquals( $params['name'], $instance->getName() );
+            $this->assertEquals( $params['type'], $instance->getMimeType() );
+        }
+
+
     }
