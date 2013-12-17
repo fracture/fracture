@@ -82,8 +82,8 @@
         {
             $out = str_replace( [ '[', ']' ], [ '(?:', ')?' ], $notation );
 
-            $enhancement = '(?P<\2>' . Pattern::REGVAL . ')';
-            $out = preg_replace( Pattern::REGKEY ,$enhancement, $out );
+            $enhancement = '(?P<\2>' . self::REGVAL . ')';
+            $out = preg_replace( self::REGKEY ,$enhancement, $out );
 
             return $out;
         }
@@ -98,7 +98,7 @@
 
             foreach ( $conditions as $key => $value)
             {
-                $search[]  = "<$key>" . Pattern::STRVAL;
+                $search[]  = "<$key>" . self::STRVAL;
                 $replace[] = "<$key>$value";
             }
 

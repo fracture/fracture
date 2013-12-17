@@ -2,4 +2,3 @@
 
     require '../application/bootstrap.php';
 
-?>
