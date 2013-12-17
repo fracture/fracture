@@ -32,16 +32,53 @@
          */
         public function test_With_Invalid_Input()
         {
-            $instance = new FileBagBuilder( null );
+            $input = [ 'foo' => 'bar' ];
 
-            $object = $instance->create( [ 'foo' => ['bar'] ] );
-            $this->assertInstanceOf( 'Fracture\Http\FileBag', $object );
+            $response  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $response->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( false ) );
 
 
-            $object = $instance->create( [ 'foo' => 'bar' ] );
+            $builder = $this->getMock( 'UploadedFileBuilder', ['create'] );
+            $builder->expects( $this->once() )
+                    ->method( 'create' )
+                    ->will( $this->returnValue( $response ) );
+
+
+            $instance = new FileBagBuilder( $builder );
+
+            $object = $instance->create( $input );
             $this->assertInstanceOf( 'Fracture\Http\FileBag', $object );
         }
 
+
+        /**
+         * @covers Fracture\Http\FileBagBuilder::__construct
+         * @covers Fracture\Http\FileBagBuilder::create
+         * @covers Fracture\Http\FileBagBuilder::createItem
+         */
+        public function test_With_Invalid_Malformed_Upload()
+        {
+            $input = [ 'foo' => ['bar'] ];
+
+            $response  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $response->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( false ) );
+
+
+            $builder = $this->getMock( 'UploadedFileBuilder', ['create'] );
+            $builder->expects( $this->once() )
+                    ->method( 'create' )
+                    ->with( $this->equalTo( $input['foo'] ) )
+                    ->will( $this->returnValue( $response ) );
+
+            $instance = new FileBagBuilder( $builder );
+
+            $object = $instance->create( $input );
+            $this->assertInstanceOf( 'Fracture\Http\FileBag', $object );
+        }
 
         /**
          * @covers Fracture\Http\FileBagBuilder::__construct
@@ -60,11 +97,17 @@
                 ],
             ];
 
+            $response  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $response->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( true ) );
+
+
             $builder = $this->getMock( 'UploadedFileBuilder', ['create'] );
             $builder->expects( $this->once() )
                     ->method( 'create' )
                     ->with( $this->equalTo( $input['alpha'] ) )
-                    ->will( $this->returnValue( new UploadedFile( $input['alpha'] ) ) );
+                    ->will( $this->returnValue( $response ) );
 
             $instance = new FileBagBuilder( $builder );
             $object = $instance->create( $input );
@@ -97,10 +140,16 @@
                 ],
             ];
 
+            $response  = $this->getMock( 'UploadedFile', ['isValid'] );
+            $response->expects( $this->exactly(2) )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( true ) );
+
+
             $builder = $this->getMock( 'UploadedFileBuilder', ['create'] );
             $builder->expects( $this->exactly(2) )
                     ->method( 'create' )
-                    ->will( $this->returnValue( new UploadedFile([]) ) );
+                    ->will( $this->returnValue( $response ) );
 
             $instance = new FileBagBuilder( $builder );
             $object = $instance->create( $input );

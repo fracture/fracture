@@ -21,7 +21,7 @@
             foreach ( $list as $key => $value )
             {
                 $item = $this->createItem( $value );
-                $instance->addItem( $key, $item );
+                $instance[ $key ] =  $item;
             }
 
             return $instance;
@@ -29,13 +29,16 @@
 
         private function createItem( $params )
         {
+            /*
             if ( is_array( $params ) === false ||
                  array_key_exists( 'name', $params ) === false  )
             {
                 return null;
             }
+            */
 
-            if ( is_array( $params[ 'name' ] ) === true )
+            if ( isset( $params[ 'name' ] ) === true &&
+                 is_array( $params[ 'name' ] ) === true )
             {
                 return $this->createFromList( $params );
             }
@@ -58,7 +61,7 @@
                     'size'      => $list['size'][$key],
                 ];
                 $file = $this->uploadedFileBuilder->create( $params );
-                $instance->addItem( $key, $file );
+                $instance[ $key ] = $file;
             }
 
             return $instance;
