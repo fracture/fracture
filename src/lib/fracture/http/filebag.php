@@ -2,39 +2,14 @@
 
     namespace Fracture\Http;
 
-    class FileBag implements \Iterator
+    class FileBag implements \Iterator, \ArrayAccess
     {
-
-        private $params = [];
 
         private $entries = [];
 
         private $current = 0;
 
 
-
-        public function prepare()
-        {
-
-        }
-
-
-        public function addItem( $name, $item )
-        {
-            $this->entries[ $name ] = $item;
-        }
-
-
-        public function hasItem( $name )
-        {
-
-        }
-
-
-        public function fetchItem( $name )
-        {
-
-        }
 
 
         // implementing Iterator interface
@@ -68,6 +43,46 @@
         }
 
 
+        // implementing ArrayAccess interface
+        public function  offsetExists ( $offset )
+        {
+            return isset( $this->entries[ $offset ] );
+        }
+
+
+        public function offsetSet ( $offset, $value )
+        {
+            if ( $value->isValid() === false )
+            {
+                return;
+            }
+
+            if ( is_null( $offset ) === true )
+            {
+                $this->entries[] = $value;
+            }
+            else
+            {
+                $this->entries[ $offset ] = $value;
+            }
+        }
+
+
+        public function offsetGet ( $offset )
+        {
+            if ( array_key_exists( $offset, $this->entries ) )
+            {
+                return $this->entries[ $offset ];
+            }
+
+            return null;
+        }
+
+
+        public function offsetUnset ( $offset )
+        {
+            unset( $this->entries[ $offset ] );
+        }
 
 
     }
