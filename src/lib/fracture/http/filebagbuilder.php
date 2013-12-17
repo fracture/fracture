@@ -34,9 +34,9 @@
                 return null;
             }
 
-            if ( is_array( $list[ 'name' ] ) === true )
+            if ( is_array( $params[ 'name' ] ) === true )
             {
-                return $this->createFromLists( $params );
+                return $this->createFromList( $params );
             }
 
             return $this->uploadedFileBuilder->create( $params );
