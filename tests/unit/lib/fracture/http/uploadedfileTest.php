@@ -7,7 +7,7 @@
     use ReflectionClass;
     use PHPUnit_Framework_TestCase;
 
-    use \Mock\UploadedFile as UploadedFile;
+    use \Mock\UploadedFile as ExposedUploadedFile;
 
 
     class UploadedFileTest extends PHPUnit_Framework_TestCase
@@ -25,7 +25,7 @@
          */
         public function test_Upload_Types( $params, $type, $validity )
         {
-            $instance = new UploadedFile( $params );
+            $instance = new ExposedUploadedFile( $params );
 
             $instance->prepare();
             $this->assertEquals( $type, $instance->getMimeType() );
@@ -48,7 +48,7 @@
          */
         public function test_Upload_Validity( $params, $result )
         {
-            $instance = new UploadedFile( $params );
+            $instance = new ExposedUploadedFile( $params );
 
             $instance->prepare();
             $this->assertEquals( $result, $instance->isValid() );
@@ -76,7 +76,7 @@
                 'size'      => 74,
             ];
 
-            $instance = new UploadedFile( $params );
+            $instance = new ExposedUploadedFile( $params );
 
             $this->assertEquals( $params['name'], $instance->getName() );
             $this->assertEquals( $params['type'], $instance->getMimeType() );

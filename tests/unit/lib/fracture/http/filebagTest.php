@@ -81,30 +81,16 @@
 
 
         /**
+         * @dataProvider provide_List_of_UploadedFile_Instances
+         *
          * @covers Fracture\Http\FileBag::current
          * @covers Fracture\Http\FileBag::key
          * @covers Fracture\Http\FileBag::next
          * @covers Fracture\Http\FileBag::rewind
          * @covers Fracture\Http\FileBag::valid
          */
-        public function test_Iterator_with_Foreach_Loop()
+        public function test_Iterator_with_Foreach_Loop( $first, $second, $third )
         {
-
-            $first  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $first->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
-            $second  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $second->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
-            $third  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $third->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
             $instance = new FileBag;
 
             $instance['a'] = $first;
@@ -124,30 +110,16 @@
 
 
         /**
+         * @dataProvider provide_List_of_UploadedFile_Instances
+         *
          * @covers Fracture\Http\FileBag::current
          * @covers Fracture\Http\FileBag::key
          * @covers Fracture\Http\FileBag::next
          * @covers Fracture\Http\FileBag::rewind
          * @covers Fracture\Http\FileBag::valid
          */
-        public function test_Iterator_Directly_with_Numeric_Keys()
+        public function test_Iterator_Directly_with_Numeric_Keys( $first, $second, $third )
         {
-
-            $first  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $first->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
-            $second  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $second->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
-            $third  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
-            $third->expects( $this->once() )
-                     ->method( 'isValid' )
-                     ->will( $this->returnValue( true ) );
-
             $instance = new FileBag;
 
             $instance[] = $first;
@@ -166,6 +138,31 @@
             $instance->next();
             $this->assertEquals( $second, $instance->current() );
 
+        }
+
+
+        public function provide_List_of_UploadedFile_Instances()
+        {
+            $first  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
+            $first->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( true ) );
+
+            $second  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
+            $second->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( true ) );
+
+            $third  = $this->getMock( 'Fracture\Http\UploadedFile', ['isValid'], [ 'foo' => 'bar' ] );
+            $third->expects( $this->once() )
+                     ->method( 'isValid' )
+                     ->will( $this->returnValue( true ) );
+
+            return [[
+                'first'  => $first,
+                'second' => $second,
+                'third'  => $third,
+            ]];
         }
 
     }
