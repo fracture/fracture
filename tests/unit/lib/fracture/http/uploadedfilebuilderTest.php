@@ -61,7 +61,7 @@
          * @dataProvider provide_Input
          *
          * @covers Fracture\Http\UploadedFileBuilder::create
-         * @covers Fracture\Http\UploadedFileBuilder::createInstance
+         * @covers Fracture\Http\UploadedFileBuilder::buildInstance
          */
         public function test_Unaltered_Builder( $input )
         {
