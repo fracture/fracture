@@ -65,6 +65,7 @@
          * @covers Fracture\Http\UploadedFile::__construct
          * @covers Fracture\Http\UploadedFile::getName
          * @covers Fracture\Http\UploadedFile::getMimeType
+         * @covers Fracture\Http\UploadedFile::getSize
          */
         public function test_Simple_Getters()
         {
@@ -80,6 +81,7 @@
 
             $this->assertEquals( $params['name'], $instance->getName() );
             $this->assertEquals( $params['type'], $instance->getMimeType() );
+            $this->assertEquals( $params['size'], $instance->getSize() );
         }
 
 
