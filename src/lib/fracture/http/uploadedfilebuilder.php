@@ -10,12 +10,6 @@
             $instance = $this->buildInstance( $params );
             $instance->prepare();
 
-
-            if ( $instance->isValid() === false )
-            {
-                $instance = null;
-            }
-
             return $instance;
         }
 
