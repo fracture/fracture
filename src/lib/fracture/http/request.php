@@ -13,6 +13,10 @@
 
         private $fileBagBuilder = null;
 
+        private $address = null;
+
+        private $uri = null;
+
 
         public function __construct( $fileBagBuilder = null )
         {
@@ -160,7 +164,6 @@
             $uri = $this->sanitizeUri( $uri );
             $uri = $this->resolveUri( $uri );
             $this->uri = '/' . $uri;
-            return $this;
         }
 
 
@@ -171,21 +174,20 @@
 
 
 
-        public function setIp( $ip )
+        public function setAddress( $address )
         {
-            if ( filter_var( $ip, FILTER_VALIDATE_IP ) === false )
+            if ( filter_var( $address, FILTER_VALIDATE_IP ) === false )
             {
-                $ip = null;
+                $address = null;
             }
 
-            $this->ip = $ip;
-            return $this;
+            $this->address = $address;
         }
 
 
-        public function getIp()
+        public function getAddress()
         {
-            return $this->ip;
+            return $this->address;
         }
 
 

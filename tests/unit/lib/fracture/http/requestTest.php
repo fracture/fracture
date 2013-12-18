@@ -218,27 +218,27 @@
 
 
         /**
-         * @covers Fracture\Http\Request::setIp
-         * @covers Fracture\Http\Request::getIp
+         * @covers Fracture\Http\Request::setAddress
+         * @covers Fracture\Http\Request::getAddress
          */
-        public function test_Valid_IP()
+        public function test_Valid_Address()
         {
             $request = new Request;
-            $request->setIp( '127.0.0.1' );
+            $request->setAddress( '127.0.0.1' );
 
-            $this->assertEquals( '127.0.0.1', $request->getIp() );
+            $this->assertEquals( '127.0.0.1', $request->getAddress() );
         }
 
         /**
-         * @covers Fracture\Http\Request::setIp
-         * @covers Fracture\Http\Request::getIp
+         * @covers Fracture\Http\Request::setAddress
+         * @covers Fracture\Http\Request::getAddress
          */
-        public function test_Invalid_IP()
+        public function test_Invalid_Address()
         {
             $request = new Request;
-            $request->setIp( 'a.b.c.d.e' );
+            $request->setAddress( 'a.b.c.d.e' );
 
-            $this->assertNull( $request->getIp() );
+            $this->assertNull( $request->getAddress() );
         }
 
 
