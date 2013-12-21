@@ -8,7 +8,7 @@
     use Fracture\Routing\RouteBuilder;
     use Fracture\Routing\Router;
 
-    use Fracture\NoName\RequestBuilder;
+    use Fracture\Http\RequestBuilder;
 
 
     require '../lib/fracture/transcription/jsonreader.php';
@@ -45,7 +45,12 @@
                 : '/';
 
     $builder = new RequestBuilder;
-    $request = $builder->create();
+    $request = $builder->create( [
+        'get'    => $_GET,
+        'files'  => $_FILES,
+        'server' => $_SERVER,
+        'post'   => $_FILES,
+    ] );
     $request->setUri( $uri );
 
     $configuration = $reader->getAsArray( __DIR__ . '/config/routes.json' );
