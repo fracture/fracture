@@ -14,6 +14,11 @@
         }
 
 
+        /**
+         * Used for producinf a FileBag instance from standard $_FILES values
+         *
+         * @param array $list
+         */
         public function create( $list )
         {
             $instance = new FileBag;
@@ -27,8 +32,11 @@
             return $instance;
         }
 
+
         private function createItem( $params )
         {
+            // when using multiple "array inputs", the data ends up formated
+            // as 'name' => [first, second, ..]
             if ( isset( $params[ 'name' ] ) === true &&
                  is_array( $params[ 'name' ] ) === true )
             {
@@ -39,6 +47,10 @@
         }
 
 
+        /**
+         * When using <input type="file" name="foobar[]"> type of definitions,
+         * this method is repsonsible for re-packeging the inputs into a sub-filebag
+         */
         private function createFromList( $list )
         {
             $instance = new FileBag;

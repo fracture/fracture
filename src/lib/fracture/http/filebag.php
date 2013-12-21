@@ -52,6 +52,7 @@
 
         public function offsetSet( $offset, $value )
         {
+            // attempts to add invalid file in a filebag er ignored
             if ( is_a( $value, 'Fracture\Http\UploadedFile') === true &&
                  $value->isValid() === false )
             {
