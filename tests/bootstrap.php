@@ -27,10 +27,6 @@
         $reader->getAsArray( SOURCE_PATH . '/application/config/namespaces.json'),
         SOURCE_PATH
     );
-    $map->import(
-        [ 'Mock' => ['unit/mocks'] ],
-        TEST_PATH
-    );
 
     $loader->addMap( $map );
 
