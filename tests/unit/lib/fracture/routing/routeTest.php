@@ -19,7 +19,7 @@
          */
         public function test_Pattern_Expression_Retrieved()
         {
-            $pattern = $this->getMock( 'Pattern', ['getExpression'] );
+            $pattern = $this->getMock( 'Fracture\Routing\Pattern', [ 'getExpression' ], [ '' ] );
             $pattern->expects($this->once())
                     ->method('getExpression')
                     ->will($this->returnValue('##'));
@@ -40,7 +40,11 @@
          */
         public function test_Simple_Matches( $expression, $url, $expected )
         {
-            $pattern = new \Mock\Pattern( $expression );
+            $pattern = $this->getMock( 'Fracture\Routing\Pattern', [ 'getExpression' ], [ '' ] );
+            $pattern->expects($this->once())
+                    ->method('getExpression')
+                    ->will( $this->returnValue( $expression ) );
+
             $route = new Route( $pattern, 'not-important' );
             $this->assertEquals( $expected, $route->getMatch( $url ) );
         }
@@ -62,7 +66,11 @@
          */
         public function test_With_Default_Matches( $expression, $url, $defaults, $expected )
         {
-            $pattern = new \Mock\Pattern( $expression );
+            $pattern = $this->getMock( 'Fracture\Routing\Pattern', [ 'getExpression' ], [ '' ] );
+            $pattern->expects($this->once())
+                    ->method('getExpression')
+                    ->will( $this->returnValue( $expression ) );
+
             $route = new Route( $pattern, 'not-important', $defaults );
             $this->assertEquals( $expected, $route->getMatch( $url ) );
         }
@@ -84,7 +92,11 @@
          */
         public function test_Failing_Matches( $expression, $url )
         {
-            $pattern = new \Mock\Pattern( $expression );
+            $pattern = $this->getMock( 'Fracture\Routing\Pattern', [ 'getExpression' ], [ '' ] );
+            $pattern->expects($this->once())
+                    ->method('getExpression')
+                    ->will( $this->returnValue( $expression ) );
+
             $route = new Route( $pattern, 'not-important' );
             $this->assertFalse( $route->getMatch( $url ) );
         }
