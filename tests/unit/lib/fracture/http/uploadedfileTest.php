@@ -25,7 +25,11 @@
          */
         public function test_Upload_Types( $params, $type, $validity )
         {
-            $instance = new ExposedUploadedFile( $params );
+
+            $instance = $this->getMock( 'Fracture\Http\UploadedFile', [ 'seemsTampered' ], [ $params ] );
+            $instance->expects( $this->once() )
+                     ->method( 'seemsTampered' )
+                     ->will( $this->returnValue( false ) );
 
             $instance->prepare();
             $this->assertEquals( $type, $instance->getMimeType() );
@@ -48,7 +52,10 @@
          */
         public function test_Upload_Validity( $params, $result )
         {
-            $instance = new ExposedUploadedFile( $params );
+            $instance = $this->getMock( 'Fracture\Http\UploadedFile', [ 'seemsTampered' ], [ $params ] );
+            $instance->method( 'seemsTampered' )
+                     ->will( $this->returnValue( false ) );
+
 
             $instance->prepare();
             $this->assertEquals( $result, $instance->isValid() );
@@ -77,7 +84,7 @@
                 'size'      => 74,
             ];
 
-            $instance = new ExposedUploadedFile( $params );
+            $instance = new UploadedFile( $params );
 
             $this->assertEquals( $params['name'], $instance->getName() );
             $this->assertEquals( $params['type'], $instance->getMimeType() );
