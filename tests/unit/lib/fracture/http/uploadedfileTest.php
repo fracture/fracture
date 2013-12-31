@@ -53,7 +53,8 @@
         public function test_Upload_Validity( $params, $result )
         {
             $instance = $this->getMock( 'Fracture\Http\UploadedFile', [ 'seemsTampered' ], [ $params ] );
-            $instance->method( 'seemsTampered' )
+            $instance->expects( $this->any() )
+                     ->method( 'seemsTampered' )
                      ->will( $this->returnValue( false ) );
 
 
