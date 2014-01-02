@@ -11,8 +11,6 @@
 
         protected $pool = [];
 
-        protected $currentRoute = null;
-
 
         public function __construct( $builder )
         {
@@ -48,7 +46,6 @@
 
                 if ( empty( $parameters ) === false )
                 {
-                    $this->currentRoute = $name;
                     return $parameters;
                 }
             }

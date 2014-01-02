@@ -70,18 +70,25 @@
         public function test_Routing_With_No_Routes()
         {
 
-            $request = $this->getMock( 'Fracture\Http\Request', [ 'getUri' ] );
+            $request = $this->getMock( 'Fracture\Http\Request', [ 'getUri', 'setParameters' ] );
             $request->expects( $this->once() )
                     ->method( 'getUri' )
                     ->will( $this->returnValue( '/not/important' ) );
 
-            $builder = new RouteBuilder;
+            $request->expects( $this->once() )
+                    ->method( 'setParameters' )
+                    ->with( $this->equalTo( [] ) );
+
+
+
+            $builder = $this->getMock( 'Fracture\Routing\RouteBuilder', [ 'create' ] );
+            $builder->expects( $this->never() )
+                    ->method( 'create' );
+
             $router = new Router( $builder );
 
             $router->import( [] );
             $router->route( $request );
-
-            //$this->assertEquals( [], $request->getParameters() );
         }
 
 
@@ -92,34 +99,37 @@
          *
          * @covers Fracture\Routing\Router::createRoutes
          * @covers Fracture\Routing\Router::gatherRouteValues
-         *
-         * @dataProvider simple_Route_Provider
          */
-        public function test_Routing_With_Single_Route( $filepath, $uri, $expected )
+        public function test_Routing_With_Single_Route()
         {
-            //$request = new \Mock\UserRequest( $uri );
+            $url = '/foo';
+            $parameters = [ [ 'foo' => 'bar' ] ];
+            $config = [ "test" => [] ];
 
-            $request = $this->getMock( 'Fracture\Http\Request', [ 'getUri' ] );
+            $route = $this->getMock( 'Fracture\Routing\Route', [ 'getMatch' ], [ '', '' ] );
+            $route->expects( $this->once() )
+                  ->method( 'getMatch' )
+                  ->will( $this->returnValue( $parameters ) );
+
+            $request = $this->getMock( 'Fracture\Http\Request', [ 'getUri', 'setParameters' ] );
             $request->expects( $this->once() )
                     ->method( 'getUri' )
-                    ->will( $this->returnValue( $uri ) );
+                    ->will( $this->returnValue( $url ) );
+            $request->expects( $this->once() )
+                    ->method( 'setParameters' )
+                    ->with( $this->equalTo( $parameters ) );
 
-            $builder = new RouteBuilder;
-            $router = new Router( $builder );
 
-            $json = file_get_contents( FIXTURE_PATH . $filepath );
-            $config = json_decode( $json, true );
+            $builder = $this->getMock( 'Fracture\Routing\RouteBuilder', [ 'create' ] );
+            $builder->expects( $this->once() )
+                    ->method( 'create' )
+                    ->will( $this->returnValue( $route ) );
 
-            $router->import( $config );
-            $router->route( $request );
 
-            //$this->assertEquals( $expected, $request->getParameters() );
+            $instance = new Router( $builder );
+            $instance->import( $config );
+            $instance->route( $request );
         }
 
-
-        public function simple_Route_Provider()
-        {
-            return include FIXTURE_PATH . '/routing/single-route-list.php';
-        }
 
     }
