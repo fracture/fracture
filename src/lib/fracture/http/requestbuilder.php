@@ -46,6 +46,10 @@
             }
         }
 
+
+        /*
+         * @codeCoverageIgnore
+         */
         protected function isCLI()
         {
             return php_sapi_name() === 'cli';
