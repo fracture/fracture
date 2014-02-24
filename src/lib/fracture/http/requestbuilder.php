@@ -47,7 +47,7 @@
         }
 
 
-        /*
+        /**
          * @codeCoverageIgnore
          */
         protected function isCLI()
