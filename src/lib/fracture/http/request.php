@@ -121,6 +121,7 @@
 
         private function sanitizeUri( $uri )
         {
+            $uri = explode('?', $uri)[0];
             // to remove './' at the start of $uri
             $uri = '/' . $uri;
             $uri = preg_replace( [ '#(/)+#', '#/(\./)+#' ], '/', $uri );

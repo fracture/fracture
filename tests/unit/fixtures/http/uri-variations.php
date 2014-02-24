@@ -86,6 +86,16 @@
             'uri'      => '/foo/bar/../../baz/',
             'expected' => '/baz',
         ],
+
+        [
+            'uri' => '/foo/bar?extra=param',
+            'expected' => '/foo/bar',
+        ],
+
+        [
+            'uri' => '/foo/bar?alpha&beta',
+            'expected' => '/foo/bar',
+        ],
     ];
 
 /*
