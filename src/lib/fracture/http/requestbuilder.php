@@ -38,9 +38,17 @@
         {
             $instance->setParameters( $params[ 'get' ] );
             $instance->setParameters( $params[ 'post' ] );
-            $instance->setMethod( $params[ 'server' ][ 'REQUEST_METHOD' ] );
             $instance->setUploadedFiles( $params[ 'files' ] );
-            $instance->setAddress( $params[ 'server' ][ 'REMOTE_ADDR' ] );
+            if ( !$this->isCLI() )
+            {
+                $instance->setMethod( $params[ 'server' ][ 'REQUEST_METHOD' ] );
+                $instance->setAddress( $params[ 'server' ][ 'REMOTE_ADDR' ] );
+            }
+        }
+
+        protected function isCLI()
+        {
+            return php_sapi_name() === 'cli';
         }
 
     }

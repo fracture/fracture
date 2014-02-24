@@ -47,12 +47,59 @@
 
 
         /**
+         * @dataProvider provide_Test_Shared_Setup
          * @covers Fracture\Http\RequestBuilder::create
          * @covers Fracture\Http\RequestBuilder::applyParams
          */
-        public function test_Method_Calls_on_Instance()
+        public function test_Method_Calls_on_Instance( $request, $builder )
         {
 
+            $request->expects( $this->once() )->method( 'setUploadedFiles' );
+            $request->expects( $this->once() )->method( 'setAddress' );
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( false ) );
+
+            $instance = $builder->create( [
+                'get'    => [],
+                'post'   => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'post',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                ],
+                'files'  => [],
+            ] );
+            $this->assertInstanceOf( 'Fracture\Http\Request', $instance );
+        }
+
+
+        /**
+         * @dataProvider provide_Test_Shared_Setup
+         * @covers Fracture\Http\RequestBuilder::create
+         * @covers Fracture\Http\RequestBuilder::applyParams
+         */
+        public function test_Method_Calls_on_Instance_for_CLI( $request, $builder )
+        {
+
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( true ) );
+
+
+            $instance = $builder->create( [
+                'get'    => [],
+                'post'   => [],
+                'files'  => [],
+            ] );
+            $this->assertInstanceOf( 'Fracture\Http\Request', $instance );
+        }
+
+
+
+        public function provide_Test_Shared_Setup()
+        {
             $request = $this->getMock(
                 'Fracture\Http\Request',
                 [
@@ -66,30 +113,22 @@
 
             $request->expects( $this->exactly(2) )->method( 'setParameters' );
             $request->expects( $this->once() )->method( 'setMethod' );
-            $request->expects( $this->once() )->method( 'setUploadedFiles' );
-            $request->expects( $this->once() )->method( 'setAddress' );
             $request->expects( $this->once() )->method( 'prepare' );
 
 
 
-            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'buildInstance' ] );
+            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'buildInstance', 'isCLI' ] );
 
             $builder->expects( $this->once() )
                     ->method( 'buildInstance' )
                     ->will( $this->returnValue( $request ) );
 
-
-            $instance = $builder->create( [
-                'get'    => [],
-                'post'   => [],
-                'server' => [
-                    'REQUEST_METHOD' => 'post',
-                    'REMOTE_ADDR'    => '0.0.0.0',
-                ],
-                'files'  => [],
-            ] );
-            $this->assertInstanceOf( 'Fracture\Http\Request', $instance );
+            return [[
+                'request' => $request,
+                'builder' => $builder
+            ]];
         }
+
 
         /**
          * @covers Fracture\Http\RequestBuilder::create
