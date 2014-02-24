@@ -4,7 +4,7 @@
         "notation": ":resource[/:id][/:action]",
         "defaults": {
             "resource"  :   "site",
-            "action"    :   "default"
+            "action"    :   "main"
         },
         "conditions": {
             "id"        :   "[0-9]+"
@@ -18,7 +18,7 @@
         },
         "defaults": {
             "resource"  :   "site",
-            "action"    :   "default"
+            "action"    :   "main"
         }
     }
 
