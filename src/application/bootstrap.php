@@ -1,15 +1,6 @@
 <?php
 
-    use Fracture\Transcription\JsonReader;
-
-    use Fracture\Autoload\NodeMap;
-    use Fracture\Autoload\ClassLoader;
-
-    use Fracture\Routing\RouteBuilder;
-    use Fracture\Routing\Router;
-
-    use Fracture\Http\RequestBuilder;
-
+    namespace Fracture;
 
     require '../lib/fracture/transcription/jsonreader.php';
     require '../lib/fracture/autoload/searchable.php';
@@ -18,19 +9,18 @@
     require '../lib/fracture/autoload/classloader.php';
 
 
-
-    $reader = new JsonReader;
+    $reader = new Transcription\JsonReader;
 
     /*
      * Sets up initialized the development stage autoloader
      */
 
-    $loader = new ClassLoader;
+    $loader = new Autoload\ClassLoader;
     $loader->register();
 
     $configuration = $reader->getAsArray( __DIR__ . '/config/namespaces.json' );
 
-    $map = new NodeMap( __DIR__ );
+    $map = new Autoload\NodeMap( __DIR__ );
     $map->import( $configuration, __DIR__ . '/..' );
 
     $loader->addMap( $map );
@@ -44,7 +34,7 @@
                 ? $_SERVER[ 'PATH_INFO' ]
                 : '/';
 
-    $builder = new RequestBuilder;
+    $builder = new Http\RequestBuilder;
     $request = $builder->create( [
         'get'    => $_GET,
         'files'  => $_FILES,
@@ -55,10 +45,12 @@
 
     $configuration = $reader->getAsArray( __DIR__ . '/config/routes.json' );
 
-    $router = new Router( new RouteBuilder );
+    $router = new Routing\Router( new Routing\RouteBuilder );
     $router->import( $configuration );
 
     $router->route( $request );
 
 
-    // $request ready to be used
+    // $request initialization complete
+    // IMPORTANT: execution continues in next file, that was included in index.php
+
