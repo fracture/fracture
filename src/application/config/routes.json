@@ -1,13 +1,10 @@
 {
 
     "main": {
-        "notation": ":resource[/:id][/:action]",
+        "notation": ":resource[/:action]",
         "defaults": {
             "resource"  :   "site",
             "action"    :   "main"
-        },
-        "conditions": {
-            "id"        :   "[0-9]+"
         }
     },
 

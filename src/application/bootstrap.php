@@ -30,8 +30,8 @@
      * Routing mechanism
      */
 
-    $uri = isset( $_SERVER[ 'PATH_INFO' ] )
-                ? $_SERVER[ 'PATH_INFO' ]
+    $uri = isset( $_SERVER[ 'REQUEST_URI' ] )
+                ? $_SERVER[ 'REQUEST_URI' ]
                 : '/';
 
     $builder = new Http\RequestBuilder;
