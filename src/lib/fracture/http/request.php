@@ -30,11 +30,11 @@
 
             // to mimic RESTlike API this lets you define override
             // for request method in form element with name '_method'
-            if ( $method === 'post' && array_key_exists( '_method', $this->parameters ) )
+            if ( array_key_exists( '_method', $this->parameters ) )
             {
                 $replacement = strtolower( $this->parameters[ '_method' ] );
 
-                if ( in_array( $replacement, [ 'put', 'delete' ] ) )
+                if ( in_array( $replacement, [ 'post', 'put', 'delete' ] ) )
                 {
                     $method = $replacement;
                 }

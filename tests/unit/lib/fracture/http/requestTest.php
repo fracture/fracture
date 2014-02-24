@@ -56,23 +56,7 @@
         }
 
 
-        /**
-         * @covers Fracture\Http\Request::setParameters
-         * @covers Fracture\Http\Request::getMethod
-         * @covers Fracture\Http\Request::prepare
-         *
-         * @covers Fracture\Http\Request::getResolvedMethod
-         *
-         * @depends test_getMethod_for_Unprepared_Request_with_Custom_Method
-         */
-        public function test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override()
-        {
-            $request = new Request;
-            $request->setParameters( ['_method' => 'PUT'] );
-            $request->prepare();
 
-            $this->assertNull( $request->getMethod() );
-        }
 
         /**
          * @covers Fracture\Http\Request::setParameters
@@ -83,36 +67,14 @@
          * @covers Fracture\Http\Request::getResolvedMethod
          *
          * @depends test_getMethod_for_Prepared_Request
-         * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_without_Override
          */
         public function test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override()
         {
             $request = new Request;
-            $request->setMethod( 'POST' );
             $request->setParameters( ['_method' => 'PUT'] );
             $request->prepare();
 
             $this->assertEquals( 'put', $request->getMethod() );
-        }
-
-        /**
-         * @covers Fracture\Http\Request::setParameters
-         * @covers Fracture\Http\Request::setMethod
-         * @covers Fracture\Http\Request::getMethod
-         * @covers Fracture\Http\Request::prepare
-         *
-         * @covers Fracture\Http\Request::getResolvedMethod
-         *
-         * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
-         */
-        public function test_getMethod_for_Prepared_Request_with_Custom_Method_with_Wrong_Override()
-        {
-            $request = new Request;
-            $request->setMethod( 'GET' );
-            $request->setParameters( ['_method' => 'PUT'] );
-            $request->prepare();
-
-            $this->assertEquals( 'get', $request->getMethod() );
         }
 
 
@@ -158,8 +120,6 @@
          * @covers Fracture\Http\Request::getParameter
          *
          * @covers Fracture\Http\Request::getResolvedMethod
-         *
-         * @depends test_getMethod_for_Prepared_Request_with_Custom_Method_with_Override
          */
         public function test_getMethod_for_Prepared_Request_Unsets_Custom_Method()
         {
