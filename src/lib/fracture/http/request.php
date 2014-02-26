@@ -117,7 +117,7 @@
 
 
 
-        public function setAcceptHeader( $header )
+        public function setAcceptHeader( AbstractedHeader $header )
         {
             $this->acceptHeader = $header;
         }

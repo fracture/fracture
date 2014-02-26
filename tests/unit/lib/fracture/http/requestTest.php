@@ -254,7 +254,9 @@
                 ],
             ];
 
-            $builder = $this->getMock( 'FileBagBuilder', ['create'] );
+            $builder = $this->getMock( 'Fracture\Http\FileBagBuilder', ['create'], [
+                'uploadedFileBuilder' => $this->getMock( 'Fracture\Http\UploadedFileBuilder')
+            ] );
             $builder->expects( $this->once() )
                     ->method( 'create' )
                     ->with( $this->equalTo( $input ) );
@@ -272,8 +274,9 @@
         public function test_Getter_and_Setter_for_Accept_Header()
         {
             $request = new Request;
-            $request->setAcceptHeader('anything');
-            $this->assertEquals( 'anything', $request->getAcceptHeader() );
+            $header = $this->getMock( 'Fracture\Http\AbstractedHeader' );
+            $request->setAcceptHeader( $header );
+            $this->assertEquals( $header, $request->getAcceptHeader() );
         }
 
 
