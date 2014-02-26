@@ -264,4 +264,17 @@
         }
 
 
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::setAcceptHeader
+         * @covers Fracture\Http\Request::getAcceptHeader
+         */
+        public function test_Getter_and_Setter_for_Accept_Header()
+        {
+            $request = new Request;
+            $request->setAcceptHeader('anything');
+            $this->assertEquals( 'anything', $request->getAcceptHeader() );
+        }
+
+
     }

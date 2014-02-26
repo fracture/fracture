@@ -5,6 +5,8 @@
     class Request
     {
 
+        private $acceptHeader = null;
+
         private $method = null;
 
         private $parameters = [];
@@ -46,9 +48,27 @@
         }
 
 
+        private function getResolvedAcceptHeader()
+        {
+            $header = $this->acceptHeader;
+
+            if ( array_key_exists( '_accept', $this->parameters ) )
+            {
+                $value = strtolower( '_accept', $this->parameters );
+                $header->setAlternativeValue( $value );
+                $header->prepare();
+                unset( $this->parameters[ '_accept' ] );
+            }
+
+            return $header;
+
+        }
+
+
         public function prepare()
         {
             $this->method = $this->getResolvedMethod();
+            $this->acceptHeader = $this->getResolvedAcceptHeader();
         }
 
 
@@ -95,6 +115,18 @@
             return $this->method;
         }
 
+
+
+        public function setAcceptHeader( $header )
+        {
+            $this->acceptHeader = $header;
+        }
+
+
+        public function getAcceptHeader()
+        {
+            return $this->acceptHeader;
+        }
 
 
         public function setUploadedFiles( $list )
