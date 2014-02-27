@@ -67,6 +67,7 @@
                 'server' => [
                     'REQUEST_METHOD' => 'post',
                     'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
                 ],
                 'files'  => [],
             ] );
@@ -142,6 +143,7 @@
                 'server' => [
                     'REQUEST_METHOD' => 'post',
                     'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
                 ],
                 'files'  => [],
             ];

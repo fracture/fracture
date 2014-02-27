@@ -43,6 +43,9 @@
             {
                 $instance->setMethod( $params[ 'server' ][ 'REQUEST_METHOD' ] );
                 $instance->setAddress( $params[ 'server' ][ 'REMOTE_ADDR' ] );
+                $header = new AcceptHeader( $params[ 'server' ][ 'HTTP_ACCEPT' ] );
+                $header->prepare();
+                $instance->setAcceptHeader( $header );
             }
         }
 
