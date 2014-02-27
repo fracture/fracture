@@ -1,0 +1,120 @@
+<?php
+
+
+    namespace Fracture\Http;
+
+    use Exception;
+    use ReflectionClass;
+    use PHPUnit_Framework_TestCase;
+
+
+    class AcceptHeaderTest extends PHPUnit_Framework_TestCase
+    {
+
+        /**
+         * @covers Fracture\Http\AcceptHeader::__construct
+         * @covers Fracture\Http\AcceptHeader::getPrioritizedList
+         *
+         * @covers Fracture\Http\AcceptHeader::obtainGroupedElements
+         * @covers Fracture\Http\AcceptHeader::obtainSortedQualityList
+         * @covers Fracture\Http\AcceptHeader::obtainAssessedItem
+         * @covers Fracture\Http\AcceptHeader::obtainSortedElements
+         */
+        public function test_Empty_Instance()
+        {
+            $instance = new AcceptHeader;
+            $instance->prepare();
+
+            $this->assertEquals( [], $instance->getPrioritizedList() );
+        }
+
+
+        /**
+         * @dataProvider provide_Simple_Accept_Headers
+         * @covers Fracture\Http\AcceptHeader::__construct
+         * @covers Fracture\Http\AcceptHeader::prepare
+         * @covers Fracture\Http\AcceptHeader::getPrioritizedList
+         *
+         * @covers Fracture\Http\AcceptHeader::obtainGroupedElements
+         * @covers Fracture\Http\AcceptHeader::obtainSortedQualityList
+         * @covers Fracture\Http\AcceptHeader::obtainAssessedItem
+         * @covers Fracture\Http\AcceptHeader::obtainSortedElements
+         */
+        public function test_Simple_Accept_Headers( $input, $expected )
+        {
+            $instance = new AcceptHeader( $input );
+            $instance->prepare();
+
+            $this->assertEquals( $expected, $instance->getPrioritizedList() );
+        }
+
+
+        public function provide_Simple_Accept_Headers()
+        {
+            return [
+                [
+                    'input' => 'text/html',
+                    'expected' => [['value' => 'text/html']],
+                ],
+                [
+                    'input' => 'text/html;version=2',
+                    'expected' => [['value' => 'text/html', 'version' => '2']],
+                ],
+                [
+                    'input' => 'text/html;foo=bar; q=0.6',
+                    'expected' => [['value' => 'text/html', 'foo' => 'bar']],
+                ],
+                [
+                    'input' => 'application/json;version=1, application/json, */*;q=0.5',
+                    'expected' => [['value' => 'application/json', 'version' => '1'], ['value' => 'application/json'], ['value' => '*/*']],
+                ],
+                [
+                    'input' => 'application/json;version=1, test/test;q=0.8, application/json, */*;q=0.5',
+                    'expected' => [['value' => 'application/json', 'version' => '1'], ['value' => 'application/json'], ['value' => 'test/test'], ['value' => '*/*']],
+                ],
+            ];
+
+        }
+
+
+        /**
+         * @covers Fracture\Http\AcceptHeader::__construct
+         * @covers Fracture\Http\AcceptHeader::prepare
+         * @covers Fracture\Http\AcceptHeader::setAlternativeValue
+         * @covers Fracture\Http\AcceptHeader::getPrioritizedList
+         *
+         * @covers Fracture\Http\AcceptHeader::obtainGroupedElements
+         * @covers Fracture\Http\AcceptHeader::obtainSortedQualityList
+         * @covers Fracture\Http\AcceptHeader::obtainAssessedItem
+         * @covers Fracture\Http\AcceptHeader::obtainSortedElements
+         */
+        public function test_Use_of_Alternative_Value()
+        {
+            $instance = new AcceptHeader( 'text/plain' );
+            $instance->prepare();
+
+            $this->assertEquals( [['value' => 'text/plain']], $instance->getPrioritizedList() );
+
+            $instance->setAlternativeValue( 'text/html' );
+            $instance->prepare();
+
+            $this->assertEquals( [['value' => 'text/html']], $instance->getPrioritizedList() );
+        }
+
+        /**
+         * @covers Fracture\Http\AcceptHeader::__construct
+         * @covers Fracture\Http\AcceptHeader::prepare
+         * @covers Fracture\Http\AcceptHeader::contains
+         *
+         * @covers Fracture\Http\AcceptHeader::obtainAssessedItem
+         */
+        public function test_Whether_Contain_Finds_Existing_Type()
+        {
+            $instance = new AcceptHeader( 'application/json;version=1;param=value, application/json' );
+            $instance->prepare();
+
+            $this->assertTrue( $instance->contains('application/json;param=value;version=1') );
+            $this->assertFalse( $instance->contains('application/json;version=value;param=1') );
+        }
+
+    }
