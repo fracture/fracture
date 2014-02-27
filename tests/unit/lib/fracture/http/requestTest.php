@@ -280,4 +280,31 @@
         }
 
 
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::setAcceptHeader
+         * @covers Fracture\Http\Request::getAcceptHeader
+         * @covers Fracture\Http\Request::getResolvedAcceptHeader
+         */
+        public function test_Getter_and_Setter_for_Accept_Header_with_Manual_Acceot_Value()
+        {
+            $request = new Request;
+            $header = $this->getMock( 'Fracture\Http\AbstractedHeader', [ 'prepare', 'setAlternativeValue' ] );
+
+            $header->expects( $this->once() )
+                   ->method('prepare');
+
+            $header->expects( $this->once() )
+                   ->method('setAlternativeValue')
+                   ->with( $this->equalTo( 'application/json') );
+
+
+            $request->setAcceptHeader( $header );
+
+            $request->setParameters( [ '_accept' => 'application/json' ] );
+            $request->prepare();
+        }
+
+
+
     }

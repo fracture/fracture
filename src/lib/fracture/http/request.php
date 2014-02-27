@@ -54,7 +54,7 @@
 
             if ( array_key_exists( '_accept', $this->parameters ) )
             {
-                $value = strtolower( '_accept', $this->parameters );
+                $value = strtolower( $this->parameters['_accept' ] );
                 $header->setAlternativeValue( $value );
                 $header->prepare();
                 unset( $this->parameters[ '_accept' ] );
