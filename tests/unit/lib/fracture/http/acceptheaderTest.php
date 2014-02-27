@@ -117,4 +117,75 @@
             $this->assertFalse( $instance->contains('application/json;version=value;param=1') );
         }
 
+
+
+        /**
+         * @dataProvider provide_Types_for_Computation
+         * @covers Fracture\Http\AcceptHeader::getPreferred
+         * @covers Fracture\Http\AcceptHeader::getParsedList
+         * @covers Fracture\Http\AcceptHeader::obtainEntryFromList
+         * @covers Fracture\Http\AcceptHeader::isMatch
+         * @covers Fracture\Http\AcceptHeader::replaceStars
+         *
+         */
+        public function test_Preferred_Type_Compution( $header, $available, $expected )
+        {
+            $instance = new AcceptHeader( $header );
+            $instance->prepare();
+
+            $this->assertEquals( $expected, $instance->getPreferred( $available ) );
+        }
+
+        public function provide_Types_for_Computation()
+        {
+            return [
+                [
+                    'header'    => 'application/json',
+                    'available' => 'application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => '*/*',
+                    'available' => 'application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'application/json;version=2',
+                    'available' => 'application/json;version=1',
+                    'expected'  => null,
+                ],
+                [
+                    'header'    => 'application/json',
+                    'available' => 'text/html, application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'text/html;q=0.1, application/json',
+                    'available' => 'application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'text/html, application/json',
+                    'available' => 'application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'text/html;q=0.1, application/json;q=0.4',
+                    'available' => 'application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'text/html, application/json, text/*',
+                    'available' => 'text/plain',
+                    'expected'  => 'text/plain',
+                ],
+                [
+                    'header'    => 'text/html, application/json',
+                    'available' => 'application/json, text/html',
+                    'expected'  => 'text/html',
+                ],
+            ];
+        }
+
+
     }
