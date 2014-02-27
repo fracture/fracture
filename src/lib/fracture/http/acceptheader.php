@@ -141,11 +141,26 @@
 
                 if ( $entry !== null)
                 {
-                    return $entry['value'];
+                    return $this->getFormatedEntry( $entry );
                 }
             }
 
             return null;
+        }
+
+
+        public function getFormatedEntry( $entry )
+        {
+            if ( count($entry) === 1 )
+            {
+                return $entry['value'];
+            }
+
+            $value = $entry['value'];
+            unset( $entry['value'] );
+
+            array_walk( $entry, function( &$item, $key ){ $item = $key . '=' . $item; });
+            return $value . ';' .  implode( ';', $entry );
         }
 
 

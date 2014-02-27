@@ -184,8 +184,49 @@
                     'available' => 'application/json, text/html',
                     'expected'  => 'text/html',
                 ],
+                [
+                    'header'    => 'application/json',
+                    'available' => 'application/json;version=2',
+                    'expected'  => null,
+                ],
+                [
+                    'header'    => 'application/json;version=3, application/json',
+                    'available' => 'application/json;version=2, application/json',
+                    'expected'  => 'application/json',
+                ],
+                [
+                    'header'    => 'application/json;version=3, application/json',
+                    'available' => 'application/json;version=2, application/json;version=3',
+                    'expected'  => 'application/json;version=3',
+                ],
             ];
         }
 
+
+        /**
+         * @dataProvider provide_Entries_for_Formating
+         * @covers Fracture\Http\AcceptHeader::__construct
+         * @covers Fracture\Http\AcceptHeader::getFormatedEntry
+         */
+        public function test_Formating_of_Entries( $entry, $result )
+        {
+            $instance = new AcceptHeader;
+            $this->assertEquals( $result, $instance->getFormatedEntry( $entry ) );
+        }
+
+
+        public function provide_Entries_for_Formating()
+        {
+            return [
+                [
+                    'entry' => ['value' => 'text/html'],
+                    'result' => 'text/html',
+                ],
+                [
+                    'entry' => ['value' => 'text/html', 'version' => '2'],
+                    'result' => 'text/html;version=2',
+                ],
+            ];
+        }
 
     }
