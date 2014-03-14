@@ -157,4 +157,169 @@
             $instance = $builder->create( $input );
         }
 
+        /**
+         * @covers Fracture\Http\RequestBuilder::create
+         */
+        public function test_When_Content_Parsers_Applied()
+        {
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'put',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
+                ],
+            ];
+
+            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'applyContentParsers', 'isCLI' ] );
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( false ) );
+
+            $builder->expects( $this->once() )
+                    ->method( 'applyContentParsers' )
+                    ->with( $this->isInstanceOf( '\Fracture\Http\Request' ));
+
+            $instance = $builder->create( $input );
+        }
+
+
+        /**
+         * @covers Fracture\Http\RequestBuilder::create
+         */
+        public function test_When_Content_Parsers_Ignored()
+        {
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'get',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
+                ],
+            ];
+
+            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'applyContentParsers', 'isCLI' ] );
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( false ) );
+
+            $builder->expects( $this->never() )
+                    ->method( 'applyContentParsers' );
+
+            $instance = $builder->create( $input );
+        }
+
+
+
+        /**
+         * @covers Fracture\Http\RequestBuilder::create
+         * @covers Fracture\Http\RequestBuilder::applyContentParsers
+         * @covers Fracture\Http\RequestBuilder::addContentParser
+         */
+        public function test_Applied_Content_Parsers()
+        {
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'delete',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
+                    'CONTENT_TYPE'   => 'application/json',
+                ],
+            ];
+
+            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'isCLI' ] );
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( false ) );
+
+
+            $builder->addContentParser( 'application/json', function() {
+                return ['foo' => 'bar'];
+            });
+
+            $instance = $builder->create( $input );
+            $this->assertEquals('bar', $instance->getParameter('foo'));
+
+        }
+
+
+        /**
+         * @covers Fracture\Http\RequestBuilder::create
+         * @covers Fracture\Http\RequestBuilder::applyContentParsers
+         * @covers Fracture\Http\RequestBuilder::addContentParser
+         */
+        public function test_Applied_Content_Parsers_with_Missing_Header()
+        {
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'delete',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
+                ],
+            ];
+
+            $builder = $this->getMock( 'Fracture\Http\RequestBuilder', [ 'isCLI' ] );
+
+            $builder->expects( $this->once() )
+                    ->method( 'isCLI' )
+                    ->will( $this->returnValue( false ) );
+
+
+            $builder->addContentParser( 'application/json', function() {
+                return ['foo' => 'bar'];
+            });
+
+            $instance = $builder->create( $input );
+            $this->assertEquals(null, $instance->getParameter('foo'));
+
+        }
+
+        /*
+         * @covers Fracture\Http\RequestBuilder::create
+         * @covers Fracture\Http\RequestBuilder::applyContentParsers
+         * @covers Fracture\Http\RequestBuilder::applyHeaders
+         */
+        public function test_If_Header_Abstractions_Applied()
+        {
+            $request = $this->getMock('Fracture\Http\Request', ['setAcceptHeader', 'setContentTypeHeader']);
+
+            $request->expects($this->once())
+                    ->method('setAcceptHeader')
+                    ->with($this->isInstanceOf('Fracture\Http\AcceptHeader'));
+
+            $request->expects($this->once())
+                    ->method('setContentTypeHeader')
+                    ->with($this->isInstanceOf('Fracture\Http\ContentTypeHeader'));
+
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'post',
+                    'REMOTE_ADDR'    => '0.0.0.0',
+                    'HTTP_ACCEPT'    => 'text/html',
+                    'CONTENT_TYPE'   => 'application/json',
+                ],
+            ];
+
+            $builder = $this->getMock('Fracture\Http\RequestBuilder', ['buildInstance', 'isCLI']);
+
+            $builder->expects($this->once())
+                    ->method('isCLI')
+                    ->will($this->returnValue(false));
+
+            $builder->expects($this->once())
+                    ->method('buildInstance')
+                    ->will($this->returnValue($request));
+
+            $instance = $builder->create($input);
+
+
+        }
+
+
     }
