@@ -274,7 +274,7 @@
         public function test_Getter_and_Setter_for_Accept_Header()
         {
             $request = new Request;
-            $header = $this->getMock( 'Fracture\Http\AbstractedHeader' );
+            $header = $this->getMock( 'Fracture\Http\AcceptHeader' );
             $request->setAcceptHeader( $header );
             $this->assertEquals( $header, $request->getAcceptHeader() );
         }
@@ -289,7 +289,7 @@
         public function test_Getter_and_Setter_for_Accept_Header_with_Manual_Acceot_Value()
         {
             $request = new Request;
-            $header = $this->getMock( 'Fracture\Http\AbstractedHeader', [ 'prepare', 'setAlternativeValue' ] );
+            $header = $this->getMock( 'Fracture\Http\AcceptHeader', [ 'prepare', 'setAlternativeValue' ] );
 
             $header->expects( $this->once() )
                    ->method('prepare');
