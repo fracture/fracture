@@ -8,7 +8,7 @@
 
         public function getAsArray( $filepath )
         {
-            if ( file_exists( $filepath ) === false )
+            if ( !file_exists( $filepath ) && !preg_match( '#^[a-z]+://#i', $filepath ) )
             {
                 throw new \Exception( "File '$filepath' not found!" );
             }
