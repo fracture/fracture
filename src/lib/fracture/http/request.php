@@ -6,6 +6,7 @@
     {
 
         private $acceptHeader = null;
+        private $contentTypeHeader = null;
 
         private $method = null;
 
@@ -126,6 +127,17 @@
         public function getAcceptHeader()
         {
             return $this->acceptHeader;
+        }
+
+
+        public function setContentTypeHeader( AbstractedHeader $header)
+        {
+            $this->contentTypeHeader = $header;
+        }
+
+        public function getContentTypeHeader()
+        {
+            return $this->contentTypeHeader;
         }
 
 

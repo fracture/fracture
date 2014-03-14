@@ -35,11 +35,15 @@
                 : '/';
 
     $builder = new Http\RequestBuilder;
+
+    $builder->addContentParser( 'application/json', function() use ($reader){
+        return $reader->getAsArray( 'php://input' );
+    });
     $request = $builder->create( [
         'get'    => $_GET,
         'files'  => $_FILES,
         'server' => $_SERVER,
-        'post'   => $_FILES,
+        'post'   => $_POST,
     ] );
     $request->setUri( $uri );
 
