@@ -83,7 +83,7 @@
         }
 
 
-        protected function applyHeaders( $instance, $params )
+        public function applyHeaders( $instance, $params )
         {
             if (array_key_exists('HTTP_ACCEPT', $params)) {
                 $header = new AcceptHeader($params['HTTP_ACCEPT']);

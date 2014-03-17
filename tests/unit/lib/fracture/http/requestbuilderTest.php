@@ -279,47 +279,50 @@
 
         }
 
-        /*
+        /**
          * @covers Fracture\Http\RequestBuilder::create
          * @covers Fracture\Http\RequestBuilder::applyContentParsers
          * @covers Fracture\Http\RequestBuilder::applyHeaders
          */
-        public function test_If_Header_Abstractions_Applied()
+        public function test_If_Accept_Header_Applied()
         {
-            $request = $this->getMock('Fracture\Http\Request', ['setAcceptHeader', 'setContentTypeHeader']);
-
-            $request->expects($this->once())
-                    ->method('setAcceptHeader')
-                    ->with($this->isInstanceOf('Fracture\Http\AcceptHeader'));
-
-            $request->expects($this->once())
-                    ->method('setContentTypeHeader')
-                    ->with($this->isInstanceOf('Fracture\Http\ContentTypeHeader'));
-
             $input = [
                 'get'    => [],
                 'server' => [
                     'REQUEST_METHOD' => 'post',
                     'REMOTE_ADDR'    => '0.0.0.0',
                     'HTTP_ACCEPT'    => 'text/html',
+                ],
+            ];
+
+            $builder = new RequestBuilder;
+            $instance = $builder->create($input);
+
+            $this->assertInstanceOf('Fracture\Http\AcceptHeader', $instance->getAcceptHeader());
+        }
+
+
+        /**
+         * @covers Fracture\Http\RequestBuilder::create
+         * @covers Fracture\Http\RequestBuilder::applyContentParsers
+         * @covers Fracture\Http\RequestBuilder::applyHeaders
+         */
+        public function test_If_Content_Type_Header_Applied()
+        {
+            $input = [
+                'get'    => [],
+                'server' => [
+                    'REQUEST_METHOD' => 'post',
+                    'REMOTE_ADDR'    => '0.0.0.0',
                     'CONTENT_TYPE'   => 'application/json',
                 ],
             ];
 
-            $builder = $this->getMock('Fracture\Http\RequestBuilder', ['buildInstance', 'isCLI']);
 
-            $builder->expects($this->once())
-                    ->method('isCLI')
-                    ->will($this->returnValue(false));
-
-            $builder->expects($this->once())
-                    ->method('buildInstance')
-                    ->will($this->returnValue($request));
-
+            $builder = new RequestBuilder;
             $instance = $builder->create($input);
 
-
+            $this->assertInstanceOf('Fracture\Http\ContentTypeHeader', $instance->getContentTypeHeader());
         }
-
 
     }

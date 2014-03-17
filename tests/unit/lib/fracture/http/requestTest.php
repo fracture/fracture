@@ -280,6 +280,21 @@
         }
 
 
+
+        /**
+         * @covers Fracture\Http\Request::__construct
+         * @covers Fracture\Http\Request::setContentTypeHeader
+         * @covers Fracture\Http\Request::getContentTypeHeader
+         */
+        public function test_Getter_and_Setter_for_Content_Type_Header()
+        {
+            $request = new Request;
+            $header = $this->getMock( 'Fracture\Http\ContentTypeHeader' );
+            $request->setContentTypeHeader( $header );
+            $this->assertEquals( $header, $request->getContentTypeHeader() );
+        }
+
+
         /**
          * @covers Fracture\Http\Request::__construct
          * @covers Fracture\Http\Request::setAcceptHeader
